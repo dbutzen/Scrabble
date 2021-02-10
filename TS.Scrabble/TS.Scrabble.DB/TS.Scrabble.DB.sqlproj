@@ -56,5 +56,32 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Post-Deployment" />
+    <Folder Include="Pre-Deployment" />
+    <Folder Include="Stored Procedures" />
+    <Folder Include="Post-Deployment\DefaultData" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblGame.sql" />
+    <Build Include="Tables\tblUserGame.sql" />
+    <Build Include="Tables\tblDictionary.sql" />
+    <None Include="Post-Deployment\DefaultData\Dictionaries.sql" />
+    <None Include="Post-Deployment\DefaultData\Games.sql" />
+    <None Include="Post-Deployment\DefaultData\UserGames.sql" />
+    <None Include="Post-Deployment\DefaultData\Users.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TS.Scrabble.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Post-Deployment\Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Pre-Deployment\Script.PreDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TS.Scrabble.DB.publish.xml" />
   </ItemGroup>
 </Project>
