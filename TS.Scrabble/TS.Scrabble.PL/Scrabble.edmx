@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TS.Scrabble.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblDictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Word" Type="varchar(max)" Nullable="false" />
+          <Property Name="Definition" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="DatePlayed" Type="datetime" Nullable="false" />
+          <Property Name="GameState" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="varchar(max)" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="UserCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Wins" Type="int" Nullable="false" />
+          <Property Name="Losses" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUserGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="IsWinner" Type="bit" Nullable="false" />
+          <Property Name="PlayerScore" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblUserGame_tblGame">
+          <End Role="tblGame" Type="Self.tblGame" Multiplicity="1" />
+          <End Role="tblUserGame" Type="Self.tblUserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGame">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserGame_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblUserGame" Type="Self.tblUserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserGame">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TSScrabbleDBModelStoreContainer">
+          <EntitySet Name="tblDictionary" EntityType="Self.tblDictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGame" EntityType="Self.tblGame" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUserGame" EntityType="Self.tblUserGame" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblUserGame_tblGame" Association="Self.FK_tblUserGame_tblGame">
+            <End Role="tblGame" EntitySet="tblGame" />
+            <End Role="tblUserGame" EntitySet="tblUserGame" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserGame_tblUser" Association="Self.FK_tblUserGame_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblUserGame" EntitySet="tblUserGame" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TS.Scrabble.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblDictionary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Word" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Definition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatePlayed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GameState" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblUserGames" Relationship="Self.FK_tblUserGame_tblGame" FromRole="tblGame" ToRole="tblUserGame" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="UserCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Wins" Type="Int32" Nullable="false" />
+          <Property Name="Losses" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUserGames" Relationship="Self.FK_tblUserGame_tblUser" FromRole="tblUser" ToRole="tblUserGame" />
+        </EntityType>
+        <EntityType Name="tblUserGame">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="GameId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="IsWinner" Type="Boolean" Nullable="false" />
+          <Property Name="PlayerScore" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblGame" Relationship="Self.FK_tblUserGame_tblGame" FromRole="tblUserGame" ToRole="tblGame" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblUserGame_tblUser" FromRole="tblUserGame" ToRole="tblUser" />
+        </EntityType>
+        <Association Name="FK_tblUserGame_tblGame">
+          <End Role="tblGame" Type="Self.tblGame" Multiplicity="1" />
+          <End Role="tblUserGame" Type="Self.tblUserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGame">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserGame">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblUserGame_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblUserGame" Type="Self.tblUserGame" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblUserGame">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScrabbleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDictionaries" EntityType="Self.tblDictionary" />
+          <EntitySet Name="tblGames" EntityType="Self.tblGame" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblUserGames" EntityType="Self.tblUserGame" />
+          <AssociationSet Name="FK_tblUserGame_tblGame" Association="Self.FK_tblUserGame_tblGame">
+            <End Role="tblGame" EntitySet="tblGames" />
+            <End Role="tblUserGame" EntitySet="tblUserGames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblUserGame_tblUser" Association="Self.FK_tblUserGame_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblUserGame" EntitySet="tblUserGames" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TSScrabbleDBModelStoreContainer" CdmEntityContainer="ScrabbleEntities">
+          <EntitySetMapping Name="tblDictionaries">
+            <EntityTypeMapping TypeName="TS.Scrabble.DBModel.tblDictionary">
+              <MappingFragment StoreEntitySet="tblDictionary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="Definition" ColumnName="Definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGames">
+            <EntityTypeMapping TypeName="TS.Scrabble.DBModel.tblGame">
+              <MappingFragment StoreEntitySet="tblGame">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DatePlayed" ColumnName="DatePlayed" />
+                <ScalarProperty Name="GameState" ColumnName="GameState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="TS.Scrabble.DBModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="UserCreationDate" ColumnName="UserCreationDate" />
+                <ScalarProperty Name="Wins" ColumnName="Wins" />
+                <ScalarProperty Name="Losses" ColumnName="Losses" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUserGames">
+            <EntityTypeMapping TypeName="TS.Scrabble.DBModel.tblUserGame">
+              <MappingFragment StoreEntitySet="tblUserGame">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsWinner" ColumnName="IsWinner" />
+                <ScalarProperty Name="PlayerScore" ColumnName="PlayerScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
