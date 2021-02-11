@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.PL", "TS.Scrabb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.BL", "TS.Scrabble.BL\TS.Scrabble.BL.csproj", "{F917B3AA-C95E-4CC7-903B-BE15DAC5A345}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.WFUI", "..\TS.Scrabble.WFUI\TS.Scrabble.WFUI\TS.Scrabble.WFUI.csproj", "{440B28FA-B4C8-4041-A832-7F4A7864CC5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{F917B3AA-C95E-4CC7-903B-BE15DAC5A345}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F917B3AA-C95E-4CC7-903B-BE15DAC5A345}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F917B3AA-C95E-4CC7-903B-BE15DAC5A345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
