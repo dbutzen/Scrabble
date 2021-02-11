@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TS.Scrabble.BL.Models
 {
-    public class Class1
+    public class Hand
     {
+        public List<Tile> tiles { get; set; }
     }
 }
