@@ -29,13 +29,13 @@ textarea {
         padding: 0;
     }
 }
-table {
+table.game-board {
     border-collapse: collapse;
     margin: 0 auto;
 }
 
 td {
-    background: #47b75e;
+    background: #cfd034;
     border: 1px solid #d4fcdb;
     min-width: 24px;
     height: 27px;
@@ -45,5 +45,30 @@ td {
     padding: 50px;
 }
 .game-board {
-  margin-right: 50px;
+}
+table.score-board {
+    background: #00ffff;
+    border: 1px solid #d4fcdb;
+    width: auto;
+    margin-right: 0px;
+    margin-left: auto;
+}
+#tw {
+    background: #E60000;
+}
+
+#dw {
+    background: #F86969;
+}
+
+#t1 {
+    background: #3675FA;
+}
+
+#d1 {
+    background: #22ACD8;
+}
+
+#start {
+    background: #ff5500;
 }
