@@ -9,7 +9,7 @@ namespace TS.Scrabble.BL
 {
     public static class BagManager
     {
-        public static int InitializeTiles(Game game)
+        public static int InitializeBag(Game game)
         {
             for (int i = 0; i < 9; i++)
             {

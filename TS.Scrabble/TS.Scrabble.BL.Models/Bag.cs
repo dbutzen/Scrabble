@@ -9,5 +9,6 @@ namespace TS.Scrabble.BL.Models
     public class Bag
     {
         public List<Tile> tiles { get; set; }
+        public bool isEmpty { get; set; }
     }
 }

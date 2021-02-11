@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TS.Scrabble.BL.Models
 {
-    public class Board
+    public class Space
     {
-        public Space[,] spaces;
+        public bool hasTile { get; set; }
+        public string bonus { get; set; }
     }
 }
