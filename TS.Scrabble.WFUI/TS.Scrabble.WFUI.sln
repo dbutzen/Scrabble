@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.WFUI", "TS.Scrabble.WFUI\TS.Scrabble.WFUI.csproj", "{440B28FA-B4C8-4041-A832-7F4A7864CC5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.WFUI", "TS.Scrabble\TS.Scrabble.WFUI.csproj", "{440B28FA-B4C8-4041-A832-7F4A7864CC5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
