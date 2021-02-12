@@ -83,5 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="TS.Scrabble.DB.publish.xml" />
+    <None Include="localdb.publish.xml" />
   </ItemGroup>
 </Project>
