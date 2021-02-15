@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.BL", "TS.Scrabb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.PL.Test", "TS.Scrabble.PL.Test\TS.Scrabble.PL.Test.csproj", "{869B6C41-B140-435C-9C78-3918BBC6E5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.WFUI", "TS.Scrabble.WFUI\TS.Scrabble.WFUI.csproj", "{440B28FA-B4C8-4041-A832-7F4A7864CC5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrable.WFUI", "WebApplication1\TS.Scrable.WFUI.csproj", "{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +43,10 @@ Global
 		{869B6C41-B140-435C-9C78-3918BBC6E5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{869B6C41-B140-435C-9C78-3918BBC6E5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{869B6C41-B140-435C-9C78-3918BBC6E5BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{440B28FA-B4C8-4041-A832-7F4A7864CC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
