@@ -8,7 +8,7 @@ using TS.Scrabble.BL.Models;
 namespace TS.Scrabble.BL
 {
     public static class BagManager
-    {
+    {/*
         public static int InitializeBag(Game game)
         {
             for (int i = 0; i < 9; i++)
@@ -201,6 +201,6 @@ namespace TS.Scrabble.BL
                 game.gameBag.tiles.Add(tile);
             }
             return 1;
-        }
+        }*/
     }
 }

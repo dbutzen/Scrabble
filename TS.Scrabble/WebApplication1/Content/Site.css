@@ -71,23 +71,23 @@ table.score-board {
     border: 1px solid #d4fcdb;
     background: #808080;
 }
-#tw {
+.tw {
     background: #E60000;
 }
 
-#dw {
+.dw {
     background: #F86969;
 }
 
-#t1 {
+.t1 {
     background: #3675FA;
 }
 
-#d1 {
+.d1 {
     background: #22ACD8;
 }
 
-#start {
+.start {
     background: #ff5500;
 }
 
