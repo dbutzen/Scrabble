@@ -67,7 +67,7 @@ table.score-board {
     margin-right: 0px;
     margin-left: auto;
 }
-#r1 {
+.r1 {
     border: 1px solid #d4fcdb;
     background: #808080;
 }
@@ -84,7 +84,7 @@ table.score-board {
 }
 
 .d1 {
-    background: #22ACD8;
+    background: #18FFEE;
 }
 
 .start {
