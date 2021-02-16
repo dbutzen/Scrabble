@@ -33,7 +33,7 @@ namespace TS.Scrabble.BL.Test
         [TestMethod]
         public void LoadByGameIdTest()
         {
-            Assert.AreEqual(4, UserManager.Load(2).Count);
+            Assert.AreEqual(4, UserManager.Load(1).Count);
         }
     }
 }
