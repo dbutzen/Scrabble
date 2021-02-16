@@ -173,6 +173,32 @@ table.score-board {
     height: 50px;
     text-align: center;
 }
-.test {
-
+.Sidebar-Left {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+.Sidebar-Right {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+.Background {
+    
+}
+.Front {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

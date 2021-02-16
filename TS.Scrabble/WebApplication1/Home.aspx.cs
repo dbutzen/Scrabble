@@ -7,9 +7,18 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication1
 {
-    public partial class Contact : Page
+    public partial class Home : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCreate_Click(object sender, EventArgs e)
         {
 
         }
