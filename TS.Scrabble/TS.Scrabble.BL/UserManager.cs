@@ -163,9 +163,9 @@ namespace TS.Scrabble.BL
                 List<User> userids = new List<User>();
                 using (ScrabbleEntities dc = new ScrabbleEntities())
                 {
-                    dc.tblUserGames.Where(g => g.Id == gameid).ToList().ForEach(g => userids.Add(new User
+                    dc.tblUserGames.Where(g => g.GameId == gameid).ToList().ForEach(g => userids.Add(new User
                     {
-                        Id = g.Id,
+                        Id = g.UserId
                     }));
                     foreach(User user in userids)
                     {
