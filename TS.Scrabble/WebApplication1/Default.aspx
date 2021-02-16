@@ -29,9 +29,9 @@
     <asp:Button ID="btnPass" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Pass" OnClick="btnPass_Click" />
     <div class="score-board">
         <table  id="score-board" class="score-board">
-            <tr><th id="r1">Player</th><th id="r1">Score</th></tr>
-            <tr><td id="r1">Peter</td> <td id="r1">1000</td></tr>
-            <tr><td id="r1">Lois</td><td id="r1">900</td></tr>
+            <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
+            <tr><td class="r1">Peter</td> <td class="r1">1000</td></tr>
+            <tr><td class="r1">Lois</td><td class="r1">900</td></tr>
         </table>
     </div>
 
