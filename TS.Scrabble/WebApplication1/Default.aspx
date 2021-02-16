@@ -1,7 +1,13 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    <div class="score-board">
+        <table  id="score-board">
+            <tr><th id="r1">Player</th><th id="r1">Score</th></tr>
+            <tr><td id="r1">Peter</td> <td id="r1">1000</td></tr>
+            <tr><td id="r1">Lois</td><td id="r1">900</td></tr>
+        </table>
+    </div>
     <div class="wrapper">
   <div class="game">
       <div class="game-board">
@@ -25,14 +31,18 @@
       </div>
       </div>
         </div>
-    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Submit" OnClick="btnSubmit_Click" />
-    <asp:Button ID="btnPass" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Pass" OnClick="btnPass_Click" />
-    <div class="score-board">
-        <table  id="score-board" class="score-board">
-            <tr><th id="r1">Player</th><th id="r1">Score</th></tr>
-            <tr><td id="r1">Peter</td> <td id="r1">1000</td></tr>
-            <tr><td id="r1">Lois</td><td id="r1">900</td></tr>
-        </table>
+    <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Submit" OnClick="btnSubmit_Click"/>
+    <asp:Button ID="btnPass" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Pass" OnClick="btnPass_Click"/>
+    <div id="tray-container">    
+        <asp:Image ID="image1" runat="server" ImageUrl="~/Images/Scrabble-Tray.png" />
+        <div class="Letter1">L1</div>
+        <div class="Letter2">L2</div>
+        <div class="Letter3">L3</div>
+        <div class="Letter4">L4</div>
+        <div class="Letter5">L5</div>
+        <div class="Letter6">L6</div>
+        <div class="Letter7">L7</div>
     </div>
+        
 
 </asp:Content>
