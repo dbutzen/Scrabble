@@ -45,6 +45,7 @@ td {
 
 .wrapper {
     padding: 50px;
+    margin-bottom: 10px;
 }
 
 .game-board {
@@ -62,6 +63,7 @@ table.score-board {
     background: #808080;
     border: 1px solid #808080;
     width: auto;
+    margin-left:50px;
     margin-right: 0px;
     margin-left: auto;
 }
@@ -89,3 +91,53 @@ table.score-board {
     background: #ff5500;
 }
 
+#tray-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-dark {
+    /*background-color: darkcyan !important;*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,127,128,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.Letter1 {
+    position:absolute;
+    top: 92%;
+    left: 35%;
+}
+.Letter2 {
+    position: absolute;
+    top: 92%;
+    left: 40%;
+}
+.Letter3 {
+    position: absolute;
+    top: 92%;
+    left: 45%;
+}
+.Letter4 {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+}
+.Letter5 {
+    position: absolute;
+    top: 92%;
+    left: 55%;
+}
+.Letter6 {
+    position: absolute;
+    top: 92%;
+    left: 60%;
+}
+.Letter7 {
+    position: absolute;
+    top: 92%;
+    left: 65%;
+}
+.test {
+
+}

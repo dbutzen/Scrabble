@@ -17,5 +17,6 @@ namespace TS.Scrabble.BL.Models
         public string GameState { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
+        public List<User> Players { get; set; }
     }
 }

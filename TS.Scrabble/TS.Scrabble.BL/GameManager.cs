@@ -172,7 +172,8 @@ namespace TS.Scrabble.BL
                         DatePlayed = dt.DatePlayed,
                         GameState = dt.GameState,
                         Name = dt.Name,
-                        Password = dt.Password
+                        Password = dt.Password,
+                        Players = UserManager.Load(dt.Id)
                     }));
                     return rows;
                 }
@@ -199,7 +200,8 @@ namespace TS.Scrabble.BL
                             Name = row.Name,
                             DatePlayed = row.DatePlayed,
                             GameState = row.GameState,
-                            Password = row.Password
+                            Password = row.Password,
+                            Players = UserManager.Load(row.Id)
                         };
                         return game;
 

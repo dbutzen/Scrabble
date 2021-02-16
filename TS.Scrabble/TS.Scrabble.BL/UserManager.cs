@@ -155,6 +155,44 @@ namespace TS.Scrabble.BL
             }
         }
 
+        public static List<User> Load(int gameid)
+        {
+            try
+            {
+                List<User> rows = new List<User>();
+                List<User> userids = new List<User>();
+                using (ScrabbleEntities dc = new ScrabbleEntities())
+                {
+                    dc.tblUserGames.Where(g => g.Id == gameid).ToList().ForEach(g => userids.Add(new User
+                    {
+                        Id = g.Id,
+                    }));
+                    foreach(User user in userids)
+                    {
+                        dc.tblUsers.Where(u => u.Id == user.Id).ToList().ForEach(dt => rows.Add(new User
+                        {
+                            Id = dt.Id,
+                            FirstName = dt.FirstName,
+                            LastName = dt.LastName,
+                            Username = dt.UserName,
+                            Email = dt.Email,
+                            CreationDate = dt.UserCreationDate,
+                            Score = dt.Score,
+                            Wins = dt.Wins,
+                            Losses = dt.Losses
+                        }));
+                    }
+                    
+                    return rows;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public static User LoadById(int id)
         {
             try
