@@ -104,39 +104,74 @@ table.score-board {
 }
 
 .Letter1 {
-    position:absolute;
-    top: 92%;
-    left: 35%;
+    position: absolute;
+    top: 90%;
+    left: 34%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter2 {
     position: absolute;
-    top: 92%;
-    left: 40%;
+    top: 90%;
+    left: 39%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter3 {
     position: absolute;
-    top: 92%;
-    left: 45%;
+    top: 90%;
+    left: 44%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter4 {
     position: absolute;
-    top: 92%;
-    left: 50%;
+    top: 90%;
+    left: 49%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter5 {
     position: absolute;
-    top: 92%;
-    left: 55%;
+    top: 90%;
+    left: 54%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter6 {
     position: absolute;
-    top: 92%;
-    left: 60%;
+    top: 90%;
+    left: 59%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .Letter7 {
     position: absolute;
-    top: 92%;
-    left: 65%;
+    top: 90%;
+    left: 64%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
 }
 .test {
 

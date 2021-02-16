@@ -43,6 +43,7 @@
         <div class="Letter6">L6</div>
         <div class="Letter7">L7</div>
     </div>
+    <asp:Button ID="btnChallenge" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Challenge" OnClick="btnChallenge_Click"/>
         
 
 </asp:Content>

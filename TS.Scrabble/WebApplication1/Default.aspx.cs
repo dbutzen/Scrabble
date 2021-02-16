@@ -23,5 +23,10 @@ namespace WebApplication1
         {
 
         }
+
+        protected void btnChallenge_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
