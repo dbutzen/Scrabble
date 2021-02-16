@@ -34,6 +34,16 @@
             <tr><td id="r1">Lois</td><td id="r1">900</td></tr>
         </table>
     </div>
+    <div id="tray-container">    
+        <asp:Image ID="image1" runat="server" ImageUrl="~/Images/Scrabble-Tray.png" />
+        <div class="Letter1">L1</div>
+        <div class="Letter2">L2</div>
+        <div class="Letter3">L3</div>
+        <div class="Letter4">L4</div>
+        <div class="Letter5">L5</div>
+        <div class="Letter6">L6</div>
+        <div class="Letter7">L7</div>
+    </div>
     <asp:Button ID="btnChallenge" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Challenge" OnClick="btnChallenge_Click"/>
         
 
