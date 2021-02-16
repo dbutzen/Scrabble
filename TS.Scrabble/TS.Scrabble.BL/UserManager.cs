@@ -28,6 +28,7 @@ namespace TS.Scrabble.BL
                     row.FirstName = user.FirstName;
                     row.LastName = user.LastName;
                     row.Email = user.Email;
+                    row.Password = user.Password;
                     row.Losses = user.Losses;
                     row.Wins = user.Wins;
                     row.Score = user.Score;
