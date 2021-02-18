@@ -56,6 +56,9 @@
                         <a class="nav-link" runat="server" href="~/Home">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" runat="server" href="~/Default">Gameboard</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" runat="server" href="~/Scoreboard">Scoreboard</a>
                     </li>
                     <li class="nav-item">
