@@ -161,29 +161,58 @@ namespace TS.Scrabble.BL
             try
             {
                 List<User> rows = new List<User>();
-                List<User> userids = new List<User>();
+                //List<User> userids = new List<User>();
                 using (ScrabbleEntities dc = new ScrabbleEntities())
                 {
-                    dc.tblUserGames.Where(g => g.GameId == gameid).ToList().ForEach(g => userids.Add(new User
-                    {
-                        Id = g.UserId
+                    var users = (from u in dc.tblUsers
+                                 join ug in dc.tblUserGames on u.Id equals ug.UserId
+                                 select new
+                                 {
+                                     Id = u.Id,
+                                     FirstName = u.FirstName,
+                                     LastName = u.LastName,
+                                     Username = u.UserName,
+                                     Email = u.Email,
+                                     CreationDate = u.UserCreationDate,
+                                     Score = u.Score,
+                                     Wins = u.Wins,
+                                     Losses = u.Losses
+                                 }).ToList();
+
+                    users.ForEach(dt => rows.Add(new User {
+                        Id = dt.Id,
+                        FirstName = dt.FirstName,
+                        LastName = dt.LastName,
+                        Username = dt.Username,
+                        Email = dt.Email,
+                        CreationDate = dt.CreationDate,
+                        Score = dt.Score,
+                        Wins = dt.Wins,
+                        Losses = dt.Losses
                     }));
-                    foreach(User user in userids)
-                    {
-                        dc.tblUsers.Where(u => u.Id == user.Id).ToList().ForEach(dt => rows.Add(new User
-                        {
-                            Id = dt.Id,
-                            FirstName = dt.FirstName,
-                            LastName = dt.LastName,
-                            Username = dt.UserName,
-                            Email = dt.Email,
-                            CreationDate = dt.UserCreationDate,
-                            Score = dt.Score,
-                            Wins = dt.Wins,
-                            Losses = dt.Losses
-                        }));
-                    }
-                    
+
+                    // V Hits database multiple times V
+
+                    //dc.tblUserGames.Where(g => g.GameId == gameid).ToList().ForEach(g => userids.Add(new User
+                    //{
+                    //    Id = g.UserId
+                    //}));
+                    //foreach(User user in userids)
+                    //{
+                    //    dc.tblUsers.Where(u => u.Id == user.Id).ToList().ForEach(dt => rows.Add(new User
+                    //    {
+                    //        Id = dt.Id,
+                    //        FirstName = dt.FirstName,
+                    //        LastName = dt.LastName,
+                    //        Username = dt.UserName,
+                    //        Email = dt.Email,
+                    //        CreationDate = dt.UserCreationDate,
+                    //        Score = dt.Score,
+                    //        Wins = dt.Wins,
+                    //        Losses = dt.Losses
+                    //    }));
+                    //}
+
                     return rows;
                 }
             }
