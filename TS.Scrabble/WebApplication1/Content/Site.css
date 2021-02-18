@@ -103,76 +103,119 @@ table.score-board {
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,127,128,1) 35%, rgba(0,212,255,1) 100%);
 }
 
-.Letter1 {
+.hand .letter {
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+
+#handLetter1 {
     position: absolute;
-    top: 90%;
+    top: 82.5%;
     left: 34%;
     background: #cfd034;
     border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter2 {
+    position: absolute;
+    top: 82.5%;
+    left: 38.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+#handLetter3 {
+    position: absolute;
+    top: 82.5%;
+    left: 43%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+#handLetter4 {
+    position: absolute;
+    top: 82.5%;
+    left: 47.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+#handLetter5 {
+    position: absolute;
+    top: 82.5%;
+    left: 52%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+#handLetter6 {
+    position: absolute;
+    top: 82.5%;
+    left: 56.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+#handLetter7 {
+    position: absolute;
+    top: 82.5%;
+    left: 61%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+} 
+/* Attempt to minimize code
+.letter .hand {
+    position: absolute;
+    top: 90%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
     min-width: 50px;
     height: 50px;
     text-align: center;
 }
-.Letter2 {
-    position: absolute;
-    top: 90%;
+
+#handLetter1 {
+    left: 34%;
+}
+#handLetter2 {
     left: 39%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
 }
-.Letter3 {
-    position: absolute;
-    top: 90%;
+#handLetter3{
     left: 44%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
 }
-.Letter4 {
-    position: absolute;
-    top: 90%;
+#handLetter4{
     left: 49%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
 }
-.Letter5 {
-    position: absolute;
-    top: 90%;
+#handLetter5{
     left: 54%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
 }
-.Letter6 {
-    position: absolute;
-    top: 90%;
+#handLetter6{
     left: 59%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
 }
-.Letter7 {
-    position: absolute;
-    top: 90%;
+#handLetter7{
     left: 64%;
-    background: #cfd034;
-    border: 1px solid #d4fcdb;
-    min-width: 50px;
-    height: 50px;
-    text-align: center;
-}
+}*/
+
 .Sidebar-Left {
     height: 100%;
     width: 200px;
