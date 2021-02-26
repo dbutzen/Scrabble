@@ -1,0 +1,256 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: 20px;
+    }
+
+    .body-content {
+        padding: 0;
+    }
+}
+
+table.game-board {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 24px;
+    height: 27px;
+    text-align: center;
+}
+
+.wrapper {
+    padding: 50px;
+    margin-bottom: 10px;
+}
+
+.game-board {
+}
+
+table.score-board {
+    background: #808080;
+    border: 1px solid #808080;
+    width: auto;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+#score-board {
+    background: #808080;
+    border: 1px solid #808080;
+    width: auto;
+    margin-left: 50px;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.r1 {
+    border: 1px solid #d4fcdb;
+    background: #808080;
+}
+
+.tw {
+    background: #E60000;
+}
+
+.dw {
+    background: #F86969;
+}
+
+.t1 {
+    background: #3675FA;
+}
+
+.d1 {
+    background: #18FFEE;
+}
+
+.start {
+    background: #ff5500;
+}
+
+#tray-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-dark {
+    /*background-color: darkcyan !important;*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,127,128,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.hand .letter {
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+
+#handLetter1 {
+    position: absolute;
+    top: 82.5%;
+    left: 34%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter2 {
+    position: absolute;
+    top: 82.5%;
+    left: 38.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter3 {
+    position: absolute;
+    top: 82.5%;
+    left: 43%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter4 {
+    position: absolute;
+    top: 82.5%;
+    left: 47.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter5 {
+    position: absolute;
+    top: 82.5%;
+    left: 52%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter6 {
+    position: absolute;
+    top: 82.5%;
+    left: 56.5%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+
+#handLetter7 {
+    position: absolute;
+    top: 82.5%;
+    left: 61%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 80px;
+    height: 80px;
+    text-align: center;
+}
+/* Attempt to minimize code
+.letter .hand {
+    position: absolute;
+    top: 90%;
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+#handLetter1 {
+    left: 34%;
+}
+#handLetter2 {
+    left: 39%;
+}
+#handLetter3{
+    left: 44%;
+}
+#handLetter4{
+    left: 49%;
+}
+#handLetter5{
+    left: 54%;
+}
+#handLetter6{
+    left: 59%;
+}
+#handLetter7{
+    left: 64%;
+}*/
+
+.Sidebar-Left {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+
+.Sidebar-Right {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 90;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+
+.Background {
+}
+
+.Front {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

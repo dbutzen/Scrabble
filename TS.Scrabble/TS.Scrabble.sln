@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.BL", "TS.Scrabb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.PL.Test", "TS.Scrabble.PL.Test\TS.Scrabble.PL.Test.csproj", "{869B6C41-B140-435C-9C78-3918BBC6E5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrable.WFUI", "WebApplication1\TS.Scrable.WFUI.csproj", "{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.WFUI", "WebApplication1\TS.Scrabble.WFUI.csproj", "{B4E199B0-1675-4223-80AC-7C61A3D5AD8E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.BL.Test", "TS.Scrabble.BL.Test\TS.Scrabble.BL.Test.csproj", "{4276EE8E-7140-47B5-83DA-7503785A99BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TS.Scrabble.MVCUI.2", "TS.Scrabble.MVCUI.2\TS.Scrabble.MVCUI.2.csproj", "{C6EB44D4-6CA9-46D9-A34B-BA5B8689FF23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{4276EE8E-7140-47B5-83DA-7503785A99BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4276EE8E-7140-47B5-83DA-7503785A99BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4276EE8E-7140-47B5-83DA-7503785A99BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6EB44D4-6CA9-46D9-A34B-BA5B8689FF23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6EB44D4-6CA9-46D9-A34B-BA5B8689FF23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6EB44D4-6CA9-46D9-A34B-BA5B8689FF23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6EB44D4-6CA9-46D9-A34B-BA5B8689FF23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,38 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <script type="text/javascript">
+
+        var id_placeholder;
+
+        function SelectedTile(value, location) {
+            this.value = value;
+            this.location = location; //Locations are "hand", board index value
+        }
+
+        function reply_click(clicked_id) {
+            id_placeholder = clicked_id;
+        }
+
+        
+    </script>
+    <script>
+        $(function () {
+            $(".board-tile").click(function () {
+                if (selectedTile == "hand") {
+                    selectedTile.location = id_placeholder;
+                }
+            });
+
+            $(".hand").click(function () {
+                var selectedTile = new SelectedTile();
+                selectedTile.Value = this.Value;
+                selectedTile.location = "hand";
+            });
+        }
+
+    </script>
+
     <div class="wrapper">
         <div class="game">
             <div class="game-board">
@@ -36,13 +68,13 @@
     </div>
     <div id="tray-container">    
         <asp:Image ID="image1" runat="server" ImageUrl="~/Images/Scrabble-Tray.png" />
-        <div class="Letter1">L1</div>
-        <div class="Letter2">L2</div>
-        <div class="Letter3">L3</div>
-        <div class="Letter4">L4</div>
-        <div class="Letter5">L5</div>
-        <div class="Letter6">L6</div>
-        <div class="Letter7">L7</div>
+        <div class="letter hand" id="handLetter1" onclick="reply_click(this.id);">A</div>
+        <div class="letter hand" id="handLetter2">B</div>
+        <div class="letter hand" id="handLetter3">C</div>
+        <div class="letter hand" id="handLetter4">D</div>
+        <div class="letter hand" id="handLetter5">E</div>
+        <div class="letter hand" id="handLetter6">F</div>
+        <div class="letter hand" id="handLetter7">G</div>
     </div>
     <asp:Button ID="btnChallenge" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Challenge" OnClick="btnChallenge_Click"/>
         
