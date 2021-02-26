@@ -282,9 +282,11 @@ namespace TS.Scrabble.BL
                             tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.Email == user.Email);
                             if (tblUser != null)
                             {
-                                if (tblUser.Password == (user.Password)) // <----Insert Hash Method Here!!!!!!!!!
+                                if (tblUser.Password == (user.Password)) // <----Insert Hash Method Here!!!!!!!!! Attached to the xx(User.Password)
                                 {
                                     user.Id = tblUser.Id;
+                                    user.Username = tblUser.UserName;
+
                                     return true;
                                 }
                                 else return false;
