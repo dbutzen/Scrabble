@@ -190,6 +190,11 @@ table.score-board {
     height: 80px;
     text-align: center;
 }
+#ScrabbleImage {
+    background-image: url("../Images/Scrabble.png");
+    background-repeat: no-repeat;
+    height: 200px;
+}
 /* Attempt to minimize code
 .letter .hand {
     position: absolute;
