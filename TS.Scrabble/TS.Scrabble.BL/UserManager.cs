@@ -260,6 +260,51 @@ namespace TS.Scrabble.BL
             }
         }
 
+        //private static string GetHash(string password)
+        //{
+        //    using (var hasher = new System.Security.Cryptography.SHA1Managed())
+        //    {
+        //        var hashbytes = Encoding.UTF8.GetBytes(password);
+        //        return Convert.ToBase64String(hasher.ComputeHash(hashbytes));
+        //    }
+        //}
+
+        public static bool Login(User user)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(user.Email))
+                {
+                    if (!string.IsNullOrEmpty(user.Password))
+                    {
+                        using (ScrabbleEntities dc = new ScrabbleEntities())
+                        {
+                            tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.Email == user.Email);
+                            if (tblUser != null)
+                            {
+                                if (tblUser.Password == (user.Password)) // <----Insert Hash Method Here!!!!!!!!! Attached to the xx(User.Password)
+                                {
+                                    user.Id = tblUser.Id;
+                                    user.Username = tblUser.UserName;
+
+                                    return true;
+                                }
+                                else return false;
+                            }
+                            else throw new Exception("User Email does not exist.");
+                        }
+                    }
+                    else throw new Exception("Password was not set.");
+                }
+                else throw new Exception("User Email was not set.");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
 
     }
 }
