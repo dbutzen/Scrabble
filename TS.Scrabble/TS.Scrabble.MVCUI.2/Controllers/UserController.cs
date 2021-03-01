@@ -32,12 +32,12 @@ namespace TS.Scrabble.MVCUI._2.Controllers
                     Session["userid"] = user.Id;
                     Session["username"] = user.Username;
                     Session["email"] = user.Email;
-                }else
+                    return RedirectToAction("Home", "Home");
+                }
+                else
                     {
-                        return RedirectToAction("Index", "Home");
+                         ViewBag.Message = "Unable to Login";
                     }
-                
-                ViewBag.Message = "Unable to Login";
                 return View();
             }
             catch (Exception ex)
@@ -45,6 +45,16 @@ namespace TS.Scrabble.MVCUI._2.Controllers
                 ViewBag.Message = ex.Message;
                 return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["user"] = null;
+            Session["userid"] = null;
+            Session["username"] = string.Empty;
+            Session["email"] = string.Empty;
+            ViewBag.Message = "You have successfully logged out.";
+            return View("Home", "Home");
         }
 
 
@@ -58,21 +68,21 @@ namespace TS.Scrabble.MVCUI._2.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new User());
         }
 
         // POST: User/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(User user)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                UserManager.Insert(user);
+                return RedirectToAction("Login");
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }

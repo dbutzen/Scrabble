@@ -33,7 +33,7 @@ namespace TS.Scrabble.BL
                     row.Wins = user.Wins;
                     row.Score = user.Score;
                     row.UserName = user.Username;
-                    row.UserCreationDate = user.CreationDate;
+                    row.UserCreationDate = DateTime.Now;
 
                     user.Id = row.Id;
                     dc.tblUsers.Add(row);
