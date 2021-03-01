@@ -1,8 +1,6 @@
 ﻿@{
     ViewBag.Title = "Gameboard";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
 <script type="text/javascript">
 
@@ -59,8 +57,8 @@
         </div>
     </div>
 </div>
-<asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Submit" OnClick="btnSubmit_Click" />
-<asp:Button ID="btnPass" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Pass" OnClick="btnPass_Click" />
+<input type="submit" value="Submit" class="btn btn-primary btn-md ml-3" onclick="btnSubmit_Click"/>
+<input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click"/>
 <div class="score-board">
     <table id="score-board" class="score-board">
         <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
@@ -69,7 +67,7 @@
     </table>
 </div>
 <div id="tray-container">
-    <asp:Image ID="image1" runat="server" ImageUrl="~/Images/Scrabble-Tray.png" />
+    <img id="Scrabble-Tray" src="~/Images/Scrabble-Tray.png" />
     <div class="letter hand" id="handLetter1" onclick="reply_click(this.id);">A</div>
     <div class="letter hand" id="handLetter2">B</div>
     <div class="letter hand" id="handLetter3">C</div>
@@ -78,4 +76,4 @@
     <div class="letter hand" id="handLetter6">F</div>
     <div class="letter hand" id="handLetter7">G</div>
 </div>
-<asp:Button ID="btnChallenge" runat="server" CssClass="btn btn-primary btn-md ml-3" Text="Challenge" OnClick="btnChallenge_Click" />
+<input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click"/>
