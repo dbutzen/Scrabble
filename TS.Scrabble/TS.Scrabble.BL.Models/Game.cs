@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace TS.Scrabble.BL.Models
         public Bag gameBag { get; set; }
 
         public int Id { get; set; }
+        [DisplayName("Date Played")]
         public DateTime DatePlayed { get; set; }
         public string GameState { get; set; }
         public string Name { get; set; }
