@@ -28,7 +28,7 @@ namespace TS.Scrabble.BL
                     row.FirstName = user.FirstName;
                     row.LastName = user.LastName;
                     row.Email = user.Email;
-                    row.Password = user.Password;
+                    row.Password = GetHash(user.Password);
                     row.Losses = user.Losses;
                     row.Wins = user.Wins;
                     row.Score = user.Score;
@@ -66,6 +66,7 @@ namespace TS.Scrabble.BL
                     {
                         row.FirstName = user.FirstName;
                         row.LastName = user.LastName;
+                        row.Password = GetHash(user.Password);
                         row.Email = user.Email;
                         row.Losses = user.Losses;
                         row.Wins = user.Wins;
@@ -260,14 +261,14 @@ namespace TS.Scrabble.BL
             }
         }
 
-        //private static string GetHash(string password)
-        //{
-        //    using (var hasher = new System.Security.Cryptography.SHA1Managed())
-        //    {
-        //        var hashbytes = Encoding.UTF8.GetBytes(password);
-        //        return Convert.ToBase64String(hasher.ComputeHash(hashbytes));
-        //    }
-        //}
+        private static string GetHash(string password)
+        {
+            using (var hasher = new System.Security.Cryptography.SHA1Managed())
+            {
+                var hashbytes = Encoding.UTF8.GetBytes(password);
+                return Convert.ToBase64String(hasher.ComputeHash(hashbytes));
+            }
+        }
 
         public static bool Login(User user)
         {
@@ -282,7 +283,7 @@ namespace TS.Scrabble.BL
                             tblUser tblUser = dc.tblUsers.FirstOrDefault(u => u.Email == user.Email);
                             if (tblUser != null)
                             {
-                                if (tblUser.Password == (user.Password)) // <----Insert Hash Method Here!!!!!!!!! Attached to the xx(User.Password)
+                                if (tblUser.Password == GetHash(user.Password))
                                 {
                                     user.Id = tblUser.Id;
                                     user.Username = tblUser.UserName;

@@ -93,17 +93,18 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             return View();
         }
 
+        //View not created, will create when needed (create update account, create change password)
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, User user)
         {
             try
             {
-                // TODO: Add update logic here
+                UserManager.Update(user);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Home", "Home");
             }
-            catch
+            catch(Exception ex)
             {
                 return View();
             }
