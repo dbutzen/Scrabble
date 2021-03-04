@@ -4,33 +4,60 @@
 
 <script type="text/javascript">
 
-        var id_placeholder;
+    var id_placeholder;
 
-        function SelectedTile(value, location) {
-            this.value = value;
-            this.location = location; //Locations are "hand", board index value
-        }
+    function SelectedTile(value, location) {
+        this.value = value;
+        this.location = location; //Locations are "hand", board index value
+    }
 
-        function reply_click(clicked_id) {
-            id_placeholder = clicked_id;
-        }
+    function reply_click(clicked_id) {
+        id_placeholder = clicked_id;
+    }
 
 
 </script>
 <script>
-        $(function () {
-            $(".board-tile").click(function () {
-                if (selectedTile == "hand") {
-                    selectedTile.location = id_placeholder;
-                }
-            });
+    $(function () {
+        $(".board-tile").click(function () {
+            if (selectedTile == "hand") {
+                selectedTile.location = id_placeholder;
+            }
+        });
 
-            $(".hand").click(function () {
-                var selectedTile = new SelectedTile();
-                selectedTile.Value = this.Value;
-                selectedTile.location = "hand";
-            });
+        $(".hand").click(function () {
+            var selectedTile = new SelectedTile();
+            selectedTile.Value = this.Value;
+            selectedTile.location = "hand";
+        });
+
+        function MovePiece() {
+            var hand = document.getElementById("handLetter1").innerHTML;
+            alert('piece taken!');
+
         }
+
+        function letterClicked(elem) {
+            // hide input layer
+            document.getElementById("input_container").style.display = "none";
+
+            // get target field
+            var target = document.getElementsByClassName("letter hand")[0];
+            target.classList.remove("letter hand");
+
+            // get clicked letter
+            var letter = elem.srcElement.innerHTML;
+
+            // get target position
+            var targetPosition = target.id.substring(1, target.id.length).split("_");
+            var x = parseInt(targetPosition[0]) - 1;
+            var y = parseInt(targetPosition[1]) - 1;
+        }
+
+        function TestFunction() {
+            alert("Hello! I am an alert box!");
+        }
+    }
 
 </script>
 
@@ -38,7 +65,7 @@
     <div class="game">
         <div class="game-board">
             <table class="game-board">
-                <tr><td id="a1" class="tw board-tile unused">TW</td>    <td id="a2" class="board-tile unused"></td>         <td id="a3" class="board-tile unused"></td>     <td id="a4" class="d1 board-tile unused">DL</td><td id="a5" class="board-tile unused"></td>     <td id="a6" class="board-tile unused"></td>     <td id="a7" class="board-tile unused"></td>     <td id="a8" class="tw board-tile unused">DL</td>    <td id="a9" class="board-tile unused"></td>     <td id="a10" class="board-tile unused"></td>        <td id="a11" class="board-tile unused"></td>        <td id="a12" class="d1 board-tile unused">DL</td>   <td id="a13" class="board-tile unused"></td>        <td id="a14" class="board-tile unused"></td>        <td id="a15" class="tw board-tile unused">TW</td></tr>
+                <tr><td id="a1" style="cursor:pointer" class="tw board-tile unused">TW</td>    <td id="a2" class="board-tile unused"></td>         <td id="a3" class="board-tile unused"></td>     <td id="a4" class="d1 board-tile unused">DL</td><td id="a5" class="board-tile unused"></td>     <td id="a6" class="board-tile unused"></td>     <td id="a7" class="board-tile unused"></td>     <td id="a8" class="tw board-tile unused">DL</td>    <td id="a9" class="board-tile unused"></td>     <td id="a10" class="board-tile unused"></td>        <td id="a11" class="board-tile unused"></td>        <td id="a12" class="d1 board-tile unused">DL</td>   <td id="a13" class="board-tile unused"></td>        <td id="a14" class="board-tile unused"></td>        <td id="a15" class="tw board-tile unused">TW</td></tr>
                 <tr><td id="b1" class="board-tile unused"></td>         <td id="b2" class="dw board-tile unused">DW</td>    <td id="b3" class="board-tile unused"></td>     <td id="b4" class="board-tile unused"></td>     <td id="b5" class="board-tile unused"></td>     <td id="b6" class="t1 board-tile unused">TL</td><td id="b7" class="board-tile unused"></td>     <td id="b8" class="board-tile unused"></td>         <td id="b9" class="board-tile unused"></td>     <td id="b10" class="t1 board-tile unused">TL</td>   <td id="b11" class="board-tile unused"></td>        <td id="b12" class="board-tile unused"></td>        <td id="b13" class="board-tile unused"></td>        <td id="b14" class="dw board-tile unused">DW</td>   <td id="b15" class="board-tile unused"></td></tr>
                 <tr><td id="c1" class="board-tile unused"></td>         <td id="c2" class="board-tile unused"></td>         <td id="c3" class="dw board-tile unused">DW</td><td id="c4" class="board-tile unused"></td>     <td id="c5" class="board-tile unused"></td>     <td id="c6" class="board-tile unused"></td>     <td id="c7" class="d1 board-tile unused">DL</td><td id="c8" class="board-tile unused"></td>         <td id="c9" class="d1 board-tile unused">DL</td><td id="c10" class="board-tile unused"></td>        <td id="c11" class="board-tile unused"></td>        <td id="c12" class="board-tile unused"></td>        <td id="c13" class="dw board-tile unused">DW</td>   <td id="c14" class="board-tile unused"></td>        <td id="c15" class="board-tile unused"></td></tr>
                 <tr><td id="d1" class="d1 board-tile unused">DL</td>    <td id="d2" class="board-tile unused"></td>         <td id="d3" class="board-tile unused"></td>     <td id="d4" class="dw board-tile unused">DW</td><td id="d5" class="board-tile unused"></td>     <td id="d6" class="board-tile unused"></td>     <td id="d7" class="board-tile unused"></td>     <td id="d8" class="d1 board-tile unused">DL</td>    <td id="d9" class="board-tile unused"></td>     <td id="d10" class="board-tile unused"></td>        <td id="d11" class="board-tile unused"></td>        <td id="d12" class="dw board-tile unused">DW</td>   <td id="d13" class="board-tile unused"></td>        <td id="d14" class="board-tile unused"></td>        <td id="d15" class="d1 board-tile unused">DL</td></tr>
@@ -57,8 +84,8 @@
         </div>
     </div>
 </div>
-<input type="submit" value="Submit" class="btn btn-primary btn-md ml-3" onclick="btnSubmit_Click"/>
-<input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click"/>
+<input type="submit" value="Submit" class="btn btn-primary btn-md ml-3" onclick="btnSubmit_Click" />
+<input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click" />
 <div class="score-board">
     <table id="score-board" class="score-board">
         <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
@@ -68,12 +95,23 @@
 </div>
 <div id="tray-container">
     <img id="Scrabble-Tray" src="~/Images/Scrabble-Tray.png" />
-    <div class="letter hand" id="handLetter1" onclick="reply_click(this.id);">A</div>
-    <div class="letter hand" id="handLetter2">B</div>
-    <div class="letter hand" id="handLetter3">C</div>
-    <div class="letter hand" id="handLetter4">D</div>
-    <div class="letter hand" id="handLetter5">E</div>
-    <div class="letter hand" id="handLetter6">F</div>
-    <div class="letter hand" id="handLetter7">G</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter1" onclick="reply_click(this.id);">A</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter2" onclick="HandClicked()">B</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter3" onclick="HandClicked()">C</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter4" onclick="HandClicked()">D</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter5" onclick="HandClicked()">E</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter6" onclick="HandClicked()">F</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked()">G</div>
 </div>
-<input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click"/>
+
+<script>
+    // function to get the letter of the tile in the tray that is clicked
+        function HandClicked() {
+            var hand = document.getElementById("handLetter1").innerHTML;
+            alert(hand);
+        }
+        function BoardClicked() {
+            var document.getElementById().innerHTML = hand;
+        }
+</script>
+<input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click" />
