@@ -96,22 +96,23 @@
 <div id="tray-container">
     <img id="Scrabble-Tray" src="~/Images/Scrabble-Tray.png" />
     <div class="letter hand" style="cursor:pointer" id="handLetter1" onclick="reply_click(this.id);">A</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter2" onclick="HandClicked()">B</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter3" onclick="HandClicked()">C</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter4" onclick="HandClicked()">D</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter5" onclick="HandClicked()">E</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter6" onclick="HandClicked()">F</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked()">G</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter2" onclick="HandClicked(this.id)">B</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter3" onclick="HandClicked(this.id)">C</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter4" onclick="HandClicked(this.id)">D</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter5" onclick="HandClicked(this.id)">E</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter6" onclick="HandClicked(this.id)">F</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked(this.id)">G</div>
 </div>
 
 <script>
     // function to get the letter of the tile in the tray that is clicked
-        function HandClicked() {
-            var hand = document.getElementById("handLetter1").innerHTML;
+        function HandClicked(id) {
+            var hand = document.getElementById(id).innerHTML;
             alert(hand);
         }
+        // function to place letter in hand on to board
         function BoardClicked() {
-            var document.getElementById().innerHTML = hand;
+            //var document.getElementById().innerHTML = hand;
         }
 </script>
 <input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click" />
