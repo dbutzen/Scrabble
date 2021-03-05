@@ -6,14 +6,64 @@
 
         var id_placeholder;
 
+        function initialize() {
+            //Create game bag
+            var bag = [{ Letter: 'A', Value: 1, Count: 9 },
+                { Letter: 'B', Value: 3, Count: 2 },
+                { Letter: 'C', Value: 4, Count: 2 },
+                { Letter: 'D', Value: 2, Count: 4 }]
+            //Create enum for letter values
+            const VALUES = { A: 1, B: 3, C: 4, D: 3, E: 1, F: 4, G: 2, H: 4, I: 1, J: 8, K: 5, L: 1, M: 3, N: 1, O: 1, P: 3, Q: 10, R: 1, S: 1, T: 1, U: 1, V: 4, W: 4, X: 8, Y: 4, Z: 10 }
+
+            tileA = new Tile('A', '1');
+            tileB = new Tile('B', '3');
+            tileC = new Tile('C', '4');
+            tileD = new Tile('D', '3');
+            tileE = new Tile('E', '1');
+            tileF = new Tile('F', '4');
+            tileG = new Tile('G', '2');
+            tileH = new Tile('H', '4');
+            tileI = new Tile('I', '1');
+            tileJ = new Tile('J', '8');
+            tileK = new Tile('K', '5');
+            tileL = new Tile('L', '1');
+            tileM = new Tile('M', '3');
+            tileN = new Tile('N', '1');
+            tileO = new Tile('O', '1');
+            tileP = new Tile('P', '3');
+            tileQ = new Tile('Q', '10');
+            tileR = new Tile('R', '1');
+            tileS = new Tile('S', '1');
+            tileT = new Tile('T', '1');
+            tileU = new Tile('U', '1');
+            tileV = new Tile('V', '4');
+            tileW = new Tile('W', '4');
+            tileX = new Tile('X', '8');
+            tileY = new Tile('Y', '4');
+            tileZ = new Tile('Z', '10');
+            tile_ = new Tile('_', '0');
+        }
+
+        
+
+        function Tile(letter, value, count) {
+            this.letter = letter;
+            this.value = value;
+            this.count = count;
+        }
+
         function SelectedTile(value, location) {
             this.value = value;
-            this.location = location; //Locations are "hand", board index value
+            this.location = location; //Locations are "hand", board index value, 'bag'
         }
 
         function reply_click(clicked_id) {
             id_placeholder = clicked_id;
         }
+
+        
+
+        
 
         
     </script>
