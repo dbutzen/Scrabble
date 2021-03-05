@@ -2,7 +2,9 @@
     ViewBag.Title = "Gameboard";
 }
 
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script type="text/javascript" language="javascript">
 
     var id_placeholder;
 
@@ -15,18 +17,15 @@
         id_placeholder = clicked_id;
     }
 
-
-</script>
-<script>
     $(function () {
         var tileBag = [];
         var equalColumn = true;
         var equalRow = true;
-        var players = [];
+        var players = 1; //[]
         var firstPlay = true;
         var turnCounter = 1;
         var numPlayers;
-        
+
 
         $(".board-tile").click(function () {
             if (selectedTile == "hand") {
@@ -103,7 +102,7 @@
             var total = 0;
             var i;
             //loop to calculate total tiles remaining
-            for (i = 0; i < 27; i++){
+            for (i = 0; i < 27; i++) {
                 total += bag[i].Count;
             }
             //selects a value from 0 to (total tiles - 1)
@@ -112,7 +111,7 @@
             //loop to use selectedvalue to grab the correct tile
             for (i = 0; i < 27; i++) {
                 // if this is selected value
-                if (selectedValue < (tileCount + bag[i].count)){
+                if (selectedValue < (tileCount + bag[i].count)) {
                     bag[i].Count--;
                     return bag[i].letter;
                 }
@@ -147,8 +146,8 @@
             }
         }
         function initializePlayer(num) {
-            var player = { playerNumber: num, score: 0, hand=[] }
-            if (player.hand.length < 7) {
+            var player = { playerNumber: num, score: 0, hand: [] }
+            while (player.hand.length < 7) {
                 var tile = selectTileFromBag;
                 if (tile == "empty") {
                     //Should never happen
@@ -158,9 +157,9 @@
             players.push(player)
         }
 
-        
 
-    }
+
+    });
 
 </script>
 
@@ -187,7 +186,7 @@
         </div>
     </div>
 </div>
-<input type="submit" value="Submit" class="btn btn-primary btn-md ml-3" onclick="btnSubmit_Click" />
+<input type="button" value="Submit" class="btn btn-primary btn-md ml-3" onclick="gameStart();" />
 <input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click" />
 <div class="score-board">
     <table id="score-board" class="score-board">
@@ -205,6 +204,7 @@
     <div class="letter hand" style="cursor:pointer" id="handLetter5" onclick="HandClicked(this.id)">E</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter6" onclick="HandClicked(this.id)">F</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked(this.id)">G</div>
+
 </div>
 
 <script>
