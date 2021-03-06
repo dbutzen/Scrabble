@@ -99,12 +99,12 @@
             ]
         }
 
-        function selectTileFromBag() {
+        function selectTileFromBag(playerHandLength) {
             var total = 0;
             var i;
             //loop to calculate total tiles remaining
             for (i = 0; i < 27; i++) {
-                total += bag[i].Count;
+                total += tileBag[i].count;
             }
             //selects a value from 0 to (total tiles - 1)
             var selectedValue = Math.floor(Math.random() * total);
@@ -112,16 +112,30 @@
             //loop to use selectedvalue to grab the correct tile
             for (i = 0; i < 27; i++) {
                 // if this is selected value
-                if (selectedValue < (tileCount + bag[i].count)) {
-                    bag[i].Count--;
-                    return bag[i].letter;
+                if (selectedValue < (tileCount + tileBag[i].count)) {
+                    tileBag[i].Count--;
+                    addTileToHand(playerHandLength, tileBag[i].letter);
+                    return tileBag[i].letter;
                 }
                 // else
-                tileCount += bag[i].count;
+                tileCount += tileBag[i].count;
             }
             //if loop failed to pick a tile, the bag is empty
             return "empty";
         }
+
+    function addTileToHand(tileNum, text) {
+        var div = document.createElement("DIV");
+        var tray = document.getElementById("tray-container");
+
+        div.id = "handLetter" + tileNum;
+        div.className = "letter hand";
+        div.style = "curser: pointer";
+        div.onclick = "HandClicked(this.id)";
+        div.innerHTML = text;
+        tray.appendChild(div);
+
+    }
 
         function reset() {
             tileBag = [];
@@ -149,7 +163,7 @@
         function initializePlayer(num) {
             var player = { playerNumber: num, score: 0, hand: [] }
             while (player.hand.length < 7) {
-                var tile = selectTileFromBag;
+                var tile = selectTileFromBag(player.hand.length);
                 if (tile == "empty") {
                     //Should never happen
                 }
@@ -198,13 +212,13 @@
 </div>
 <div id="tray-container">
     <img id="Scrabble-Tray" src="~/Images/Scrabble-Tray.png" />
-    <div class="letter hand" style="cursor:pointer" id="handLetter1" onclick="HandClicked(this.id)">A</div>
+    @*<div class="letter hand" style="cursor:pointer" id="handLetter1" onclick="HandClicked(this.id)">A</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter2" onclick="HandClicked(this.id)">B</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter3" onclick="HandClicked(this.id)">C</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter4" onclick="HandClicked(this.id)">D</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter5" onclick="HandClicked(this.id)">E</div>
     <div class="letter hand" style="cursor:pointer" id="handLetter6" onclick="HandClicked(this.id)">F</div>
-    <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked(this.id)">G</div>
+    <div class="letter hand" style="cursor:pointer" id="handLetter7" onclick="HandClicked(this.id)">G</div>*@
 
 </div>
 
