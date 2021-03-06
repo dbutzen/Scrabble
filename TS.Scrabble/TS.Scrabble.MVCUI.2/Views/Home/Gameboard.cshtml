@@ -17,14 +17,15 @@
         id_placeholder = clicked_id;
     }
 
-    $(function () {
+    //$(document).ready(function () {
         var tileBag = [];
         var equalColumn = true;
         var equalRow = true;
-        var players = 1; //[]
+        var players = [];
         var firstPlay = true;
         var turnCounter = 1;
-        var numPlayers;
+        var numPlayers = 1;
+        var selectedTile;
 
 
         $(".board-tile").click(function () {
@@ -34,7 +35,7 @@
         });
 
         $(".hand").click(function () {
-            var selectedTile = new SelectedTile();
+            selectedTile = new SelectedTile();
             selectedTile.Value = this.Value;
             selectedTile.location = "hand";
         });
@@ -132,14 +133,14 @@
         }
 
         function gameStart() {
-            Reset();
+            reset();
             newBag();
             //player setup must happen after bag is initialized
             playerSetup(numPlayers);
 
         }
 
-        function playerSetup(playerCount) {
+    function playerSetup(playerCount) {
             var i;
             for (i = 0; i < playerCount; i++) {
                 initializePlayer(i + 1);
@@ -159,7 +160,7 @@
 
 
 
-    });
+    //});
 
 </script>
 
@@ -186,7 +187,7 @@
         </div>
     </div>
 </div>
-<input type="button" value="Submit" class="btn btn-primary btn-md ml-3" onclick="gameStart();" />
+<input type="button" value="Submit" class="btn btn-primary btn-md ml-3" onclick="gameStart()" />
 <input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click" />
 <div class="score-board">
     <table id="score-board" class="score-board">
