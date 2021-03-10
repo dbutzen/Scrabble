@@ -100,9 +100,10 @@
         ]
     }
 
-    function selectTileFromBag(playerHandLength) {
+    function selectTileFromBag(playerHandLength, playerNum) {
         var total = 0;
         var i;
+        
         //loop to calculate total tiles remaining
         for (i = 0; i < 27; i++) {
             total += tileBag[i].count;
@@ -115,6 +116,7 @@
             // if this is selected value
             if (selectedValue < (tileCount + tileBag[i].count)) {
                 tileBag[i].Count--;
+                players[playerNum].hand.push(tileBag[i]);
                 addTileToHand(playerHandLength, tileBag[i].letter);
                 return tileBag[i].letter;
             }
@@ -163,14 +165,14 @@
     }
     function initializePlayer(num) {
         var player = { playerNumber: num, score: 0, hand: [] }
-        while (player.hand.length < 7) {
-            var tile = selectTileFromBag(player.hand.length);
-            if (tile == "empty") {
-                //Should never happen
-            }
-            player.hand.push(tile);
-        }
         players.push(player)
+        while (player.hand.length < 7) {
+            selectTileFromBag(player.hand.length, 0);
+            //if (tile == "empty") {
+            //    //Should never happen
+            //}
+            //player.hand.push(tile);
+        }
     }
 
 
@@ -178,6 +180,13 @@
     //});
 
 </script>
+
+
+
+
+
+
+
 
 <div class="wrapper">
     <div class="game">
@@ -233,27 +242,32 @@
 
         hand = document.getElementById(id).innerHTML;
         piece = document.getElementById(id);
-        //alert('"' + hand + '"' + ' Piece Is Chose. Now Pick A Spot On The Board To Place Youre Letter!');
     }
     // function to place letter in hand on to board
     function BoardClicked(id) {
         // Get cell of table to manipulate
         document.getElementById(id).innerHTML = hand;
-        //piece.innerHTML = null;
         piece.remove();
-        //var tile = parseInt(id.substring(10));
-        //players[0].hand.splice(document.getElementById(id), 1);
+        var tile = parseInt(id.substring(10));
+        players[0].hand.splice(tile, 1);
     }
     function EndTurn(id) {
         var tiles = [];
         for (i = 1; i <= 7; i++) {
-            tiles.push(document.getElementById("handLetter" + i));
+            if (document.getElementById("handLetter" + i) != null) {
+                tiles.push(document.getElementById("handLetter" + i));
+            }
         }
-        for (i = 0; i < tiles.count; i++) {
-            tiles[i].id = "handLetter" + (i + 1);
+        console.log(tiles);
+        console.log(tiles.length);
+        for (t = 0; t < tiles.length; t++) {
+            tiles[t].id = "handLetter" + (t + 1);
         }
+        console.log(tiles);
         //refill tray from bag
-        selectTileFromBag();
+        while (players[0].hand.length < 7) {
+            selectTileFromBag(players[0].hand.length, 0);
+        }        
     }
 </script>
 <input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click" />
