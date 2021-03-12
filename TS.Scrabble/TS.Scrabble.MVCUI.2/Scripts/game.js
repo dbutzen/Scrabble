@@ -13,6 +13,7 @@ var currentPlayerTurn = 1;
 var numPlayers = 1;
 var selectedTile;
 var tile;
+var placements = [,];
 
 //----------------Tile Movement------------------
 function SelectedTile(value, location) {
@@ -433,6 +434,8 @@ function BoardClicked(id) {
     gameArray[first, second].Tile.Letter = document.getElementById(id).textContent; 
     gameArray[first, second].Tile.Value = getValue(gameArray[first, second].Tile.Letter);
     gameArray[first, second].PlacedThisTurn = true;
+    gameArray[first, second].Row = first;
+    gameArray[first, second].Column = second;
 
     //Removes tile from your player hand array.
     piece.remove();
@@ -516,6 +519,36 @@ function getNumberId(letter) {
     if (letter = "m") return 13;
     if (letter = "n") return 14;
     if (letter = "o") return 15;
+}
+
+// Gets the placement row and column of each new tile, checks if they are in the same row or column, returns true or false
+function checkLegalPlacement() {
+    equalRow = true;
+    equalColumn = true;
+    var row;
+    var columnl;
+    placements = [,];
+    gameArray.forEach(checkFunction());
+    for (var i = 0; i < placements.length; i++) {
+        if (i == 0) {
+            row = placements[i].Row;
+            column = placements[i].column;
+        }
+        else {
+            if (row != placements[i].Row) equalRow = false;
+            if (column != placements[i].Column) equalColumn = false;
+        }
+    }
+    if (equalRow == false && equalColumn == false) {
+        return false;
+    }
+    return true;
+}
+
+function checkFunction() {
+    if (item.PlacedThisTurn == true) {
+        placements.push({ Row: Item.Row, Column: Item.Column });
+    }
 }
 
 //-------------------------Turn Logic--------------------------------
