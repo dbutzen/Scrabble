@@ -129,12 +129,12 @@ function newBag() {
     newBagTilesCount += 2;
     for (var i = newBagTilesCount; i < 9 + newBagTilesCount; i++)
     {
-        tileBag[i] = { Letter: "I", Value=1 };
+        tileBag[i] = { Letter: "I", Value: 1 };
     }
     newBagTilesCount += 9;
     for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
     {
-        tilBag[i] = { Letter: "J", Value: 8 };
+        tileBag[i] = { Letter: "J", Value: 8 };
     }
     newBagTilesCount += 1;
     for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
