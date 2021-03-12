@@ -333,6 +333,12 @@ table.score-board {
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
+.create {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    text-align:center;
+}
+
 .forgot {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
     color: #E1BEE7;
