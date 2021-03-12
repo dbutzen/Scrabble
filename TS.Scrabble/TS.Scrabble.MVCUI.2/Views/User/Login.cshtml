@@ -28,7 +28,7 @@
                     @Html.PasswordFor(model => model.Password, new { @class = "pass" })
                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
-                <input type="button" class="submit" align="center" value="Login"/>
+                <button type="submit" class="submit" align="center">Sign in</button>
                 <p class="forgot" align="center"><a href="#">Forgot Password?</a></p>
                 <p class="create" align="center"><a href="~/Views/User/Create.cshtml">Create Account</a></p>
             </form>
