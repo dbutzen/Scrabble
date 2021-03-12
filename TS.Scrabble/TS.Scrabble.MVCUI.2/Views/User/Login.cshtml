@@ -16,22 +16,20 @@
         <div class="main-Login">
             <p class="sign" align="center">Sign in</p>
             <form class="form1">
-                <div class="main">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="email">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="pass">
-                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
-                    <a class="submit" align="center">Sign in</a>
-                    <p class="forgot" align="center"><a href="#">Forgot Password?</p>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @*@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div>
+                    <input class="email" type="text" align="center" placeholder="Email" @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                           @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
-            </form>
+                @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div>
+                    <input class="pass" type="text" align="center" placeholder="Password" @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                           @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <a class="submit" align="center">Sign in</a>
+                <p class="forgot" align="center"><a href="#">Forgot Password?</a></p>
+        </form>
         </div>
     </body>
 }
