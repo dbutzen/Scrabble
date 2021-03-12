@@ -378,6 +378,7 @@ function addTileToHand(tileNum, text) {
 //-------------Game Initialization---------------------
 function gameStart() {
     reset();
+    initArray();
     newBag();
     //player setup must happen after bag is initialized
     playerSetup(numPlayers);
