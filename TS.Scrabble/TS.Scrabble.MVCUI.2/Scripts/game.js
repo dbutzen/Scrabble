@@ -526,7 +526,7 @@ function checkLegalPlacement() {
     equalRow = true;
     equalColumn = true;
     var row;
-    var columnl;
+    var column;
     placements = [,];
     gameArray.forEach(checkFunction());
     for (var i = 0; i < placements.length; i++) {
@@ -545,6 +545,7 @@ function checkLegalPlacement() {
     return true;
 }
 
+// Function required for the foreach loop of checkLegalPlacement
 function checkFunction() {
     if (item.PlacedThisTurn == true) {
         placements.push({ Row: Item.Row, Column: Item.Column });
@@ -568,4 +569,18 @@ function EndTurn(id) {
     while (players[0].hand.length < 7) {
         selectTileFromBag(players[0].hand.length, 0);
     }
+
+    //Backend logic reset
+    endTurnLogic();
+}
+
+function endTurnLogic() {
+    gameArray.forEach(resetPlacements());
+    placements = [,];
+    currentPlayerTurn += 1;
+    if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
+}
+
+function resetPlacements() {
+    item.PlayedThisTurn = false;
 }
