@@ -311,6 +311,7 @@ table.score-board {
     font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content: center;
+    text-emphasis-style:circle;
 }
 
     .email:focus, .pass:focus {
