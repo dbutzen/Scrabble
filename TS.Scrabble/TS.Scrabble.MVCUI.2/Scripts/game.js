@@ -2,7 +2,7 @@
 var id_placeholder;
 var tray;
 
-var gameArray = [,];
+//var gameArray = [];
 var tileBag = [];
 var equalColumn = true;
 var equalRow = true;
@@ -13,7 +13,14 @@ var currentPlayerTurn = 1;
 var numPlayers = 1;
 var selectedTile;
 var tile;
-var placements = [,];
+var placements = [];
+var wordsPlayed = [];
+var scoreCounter;
+var gameArray = [];
+
+//REMINDERS
+//---Make sure when a multiplier is used to remove it from the board---
+
 
 //----------------Tile Movement------------------
 function SelectedTile(value, location) {
@@ -225,80 +232,409 @@ function newBag() {
 
 // gameArray uses 0-16 instead of 0-14 in order to provide a cushion for logic
 function initArray() {
-    for (var i = 0; i < 17; i++) {
+    /*for (var i = 0; i < 17; i++) {
         for (var j = 0; j < 17; j++) {
-            gameArray[i, j] = { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false};
-        }
+            gameArray[i][j] = { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false };
+        }*/
+    
+        gameArray =
+        [
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+            ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+                ],
+            [
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
+                { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
+            ]
+    ]
+
+
         // Triple word denoted TW, same as class in html
-        gameArray[1, 1].Bonus = "TW";
-        gameArray[1, 8].Bonus = "TW";
-        gameArray[1, 15].Bonus = "TW";
-        gameArray[8, 1].Bonus = "TW";
-        gameArray[8, 15].Bonus = "TW";
-        gameArray[15, 1].Bonus = "TW";
-        gameArray[15, 8].Bonus = "TW";
-        gameArray[15, 15].Bonus = "TW";
+        gameArray[1][1].Bonus = "TW";
+        gameArray[1][8].Bonus = "TW";
+        gameArray[1][15].Bonus = "TW";
+        gameArray[8][1].Bonus = "TW";
+        gameArray[8][15].Bonus = "TW";
+        gameArray[15][1].Bonus = "TW";
+        gameArray[15][8].Bonus = "TW";
+        gameArray[15][15].Bonus = "TW";
 
         //Double Word
-        gameArray[2, 2].Bonus = "DW";
-        gameArray[2, 14].Bonus = "DW";
-        gameArray[3, 3].Bonus = "DW";
-        gameArray[3, 13].Bonus = "DW";
-        gameArray[4, 4].Bonus = "DW";
-        gameArray[4, 12].Bonus = "DW";
-        gameArray[5, 5].Bonus = "DW";
-        gameArray[5, 11].Bonus = "DW";
-        gameArray[7, 7].Bonus = "DW";
-        gameArray[11, 5].Bonus = "DW";
-        gameArray[11, 11].Bonus = "DW";
-        gameArray[12, 4].Bonus = "DW";
-        gameArray[12, 12].Bonus = "DW";
-        gameArray[13, 3].Bonus = "DW";
-        gameArray[15, 1].Bonus = "DW";
-        gameArray[15, 1].Bonus = "DW";
-        gameArray[15, 1].Bonus = "DW";
+        gameArray[2][2].Bonus = "DW";
+        gameArray[2][14].Bonus = "DW";
+        gameArray[3][3].Bonus = "DW";
+        gameArray[3][13].Bonus = "DW";
+        gameArray[4][4].Bonus = "DW";
+        gameArray[4][12].Bonus = "DW";
+        gameArray[5][5].Bonus = "DW";
+        gameArray[5][11].Bonus = "DW";
+        gameArray[8][8].Bonus = "DW";
+        gameArray[11][5].Bonus = "DW";
+        gameArray[11][11].Bonus = "DW";
+        gameArray[12][4].Bonus = "DW";
+        gameArray[12][12].Bonus = "DW";
+        gameArray[13][3].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
 
         //Double Letter
-        gameArray[1, 4].Bonus = "DL";
-        gameArray[1, 12].Bonus = "DL";
-        gameArray[3, 6].Bonus = "DL";
-        gameArray[3, 8].Bonus = "DL";
-        gameArray[4, 1].Bonus = "DL";
-        gameArray[4, 7].Bonus = "DL";
-        gameArray[4, 15].Bonus = "DL";
-        gameArray[7, 3].Bonus = "DL";
-        gameArray[7, 7].Bonus = "DL";
-        gameArray[7, 9].Bonus = "DL";
-        gameArray[7, 13].Bonus = "DL";
-        gameArray[8, 4].Bonus = "DL";
-        gameArray[8, 12].Bonus = "DL";
-        gameArray[9, 3].Bonus = "DL";
-        gameArray[9, 7].Bonus = "DL";
-        gameArray[9, 9].Bonus = "DL";
-        gameArray[9, 13].Bonus = "DL";
-        gameArray[12, 1].Bonus = "DL";
-        gameArray[12, 8].Bonus = "DL";
-        gameArray[12, 15].Bonus = "DL";
-        gameArray[13, 7].Bonus = "DL";
-        gameArray[13, 9].Bonus = "DL";
-        gameArray[15, 4].Bonus = "DL";
-        gameArray[15, 12].Bonus = "DL";
+        gameArray[1][4].Bonus = "DL";
+        gameArray[1][12].Bonus = "DL";
+        gameArray[3][6].Bonus = "DL";
+        gameArray[3][8].Bonus = "DL";
+        gameArray[4][1].Bonus = "DL";
+        gameArray[4][7].Bonus = "DL";
+        gameArray[4][15].Bonus = "DL";
+        gameArray[7][3].Bonus = "DL";
+        gameArray[7][7].Bonus = "DL";
+        gameArray[7][9].Bonus = "DL";
+        gameArray[7][13].Bonus = "DL";
+        gameArray[8][4].Bonus = "DL";
+        gameArray[8][12].Bonus = "DL";
+        gameArray[9][3].Bonus = "DL";
+        gameArray[9][7].Bonus = "DL";
+        gameArray[9][9].Bonus = "DL";
+        gameArray[9][13].Bonus = "DL";
+        gameArray[12][1].Bonus = "DL";
+        gameArray[12][8].Bonus = "DL";
+        gameArray[12][15].Bonus = "DL";
+        gameArray[13][7].Bonus = "DL";
+        gameArray[13][9].Bonus = "DL";
+        gameArray[15][4].Bonus = "DL";
+        gameArray[15][12].Bonus = "DL";
 
         //Triple Letter
-        gameArray[2, 6].Bonus = "TW";
-        gameArray[2, 10].Bonus = "TW";
-        gameArray[6, 2].Bonus = "TW";
-        gameArray[6, 6].Bonus = "TW";
-        gameArray[6, 10].Bonus = "TW";
-        gameArray[6, 14].Bonus = "TW";
-        gameArray[8, 2].Bonus = "TW";
-        gameArray[8, 6].Bonus = "TW";
-        gameArray[8, 10].Bonus = "TW";
-        gameArray[8, 14].Bonus = "TW";
-        gameArray[14, 6].Bonus = "TW";
-        gameArray[14, 10].Bonus = "TW";
+        gameArray[2][6].Bonus = "TL";
+        gameArray[2][10].Bonus = "TL";
+        gameArray[6][2].Bonus = "TL";
+        gameArray[6][6].Bonus = "TL";
+        gameArray[6][10].Bonus = "TL";
+        gameArray[6][14].Bonus = "TL";
+        gameArray[8][2].Bonus = "TL";
+        gameArray[8][6].Bonus = "TL";
+        gameArray[8][10].Bonus = "TL";
+        gameArray[8][14].Bonus = "TL";
+        gameArray[14][6].Bonus = "TL";
+        gameArray[14][10].Bonus = "TL";
 
-    }
+    
 }
 
 
@@ -432,11 +768,11 @@ function BoardClicked(id) {
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(2);
     var second = getNumberId(secondLetter);
-    gameArray[first, second].Tile.Letter = document.getElementById(id).textContent; 
-    gameArray[first, second].Tile.Value = getValue(gameArray[first, second].Tile.Letter);
-    gameArray[first, second].PlacedThisTurn = true;
-    gameArray[first, second].Row = first;
-    gameArray[first, second].Column = second;
+    gameArray[first][second].Tile.Letter = document.getElementById(id).textContent; 
+    gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+    gameArray[first][second].PlacedThisTurn = true;
+    gameArray[first][second].Row = first;
+    gameArray[first][second].Column = second;
 
     //Removes tile from your player hand array.
     piece.remove();
@@ -553,6 +889,146 @@ function checkFunction() {
     }
 }
 
+
+//Gets list of words to use with dictionary, as well as
+//setting scoreCounter to the score of the combined words.
+//DOES NOT remove bonuses. Must be done after.
+function getWords() { 
+    var direction = "horizontal";
+    scoreCounter = 0;
+
+    if (placements.length > 1) {
+        if (placements[0].Row == placements[1].Row) direction = "horizontal";
+        if (placements[0].Column == placements[1].Column) direction = "vertical";
+    }
+    if (direction == "horizontal") {
+        //Original Word
+        words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //Offshoot Words
+        for (var i = 0; i < placements.length; i++) {
+            var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
+            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+        }
+        
+    }
+    if (direction == "vertical") {
+        words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        for (var i = 0; i < placements.length; i++) {
+            var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
+            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+        }
+        
+    }
+}
+
+
+function getHorizontalWord(originalTile, originalRow, originalColumn) {
+    var multiplier = 1;
+    var tileScore = 0;
+
+    var tempWordScore = 0;
+    var tileRow = originalRow;
+    var tileColumn = originalColumn;
+    if (gameArray[tileRow][tileColumn - 1].HasTile == false && gameArray[tileRow][tileColumn + 1].HasTile == false) return 0;
+
+
+    //Get original tile value and bonus
+    tileScore = originalTile.Tile.Value;
+    if (originalTile.Bonus == "TL") tileScore *= 3;
+    if (originalTile.Bonus == "DL") tileScore *= 2;
+    if (originalTile.Bonus == "TW") multiplier *= 3;
+    if (originalTile.Bonus == "DW") multiplier *= 2;
+    tempWordScore += tileScore;
+    tileScore = 0;
+
+    var horizontalWord = gameArray[originalRow][originalColumn].Tile.Letter;
+    // Get  Tiles to the left
+    while (gameArray[tileRow][tileColumn - 1].HasTile == true) {
+        horizontalWord = gameArray[tileRow][tileColumn - 1].Tile.Letter + horizontalWord;
+        tileColumn--;
+        //Take care of score and multiplier
+        tileScore = gameArray[tileRow][tileColumn].Tile.Value;
+        if (gameArray[tileRow][tileColumn].Bonus == "TL") tileScore *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DL") tileScore *= 2;
+        if (gameArray[tileRow][tileColumn].Bonus == "TW") multiplier *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DW") multiplier *= 2;
+        tempWordScore += tileScore;
+        tileScore = 0;
+    }
+    
+    // Reset to original position of placed word
+    tileColumn = originalColumn;
+    // Get tiles to the right;
+    while (gameArray[tileRow][tileColumn + 1].HasTile == true) {
+        horizontalWord = horizontalWord + gameArray[tileRow][tileColumn + 1].Tile.Letter;
+        tileColumn++;
+        tileScore = gameArray[tileRow][tileColumn].Tile.Value;
+        if (gameArray[tileRow][tileColumn].Bonus == "TL") tileScore *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DL") tileScore *= 2;
+        if (gameArray[tileRow][tileColumn].Bonus == "TW") multiplier *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DW") multiplier *= 2;
+        tempWordScore += tileScore;
+        tileScore = 0;
+    }
+    tempWordScore *= multiplier;
+    scoreCounter += tempWordScore;
+    return horizontalWord;
+}
+
+function getVerticalWord(originalTile, originalRow, originalColumn) {
+    var multiplier = 1;
+    var tileScore = 0;
+    var tempWordScore = 0;
+
+    //Get original tile value and bonus
+    tileScore = originalTile.Tile.Value;
+    if (originalTile.Bonus == "TL") tileScore *= 3;
+    if (originalTile.Bonus == "DL") tileScore *= 2;
+    if (originalTile.Bonus == "TW") multiplier *= 3;
+    if (originalTile.Bonus == "DW") multiplier *= 2;
+    tempWordScore += tileScore;
+    tileScore = 0;
+
+
+
+    var verticalWord = gameArray[originalRow][originalColumn].Tile.Letter;
+    var tileRow = originalRow;
+    var tileColumn = originalColumn;
+    if (gameArray[tileRow - 1][tileColumn].HasTile == false && gameArray[tileRow + 1][tileColumn].HasTile == false) return 0;
+
+    // Get tiles above
+    while (gameArray[tileRow - 1][tileColumn].HasTile == true) {
+        verticalWord = gameArray[tileRow - 1][tileColumn].Tile.Letter + verticalWord;
+        tileRow--;
+        //Take care of score and multiplier
+        tileScore = gameArray[tileRow][tileColumn].Tile.Value;
+        if (gameArray[tileRow][tileColumn].Bonus == "TL") tileScore *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DL") tileScore *= 2;
+        if (gameArray[tileRow][tileColumn].Bonus == "TW") multiplier *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DW") multiplier *= 2;
+        tempWordScore += tileScore;
+        tileScore = 0;
+    }
+    // Reset to original position of placed word
+    tileRow = originalRow;
+    // Get tiles to the right;
+    while (gameArray[tileRow + 1][originalColumn].HasTile == true) {
+        verticalWord = verticalWord + gameArray[tileRow + 1][tileColumn].Tile.Letter;
+        tileRow++;
+        tileScore = gameArray[tileRow][tileColumn].Tile.Value;
+        if (gameArray[tileRow][tileColumn].Bonus == "TL") tileScore *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DL") tileScore *= 2;
+        if (gameArray[tileRow][tileColumn].Bonus == "TW") multiplier *= 3;
+        if (gameArray[tileRow][tileColumn].Bonus == "DW") multiplier *= 2;
+        tempWordScore += tileScore;
+        tileScore = 0;
+    }
+    tempWordScore *= multiplier;
+    scoreCounter += tempWordScore;
+    return verticalWord;
+
+}
+
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
     var tiles = [];
@@ -577,11 +1053,49 @@ function EndTurn(id) {
 
 function endTurnLogic() {
     gameArray.forEach(resetPlacements());
-    placements = [,];
+    placements = [];
     currentPlayerTurn += 1;
     if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
 }
 
 function resetPlacements() {
-    item.PlayedThisTurn = false;
+    item.PlacedThisTurn = false;
 }
+
+//------------------TESTS------------------
+
+/*function getWordsTest() {
+    //{ Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false };
+    initArray();
+    words = [];
+
+    gameArray[7][7].Tile.Letter = "A";
+    gameArray[7][7].Tile.Value = 1;
+    gameArray[7][7].PlacedThisTurn = true;
+    gameArray[7][7].HasTile = true;
+    placements[0] = { Row: 7, Column: 7 };
+    gameArray[7][8].Tile.Letter = "T";
+    gameArray[7][8].Tile.Value = 1;
+    gameArray[7][8].PlacedThisTurn = true;
+    gameArray[7][8].HasTile = true;
+    placements[1] = { Row: 7, Column: 8 };
+    gameArray[7][6].Tile.Letter = "C";
+    gameArray[7][6].Tile.Value = 3;
+    gameArray[7][6].PlacedThisTurn = true;
+    gameArray[7][6].HasTile = true;
+    placements[2] = { Row: 7, Column: 6 };
+    gameArray[6][6].Tile.Letter = "A";
+    gameArray[6][6].Tile.Value = 1;
+    gameArray[6][6].HasTile = true;
+    gameArray[6][6].Bonus = "None";
+    gameArray[8][6].Tile.Letter = "E";
+    gameArray[8][6].Tile.Value = 1;
+    gameArray[8][6].HasTile = true;
+    gameArray[8][6].Bonus = "None";
+
+
+    getWords();
+    
+
+
+}*/
