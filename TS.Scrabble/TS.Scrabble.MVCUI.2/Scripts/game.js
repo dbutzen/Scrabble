@@ -864,8 +864,18 @@ function checkLegalPlacement() {
     equalColumn = true;
     var row;
     var column;
-    placements = [,];
-    gameArray.forEach(checkFunction());
+    var connected;
+    var rowCongruency = true;
+    var columnCongruency = true;
+    placements = [];
+    // Adds tiles played this turn to placements array
+    // gameArray.forEach(checkFunction());
+    for (var i = 1; i < 16; i++) {
+        for (var j = 1; j < 16; j++) {
+            if (gameArray[i][j].PlacedThisTurn == true) placements.push({ Row: i, Column: j });
+        }
+    }
+    // Checks if all tiles are either in the same row or same column
     for (var i = 0; i < placements.length; i++) {
         if (i == 0) {
             row = placements[i].Row;
@@ -876,17 +886,72 @@ function checkLegalPlacement() {
             if (column != placements[i].Column) equalColumn = false;
         }
     }
-    if (equalRow == false && equalColumn == false) {
-        return false;
+    // Checks if tiles are connected to a letter on board
+    if (equalRow == true || equalColumn == true) connected = checkConnection()
+    // Checks if tiles have any open spaces which would be bad
+    if (equalRow == true || equalColumn == true && connected == true) {
+        if (equalRow == true) rowCongruency = checkRowCongruency();
+        if (equalColumn == true) columnCongruency = checkColumnCongruency();
+    }
+    // Checks all results and returns true or false for if placement is legal
+    alert("equalRow " + equalRow);
+    alert("equalColumn " + equalColumn);
+    alert("connected " + connected);
+    alert("rowCongruency " + rowCongruency);
+    alert("columnCongruency " + columnCongruency);
+    if ((equalRow == true || equalColumn == true) && connected == true && rowCongruency == true && columnCongruency == true) return true;
+    return false;
+}
+
+// Function required for the foreach loop of checkLegalPlacement
+//function checkFunction() {
+//    alert(item.Row)
+//    if (item.PlacedThisTurn == true) {
+//        placements.push({ Row: Item.Row, Column: Item.Column });
+//    }
+//}
+
+function checkConnection() {
+    // Checks the 4 tiles surreounding each placed tile for a connection
+    // If any one tiles is connected to a tile not placed this turn, returns true
+    // If no connections are found, returns false
+    for (var i = 0; i < placements.length; i++) {
+        alert
+        if (gameArray[placements[i].Row][placements[i].Column - 1].HasTile && gameArray[placements[i].Row][placements[i].Column - 1].PlacedThisTurn != true) return true;
+        if (gameArray[placements[i].Row][placements[i].Column + 1].HasTile && gameArray[placements[i].Row][placements[i].Column + 1].PlacedThisTurn != true) return true;
+        if (gameArray[placements[i].Row - 1][placements[i].Column].HasTile && gameArray[placements[i].Row - 1][placements[i].Column].PlacedThisTurn != true) return true;
+        if (gameArray[placements[i].Row + 1][placements[i].Column].HasTile && gameArray[placements[i].Row + 1][placements[i].Column].PlacedThisTurn != true) return true;
+    }
+    return false;
+}
+
+function checkRowCongruency() {
+    var columnMax = 0;
+    var columnMin = 16;
+    var currentRow = placements[0].Row;
+    for (var i = 0; i < placements.length; i++) {
+        if (placements[i].Column < columnMin) columnMin = placements[i].Column;
+        if (placements[i].Column > columnMax) columnMax = placements[i].Column;
+    }
+    for (var i = columnMin; i <= columnMax; i++) {
+        alert("i: " + i + "    currentRow: " + currentRow);
+        if (gameArray[currentRow][i].HasTile != true) return false;
     }
     return true;
 }
 
-// Function required for the foreach loop of checkLegalPlacement
-function checkFunction() {
-    if (item.PlacedThisTurn == true) {
-        placements.push({ Row: Item.Row, Column: Item.Column });
+function checkColumnCongruency() {
+    var rowMax = 0;
+    var rowMin = 16;
+    var currentColumn = placements[0].Column;
+    for (var i = 0; i < placements.length; i++) {
+        if (placements[i].Row < rowMin) rowMin = placements[i].Row;
+        if (placements[i].Row > rowMax) rowMax = placements[i].Row;
     }
+    for (var i = columnMin; i <= columnMax; i++) {
+        if (gameArray[i][currentColumn].HasTile != true) return false;
+    }
+    return true;
 }
 
 
@@ -1063,6 +1128,41 @@ function resetPlacements() {
 }
 
 //------------------TESTS------------------
+
+
+function checkLegalPlacementTest() {
+    initArray();
+    words = [];
+
+    gameArray[7][7].Tile.Letter = "A";
+    gameArray[7][7].Tile.Value = 1;
+    gameArray[7][7].PlacedThisTurn = true;
+    gameArray[7][7].HasTile = true;
+    placements[0] = { Row: 7, Column: 7 };
+    gameArray[7][9].Tile.Letter = "T";
+    gameArray[7][9].Tile.Value = 1;
+    gameArray[7][9].PlacedThisTurn = true;
+    gameArray[7][9].HasTile = true;
+    placements[1] = { Row: 7, Column: 8 };
+    gameArray[7][6].Tile.Letter = "C";
+    gameArray[7][6].Tile.Value = 3;
+    gameArray[7][6].PlacedThisTurn = true;
+    gameArray[7][6].HasTile = true;
+    placements[2] = { Row: 7, Column: 6 };
+    gameArray[6][6].Tile.Letter = "A";
+    gameArray[6][6].Tile.Value = 1;
+    gameArray[6][6].HasTile = true;
+    gameArray[6][6].Bonus = "None";
+    gameArray[8][6].Tile.Letter = "E";
+    gameArray[8][6].Tile.Value = 1;
+    gameArray[8][6].HasTile = true;
+    gameArray[8][6].Bonus = "None";
+
+    var result = checkLegalPlacement();
+    alert(result);
+    
+}
+
 
 /*function getWordsTest() {
     //{ Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false };
