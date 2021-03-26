@@ -766,8 +766,12 @@ function BoardClicked(id) {
     //Add to array
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
-    var secondLetter = id.charAt(2);
+    var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
+    alert(firstLetter);
+    alert(secondLetter);
+    alert(first);
+    alert(second);
     gameArray[first][second].Tile.Letter = document.getElementById(id).textContent; 
     gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
     gameArray[first][second].PlacedThisTurn = true;
@@ -984,6 +988,7 @@ function getWords() {
         }
         
     }
+    return scoreCounter;
 }
 
 
@@ -1096,24 +1101,35 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
-    var tiles = [];
-    //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
-    for (i = 1; i <= 7; i++) {
-        if (document.getElementById("handLetter" + i) != null) {
-            tiles.push(document.getElementById("handLetter" + i));
-        }
-    }
-    //Reassigns the handLetterId in the player's hand.
-    for (t = 0; t < tiles.length; t++) {
-        tiles[t].id = "handLetter" + (t + 1);
-    }
-    //Refill tray from bag
-    while (players[0].hand.length < 7) {
-        selectTileFromBag(players[0].hand.length, 0);
-    }
+    if (checkLegalPlacement() == true) {
 
-    //Backend logic reset
-    endTurnLogic();
+        //Single player for testing
+        var addedScore = getWords();
+        //check for disctionary?
+        //placeholder
+
+        player.score += addedScore;
+        alert("Your current score is: " + player.score);
+
+        var tiles = [];
+        //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
+        for (i = 1; i <= 7; i++) {
+            if (document.getElementById("handLetter" + i) != null) {
+                tiles.push(document.getElementById("handLetter" + i));
+            }
+        }
+        //Reassigns the handLetterId in the player's hand.
+        for (t = 0; t < tiles.length; t++) {
+            tiles[t].id = "handLetter" + (t + 1);
+        }
+        //Refill tray from bag
+        while (players[0].hand.length < 7) {
+            selectTileFromBag(players[0].hand.length, 0);
+        }
+
+        //Backend logic reset
+        endTurnLogic();
+    }
 }
 
 function endTurnLogic() {
