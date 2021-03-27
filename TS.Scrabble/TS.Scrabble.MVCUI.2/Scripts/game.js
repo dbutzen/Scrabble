@@ -16,6 +16,7 @@ var selectedTile;
 var tile;
 var placements = [];
 var wordsPlayed = [];
+var words = [];
 var scoreCounter;
 var gameArray = [];
 var image;
@@ -629,10 +630,10 @@ function initArray() {
         gameArray[6][6].Bonus = "TL";
         gameArray[6][10].Bonus = "TL";
         gameArray[6][14].Bonus = "TL";
-        gameArray[8][2].Bonus = "TL";
-        gameArray[8][6].Bonus = "TL";
-        gameArray[8][10].Bonus = "TL";
-        gameArray[8][14].Bonus = "TL";
+        gameArray[10][2].Bonus = "TL";
+        gameArray[10][6].Bonus = "TL";
+        gameArray[10][10].Bonus = "TL";
+        gameArray[10][14].Bonus = "TL";
         gameArray[14][6].Bonus = "TL";
         gameArray[14][10].Bonus = "TL";
 
@@ -768,27 +769,28 @@ function HandClicked(id) {
 }
 // function to place letter in hand on to board
 function BoardClicked(id) {
-    // Get cell of table to manipulate
-    document.getElementById(id).innerHTML = hand;
+    
     //Add to array
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
-    alert(firstLetter);
-    alert(secondLetter);
-    alert(first);
-    alert(second);
-    gameArray[first][second].Tile.Letter = document.getElementById(id).textContent; 
-    gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
-    gameArray[first][second].PlacedThisTurn = true;
-    gameArray[first][second].Row = first;
-    gameArray[first][second].Column = second;
+    if (gameArray[first][second].HasTile == false) {
+        // Get cell of table to manipulate
+        document.getElementById(id).innerHTML = hand;
+        // Array logic
+        gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+        gameArray[first][second].PlacedThisTurn = true;
+        gameArray[first][second].HasTile = true;
+        gameArray[first][second].Row = first;
+        gameArray[first][second].Column = second;
 
-    //Removes tile from your player hand array.
-    piece.remove();
-    var tile = parseInt(id.substring(10));
-    players[0].hand.splice(tile, 1);
+        //Removes tile from your player hand array.
+        piece.remove();
+        var tile = parseInt(id.substring(10));
+        players[0].hand.splice(tile, 1);
+    }
 }
 
 //function GetImage(letter) {
@@ -867,21 +869,21 @@ function getValue(letter){
 }
 
 function getNumberId(letter) {
-    if (letter = "a") return 1;
-    if (letter = "b") return 2;
-    if (letter = "c") return 3;
-    if (letter = "d") return 4;
-    if (letter = "e") return 5;
-    if (letter = "f") return 6;
-    if (letter = "g") return 7;
-    if (letter = "h") return 8;
-    if (letter = "i") return 9;
-    if (letter = "j") return 10;
-    if (letter = "k") return 11;
-    if (letter = "l") return 12;
-    if (letter = "m") return 13;
-    if (letter = "n") return 14;
-    if (letter = "o") return 15;
+    if (letter == "a") return 1;
+    if (letter == "b") return 2;
+    if (letter == "c") return 3;
+    if (letter == "d") return 4;
+    if (letter == "e") return 5;
+    if (letter == "f") return 6;
+    if (letter == "g") return 7;
+    if (letter == "h") return 8;
+    if (letter == "i") return 9;
+    if (letter == "j") return 10;
+    if (letter == "k") return 11;
+    if (letter == "l") return 12;
+    if (letter == "m") return 13;
+    if (letter == "n") return 14;
+    if (letter == "o") return 15;
 }
 
 // Gets the placement row and column of each new tile, checks if they are in the same row or column, returns true or false
@@ -902,18 +904,26 @@ function checkLegalPlacement() {
         }
     }
     // Checks if all tiles are either in the same row or same column
-    for (var i = 0; i < placements.length; i++) {
-        if (i == 0) {
-            row = placements[i].Row;
-            column = placements[i].column;
-        }
-        else {
-            if (row != placements[i].Row) equalRow = false;
-            if (column != placements[i].Column) equalColumn = false;
+    if (placements.length == 1) {
+        equalColumn = true;
+        equalRow = true;
+    }
+    else {
+        for (var i = 0; i < placements.length; i++) {
+            if (i == 0) {
+                row = placements[i].Row;
+                column = placements[i].Column;
+            }
+            else {
+                if (row != placements[i].Row) equalRow = false;
+                if (column != placements[i].Column) equalColumn = false;
+            }
         }
     }
     // Checks if tiles are connected to a letter on board
     if (equalRow == true || equalColumn == true) connected = checkConnection()
+
+    if (firstPlay == true) connected = true;
     // Checks if tiles have any open spaces which would be bad
     if (equalRow == true || equalColumn == true && connected == true) {
         if (equalRow == true) rowCongruency = checkRowCongruency();
@@ -942,7 +952,6 @@ function checkConnection() {
     // If any one tiles is connected to a tile not placed this turn, returns true
     // If no connections are found, returns false
     for (var i = 0; i < placements.length; i++) {
-        alert
         if (gameArray[placements[i].Row][placements[i].Column - 1].HasTile && gameArray[placements[i].Row][placements[i].Column - 1].PlacedThisTurn != true) return true;
         if (gameArray[placements[i].Row][placements[i].Column + 1].HasTile && gameArray[placements[i].Row][placements[i].Column + 1].PlacedThisTurn != true) return true;
         if (gameArray[placements[i].Row - 1][placements[i].Column].HasTile && gameArray[placements[i].Row - 1][placements[i].Column].PlacedThisTurn != true) return true;
@@ -960,7 +969,7 @@ function checkRowCongruency() {
         if (placements[i].Column > columnMax) columnMax = placements[i].Column;
     }
     for (var i = columnMin; i <= columnMax; i++) {
-        alert("i: " + i + "    currentRow: " + currentRow);
+        //alert("i: " + i + "    currentRow: " + currentRow);
         if (gameArray[currentRow][i].HasTile != true) return false;
     }
     return true;
@@ -974,7 +983,7 @@ function checkColumnCongruency() {
         if (placements[i].Row < rowMin) rowMin = placements[i].Row;
         if (placements[i].Row > rowMax) rowMax = placements[i].Row;
     }
-    for (var i = columnMin; i <= columnMax; i++) {
+    for (var i = rowMin; i <= rowMax; i++) {
         if (gameArray[i][currentColumn].HasTile != true) return false;
     }
     return true;
@@ -1123,15 +1132,17 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
+    
     if (checkLegalPlacement() == true) {
 
         //Single player for testing
+
         var addedScore = getWords();
         //check for disctionary?
         //placeholder
 
-        player.score += addedScore;
-        alert("Your current score is: " + player.score);
+        players[0].score += addedScore;
+        alert("Your current score is: " + players[0].score);
 
         var tiles = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
@@ -1155,15 +1166,22 @@ function EndTurn(id) {
 }
 
 function endTurnLogic() {
-    gameArray.forEach(resetPlacements());
+    for (var i = 1; i < 16; i++) {
+        for (var j = 1; j < 16; j++) {
+            gameArray[i][j].PlacedThisTurn = false;
+        }
+    }
+    for (var i = 0; i < placements.length; i++) {
+        gameArray[placements[i].Row][placements[i].Column].Bonus = "None";
+        gameArray[placements[i].Row][placements[i].Column].BonusUsed = true;
+    }
     placements = [];
-    currentPlayerTurn += 1;
-    if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
+    //currentPlayerTurn += 1;
+    //firstPlay = false;
+    //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
 }
 
-function resetPlacements() {
-    item.PlacedThisTurn = false;
-}
+
 
 //------------------TESTS------------------
 
