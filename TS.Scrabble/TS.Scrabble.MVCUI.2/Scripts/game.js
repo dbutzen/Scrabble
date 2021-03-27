@@ -1,4 +1,5 @@
-﻿
+﻿//const { imgcrossorigin } = require("modernizr");
+
 var id_placeholder;
 var tray;
 
@@ -17,6 +18,7 @@ var placements = [];
 var wordsPlayed = [];
 var scoreCounter;
 var gameArray = [];
+var image;
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
@@ -696,6 +698,10 @@ function selectTileFromBag(playerHandLength, playerNum) {
     return "empty";
 }
 
+//function LoadImage(tile) {
+//    var letter = tile;
+//    document[tile].srcElement = letter
+//}
 
 //Adds physical tile to physical player hand
 function addTileToHand(tileNum, text) {
@@ -706,7 +712,7 @@ function addTileToHand(tileNum, text) {
     div.className = "letter hand";
     div.style.cursor = "pointer";
     div.onclick = function () { HandClicked(this.id); };
-    div.innerHTML = text;
+    div.innerHTML = '<img class = "hand letter" src = "../Images/' + text + '.png" />';
     tray.appendChild(div);
 
 }
@@ -718,6 +724,7 @@ function gameStart() {
     newBag();
     //player setup must happen after bag is initialized
     playerSetup(numPlayers);
+    //GetImage();
 }
 
 // Resets game to initial start point
@@ -782,6 +789,21 @@ function BoardClicked(id) {
     piece.remove();
     var tile = parseInt(id.substring(10));
     players[0].hand.splice(tile, 1);
+}
+
+//function GetImage(letter) {
+//    switch (letter) {
+//        case "A":
+//            var img = document.createElement('img');
+//            img.src ="~/Images/A.png";
+//            return img;
+//    }
+//}
+
+function LoadLetterImage(letter){
+    if (letter == "A") {
+        document.documentElement.outerHTML = '<img src="~/Images/A.png" />';
+    }
 }
 
 function getValue(letter){
