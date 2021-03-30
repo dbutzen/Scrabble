@@ -31,5 +31,10 @@ namespace TS.Scrabble.MVCUI._2.Controllers
         {
             return View();
         }
+
+        public ActionResult Shape()
+        {
+            return View();
+        }
     }
 }
