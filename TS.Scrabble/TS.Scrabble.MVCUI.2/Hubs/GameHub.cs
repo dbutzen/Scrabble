@@ -5,15 +5,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using TS.Scrabble.MVCUI._2.Models;
 
 namespace TS.Scrabble.MVCUI._2.Hubs
 {
     public class GameHub : Hub
     {
+        private readonly User _user;
+        public GameHub() : this(User.Instance) { }
+        public GameHub(User user)
+        {
+            _user = user;
+        }
+
         public void GetClientId(string id)
         {
             string clientId = Context.ConnectionId;
             Clients.Caller.showClientId(id);
+        }
+
+        public void PushClientId(string id)
+        {
+            _user.PushClientId(id);
+            Clients.All.addClientIds(_user.GetClientIds());
+        }
+
+        public void InitializePlayer()
+        {
+
         }
     }
     //public class Broadcaster

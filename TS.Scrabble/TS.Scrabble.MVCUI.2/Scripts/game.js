@@ -20,6 +20,7 @@ var words = [];
 var scoreCounter;
 var gameArray = [];
 var image;
+var users = [];
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
