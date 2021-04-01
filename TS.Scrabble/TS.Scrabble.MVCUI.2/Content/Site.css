@@ -101,6 +101,8 @@ table.score-board {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    enable-background:new;
 }
 
 .bg-dark {
@@ -117,16 +119,13 @@ table.score-board {
     text-align: center;
 }
 
-.letter hand  {
-    position: absolute;
-    top: 82.5%;
-    left: 34%;
+.hand-letter  {
     background: #cfd034;
     border: 1px solid #d4fcdb;
-    width: 20px;
-    height: 20px;
+    min-width: 80px;
+    height: 80px;
     text-align: center;
-    object-fit:contain;
+    align-content:center;
 }
 
 #ScrabbleImage {
@@ -134,8 +133,8 @@ table.score-board {
     background-repeat: no-repeat;
     height: 200px;
 }
-/* Attempt to minimize code
-.letter .hand {
+
+/*.letter .hand {
     position: absolute;
     top: 90%;
     background: #cfd034;
@@ -144,9 +143,9 @@ table.score-board {
     height: 50px;
     text-align: center;
 }
-
+*/
 #handLetter1 {
-    left: 34%;
+    left: 84%;
 }
 #handLetter2 {
     left: 39%;
@@ -165,7 +164,7 @@ table.score-board {
 }
 #handLetter7{
     left: 64%;
-}*/
+}
 
 .Sidebar-Left {
     height: 100%;
