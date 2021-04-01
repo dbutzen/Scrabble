@@ -34,6 +34,11 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
 
         }
+
+        public void ShowTiles(string id)
+        {
+            Clients.Client(id).displayTiles();
+        }
     }
     //public class Broadcaster
     //{

@@ -11,7 +11,7 @@ var players = [];
 var firstPlay = true;
 var turnCounter = 1;
 var currentPlayerTurn = 1;
-var numPlayers = 1;
+var numPlayers = 0;
 var selectedTile;
 var tile;
 var placements = [];
@@ -687,9 +687,9 @@ function selectTileFromBag(playerHandLength, playerNum) {
         var selectedValue = Math.floor(Math.random() * tileBag.length);
         var letter = tileBag[selectedValue].letter;
         //Push toplayer
-        players[playerNum].hand.push(tileBag[selectedValue]);
+        players[playerNum - 1].hand.push(tileBag[selectedValue]);
         //Add to hand
-        addTileToHand(playerHandLength, tileBag[selectedValue].Letter);
+        //addTileToHand(playerHandLength, tileBag[selectedValue].Letter);
         //Remove from bag
         tileBag.splice(selectedValue, 1);
         return letter;
@@ -750,7 +750,7 @@ function initializePlayer(num) {
     var player = { playerNumber: num, score: 0, hand: [] }
     players.push(player)
     while (player.hand.length < 7) {
-        selectTileFromBag(player.hand.length, 0);
+        selectTileFromBag(player.hand.length, num);
         //if (tile == "empty") {
         //    //Should never happen
         //}
