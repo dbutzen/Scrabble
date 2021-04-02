@@ -6,17 +6,43 @@
     gameHub.client.addClientIds = function (ids) {
         users = ids;
         numPlayers = users.length;
-        if (numPlayers == 3) {
+        if (numPlayers == 2) {
             gameStart();
+            gameHub.server.gameStart();
             gameHub.server.showTiles($.connection.hub.id);
         }
     };
+
+    gameHub.client.addTileToPlayerHand = function () {
+
+    }
+
+    function addTileToPlayerTray = function (tileNum, text) {
+        var div = document.createElement("DIV");
+        tray = document.getElementById("tray-container");
+
+        div.id = "handLetter" + (tileNum + 1);
+        div.className = "letter hand";
+        div.style.cursor = "pointer";
+        div.onclick = function () { HandClicked(this.id); };
+        div.innerHTML = '<img class = "hand letter" src = "../Images/' + text + '.png" />';
+        tray.appendChild(div);
+    }
 
     function onlineGameStart() {
         reset();
         initArray();
         newBag();
+        onlinePlayerSetup();
         gameHub.server.showTiles($.connection.hub.id);
+    }
+
+    function onlinePlayerSetup() {
+        var player = { playerNumber: num, score: 0, hand: [] }
+        players.push(player);
+        while (player.hand.length < 7) {
+            gameHub.server.selectTileFromTileBag();
+        }
     }
 
 

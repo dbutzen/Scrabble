@@ -29,10 +29,14 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             _user.PushClientId(id);
             Clients.All.addClientIds(_user.GetClientIds());
         }
-
-        public void InitializePlayer()
+        public void GameStart()
         {
-
+            _user.NewTileBag();
+        }
+        public void AddTile()
+        {
+            Tile tile = _user.SelectTileFromBag();
+            Clients.All.addTileToPlayerHand();
         }
 
         public void ShowTiles(string id)

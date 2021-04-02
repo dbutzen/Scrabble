@@ -748,7 +748,7 @@ function playerSetup(playerCount) {
 }
 function initializePlayer(num) {
     var player = { playerNumber: num, score: 0, hand: [] }
-    players.push(player)
+    players.push(player);
     while (player.hand.length < 7) {
         selectTileFromBag(player.hand.length, num);
         //if (tile == "empty") {
