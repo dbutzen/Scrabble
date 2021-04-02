@@ -57,6 +57,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="utMerriam-Webster.cs" />
     <Compile Include="utGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utUserGame.cs" />
