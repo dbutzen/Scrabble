@@ -19,7 +19,7 @@ textarea {
 }
 
 .navbar {
-    background: linear-gradient(to right, #8c8c8c, #4d4d4d);
+    background: linear-gradient(to right, #009999, #7a0099);
     color: white;
 }
 
@@ -97,12 +97,14 @@ table.score-board {
     background: #ff5500;
 }
 
-#tray-container {
-    display: flex;
+.tray-container {
+}
+
+#Scrabble-Tray {
+    position: relative;
     align-items: center;
     justify-content: center;
-    position: relative;
-    enable-background:new;
+    width: 50%;
 }
 
 .bg-dark {
@@ -119,13 +121,17 @@ table.score-board {
     text-align: center;
 }
 
-.hand-letter  {
+.hand-letter {
+    background-image: url("../Images/Scrabble-Tray.png");
+    background-position: center;
+    enable-background: new;
     background: #cfd034;
     border: 1px solid #d4fcdb;
-    min-width: 80px;
+    width: 80px;
     height: 80px;
     text-align: center;
-    align-content:center;
+    align-content: center;
+    display: inline-block;
 }
 
 #ScrabbleImage {
@@ -147,22 +153,28 @@ table.score-board {
 #handLetter1 {
     left: 84%;
 }
+
 #handLetter2 {
     left: 39%;
 }
-#handLetter3{
+
+#handLetter3 {
     left: 44%;
 }
-#handLetter4{
+
+#handLetter4 {
     left: 49%;
 }
-#handLetter5{
+
+#handLetter5 {
     left: 54%;
 }
-#handLetter6{
+
+#handLetter6 {
     left: 59%;
 }
-#handLetter7{
+
+#handLetter7 {
     left: 64%;
 }
 
@@ -200,7 +212,9 @@ table.score-board {
 
 .sign {
     padding-top: 40px;
-    color: #8C55AA;
+    background: linear-gradient(to right, #009999, #7a0099);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 23px;
@@ -248,12 +262,12 @@ table.score-board {
     font-family: 'Ubuntu', sans-serif;
     display: flex;
     justify-content: center;
-    text-emphasis-style:circle;
-    
+    text-emphasis-style: circle;
 }
-.pass::after {
-    content: "Password";
-}
+
+    .pass::after {
+        content: "Password";
+    }
 
     .email:focus, .pass:focus {
         border: 2px solid rgba(0, 0, 0, 0.18) !important;
@@ -263,7 +277,7 @@ table.score-board {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
-    background: linear-gradient(to right, #9C27B0, #E040FB);
+    background: linear-gradient(to right, #009999, #7a0099);
     border: 0;
     padding-left: 40px;
     padding-right: 40px;
@@ -277,14 +291,22 @@ table.score-board {
 
 .create {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #E1BEE7;
-    text-align:center;
+    background: linear-gradient(to right, #009999, #7a0099);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-align: center;
 }
 
 .forgot {
-    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
-    color: #E1BEE7;
+    text-shadow: 0px 0px 3px rgb(204, 0, 255);
+    color: #7a0099;
     padding-top: 15px;
+}
+
+.link-color {
+    background: linear-gradient(to right, #009999, #7a0099);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
 }
 
 a {
@@ -301,13 +323,14 @@ a {
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
+
 .sign {
-        padding-top: 40px;
-        color: #8C55AA;
-        font-family: 'Ubuntu', sans-serif;
-        font-weight: bold;
-        font-size: 23px;
-    }
+    padding-top: 40px;
+    color: #009999;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
 
 form1 {
     padding-top: 40px;
@@ -316,7 +339,7 @@ form1 {
 .main-Create {
     background-color: #FFFFFF;
     width: 800px;
-    height: 800px;
+    height: 650px;
     margin: 7em auto;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -336,11 +359,29 @@ form1 {
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin-bottom: 50px;
-    margin-left: 60px;
+    margin-left: 37%;
     text-align: center;
     margin-bottom: 27px;
     font-family: 'Ubuntu', sans-serif;
     display: flex;
+    align-content: center;
+    align-items: center;
     justify-content: center;
     text-emphasis-style: circle;
+}
+
+.create-submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #009999, #7a0099);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 41%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }

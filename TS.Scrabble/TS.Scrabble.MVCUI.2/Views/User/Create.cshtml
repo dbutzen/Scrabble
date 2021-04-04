@@ -12,59 +12,53 @@
 @Html.AntiForgeryToken()
 
 <div class="main-Create">
-    <h4>Create Account</h4>
+    <p class="sign" align="center">Create Account</p>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "Create-Input" } })
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "Create-Input", @placeholder = "First Name" } })
             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "Create-Input" } })
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "Create-Input", @placeholder = "Last Name" } })
             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "Create-Input" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "Create-Input", @placeholder = "Email" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "Create-Input" } })
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "Create-Input", @placeholder = "Uesrname" } })
             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password, new { @class = "Create-Input" })
+            @Html.PasswordFor(model => model.Password, new { @class = "Create-Input", @placeholder = " Password" })
             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Re-enter Password</label>
         <div class="col-md-10">
-            <input type="password" class="Create-Input" id="verifyPass" />
+            <input type="password" placeholder="Re-Enter Password" class="Create-Input" id="verifyPass" />
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" runat="server" id="create" value="Create" class="btn btn-default" onclick="password();" />
+        <div>
+            <input type="submit" runat="server" id="create" value="Create" class="create-submit" onclick="password();" />
         </div>
     </div>
 </div>
