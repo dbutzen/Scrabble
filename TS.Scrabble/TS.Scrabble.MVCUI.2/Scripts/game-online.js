@@ -7,41 +7,36 @@
         users = ids;
         numPlayers = users.length;
         if (numPlayers == 2) {
-            gameStart();
             gameHub.server.gameStart();
+            onlineGameStart();
             gameHub.server.showTiles($.connection.hub.id);
         }
     };
 
-    gameHub.client.addTileToPlayerHand = function () {
-
-    }
-
-    function addTileToPlayerTray = function (tileNum, text) {
-        var div = document.createElement("DIV");
-        tray = document.getElementById("tray-container");
-
-        div.id = "handLetter" + (tileNum + 1);
-        div.className = "letter hand";
-        div.style.cursor = "pointer";
-        div.onclick = function () { HandClicked(this.id); };
-        div.innerHTML = '<img class = "hand letter" src = "../Images/' + text + '.png" />';
-        tray.appendChild(div);
+    gameHub.client.addTileToPlayerHand = function (letter, value, num) {
+        var tile = { Letter: letter, Value: value }
+        players[num - 1].hand.push(tile);
     }
 
     function onlineGameStart() {
         reset();
         initArray();
         newBag();
-        onlinePlayerSetup();
+        onlinePlayerSetup(numPlayers);
         gameHub.server.showTiles($.connection.hub.id);
     }
 
-    function onlinePlayerSetup() {
+    function onlinePlayerSetup(playerCount) {
+        var i;
+        for (i = 0; i < playerCount; i++) {
+            initializePlayer(i + 1);
+        }
+    }
+    function initializePlayer(num) {
         var player = { playerNumber: num, score: 0, hand: [] }
         players.push(player);
         while (player.hand.length < 7) {
-            gameHub.server.selectTileFromTileBag();
+            gameHub.server.addTile(num);
         }
     }
 

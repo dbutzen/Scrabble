@@ -33,10 +33,11 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             _user.NewTileBag();
         }
-        public void AddTile()
+        public void AddTile(int playerNum)
         {
-            Tile tile = _user.SelectTileFromBag();
-            Clients.All.addTileToPlayerHand();
+            Tile tile = new Tile();
+            tile = _user.SelectTileFromBag();
+            Clients.All.addTileToPlayerHand(tile.Letter, tile.Value, playerNum);
         }
 
         public void ShowTiles(string id)
