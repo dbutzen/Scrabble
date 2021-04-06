@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using TS.Scrabble.MVCUI._2.Models;
 
@@ -29,20 +30,48 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             _user.PushClientId(id);
             Clients.All.addClientIds(_user.GetClientIds());
         }
-        public void GameStart()
+        public void AddPlayer(string username)
         {
-            _user.NewTileBag();
+            Player player = new Player();
+            player.Username = username;
+            player.Hand = new List<Tile>();
+            _user.AddPlayer(player);
+        }
+        public Task<int> InitializePlayers()
+        {
+            return _user.InitializePlayers(_user.GetPlayers());
+        }
+        public void GameStart(string id)
+        {
+            if(id == _user.GetClientIds().FirstOrDefault())
+            {
+                _user.NewTileBag();
+                Task task = Task.Run(async () => { await InitializePlayers(); });
+                task.Wait();
+                ShowTiles(_user.GetPlayers().FirstOrDefault().Hand, id);
+            }
         }
         public void AddTile(int playerNum)
         {
             Tile tile = new Tile();
-            tile = _user.SelectTileFromBag();
+            //tile = _user.SelectTileFromBag();
             Clients.All.addTileToPlayerHand(tile.Letter, tile.Value, playerNum);
         }
 
-        public void ShowTiles(string id)
+        public void ShowTiles(List<Tile> tiles, string id)
         {
-            Clients.Client(id).displayTiles();
+            List<Player> players = _user.GetPlayers();
+            foreach(Player p in players)
+            {
+                int count = 1;
+                foreach (Tile t in p.Hand)
+                {
+                    Task task = Task.Run(async () => { await Clients.Client(p.Username).displayTile(count, t.Letter, p.Username); });
+                    task.Wait();
+                    count++;
+                }
+                
+            }
         }
     }
     //public class Broadcaster

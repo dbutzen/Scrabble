@@ -4,6 +4,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using TS.Scrabble.MVCUI._2.Hubs;
 
@@ -14,6 +15,8 @@ namespace TS.Scrabble.MVCUI._2.Models
         private readonly static Lazy<User> _instance = new Lazy<User>(() => new User(GlobalHost.ConnectionManager.GetHubContext<GameHub>().Clients));
         private readonly List<string> _clientIds = new List<string>();
         private readonly List<Tile> tileBag = new List<Tile>();
+        private readonly List<Player> players = new List<Player>();
+
         public static User Instance
         {
             get
@@ -37,17 +40,45 @@ namespace TS.Scrabble.MVCUI._2.Models
             _clientIds.Add(id);
         }
 
+        public void AddPlayer(Player player)
+        {
+            players.Add(player);
+        }
+
+        public async Task<int> InitializePlayers(List<Player> playerList)
+        {
+            foreach(Player p in playerList)
+            {
+                while (p.Hand.Count < 7)
+                {
+                    Tile tile = new Tile();
+                    Task t = Task.Run(async () =>
+                    {
+                       tile = await SelectTileFromBag();
+                    });
+                    t.Wait();
+                    p.Hand.Add(tile);
+                }
+            }
+            return playerList.Count;
+        }
+
         public List<string> GetClientIds()
         {
             return _clientIds;
         }
 
-        public Tile SelectTileFromBag()
+        public List<Player> GetPlayers()
+        {
+            return players;
+        }
+
+        public async Task<Tile> SelectTileFromBag()
         {
             var rand = new Random();
             if(tileBag.Count > 0)
             {
-                Tile tile = tileBag[rand.Next(0, tileBag.Count)];
+                Tile tile =  tileBag[rand.Next(0, tileBag.Count)];
                 tileBag.Remove(tile);
                 return tile;
             } else
@@ -200,5 +231,11 @@ namespace TS.Scrabble.MVCUI._2.Models
     {
         public string Letter { get; set; }
         public int Value { get; set; }
+    }
+
+    public class Player
+    {
+        public string Username { get; set; }
+        public List<Tile> Hand { get; set; }
     }
 }
