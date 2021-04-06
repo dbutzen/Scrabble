@@ -51,13 +51,11 @@ namespace TS.Scrabble.MVCUI._2.Models
             {
                 while (p.Hand.Count < 7)
                 {
-                    Tile tile = new Tile();
                     Task t = Task.Run(async () =>
                     {
-                       tile = await SelectTileFromBag();
+                       await SelectTileFromBag(p);
                     });
                     t.Wait();
-                    p.Hand.Add(tile);
                 }
             }
             return playerList.Count;
@@ -73,13 +71,15 @@ namespace TS.Scrabble.MVCUI._2.Models
             return players;
         }
 
-        public async Task<Tile> SelectTileFromBag()
+        public async Task<Tile> SelectTileFromBag(Player player)
         {
             var rand = new Random();
-            if(tileBag.Count > 0)
+            int value = rand.Next(0, tileBag.Count - 1);
+            if (tileBag.Count > 0)
             {
-                Tile tile =  tileBag[rand.Next(0, tileBag.Count)];
+                Tile tile =  tileBag[value];
                 tileBag.Remove(tile);
+                player.Hand.Add(tile);
                 return tile;
             } else
             {

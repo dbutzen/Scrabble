@@ -22,6 +22,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         public void GetClientId(string id)
         {
             string clientId = Context.ConnectionId;
+            _user.GetPlayers();
             Clients.Caller.showClientId(id);
         }
 
