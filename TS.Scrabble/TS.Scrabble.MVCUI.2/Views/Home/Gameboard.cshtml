@@ -2,8 +2,8 @@
     ViewBag.Title = "Gameboard";
 }
 
+<link rel="stylesheet" href="~/Content/Site.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-
 <script src="~/Scripts/game.js" type="text/javascript" language="javascript"></script>
 
 <div class="wrapper">
@@ -43,6 +43,7 @@
 </div>
 <div id="tray-container">
     <img id="Scrabble-Tray" src="../Images/Scrabble-Tray.png" />
+    <div id="challengeView"></div> <!--Div Created to house the Definition of a word when the challenge button is pressed.-->
 </div>
 
-<input type="submit" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="btnChallenge_Click" />
+<input type="submit" id="btnChallenge" value="Challenge" class="btn btn-primary btn-md ml-3" onclick="ChallengeWord()" />

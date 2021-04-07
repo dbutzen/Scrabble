@@ -42,17 +42,14 @@ table.game-board {
 td {
     background: #cfd034;
     border: 1px solid #d4fcdb;
-    min-width: 24px;
-    height: 27px;
+    min-width: 40px;
+    height: 40px;
     text-align: center;
 }
 
 .wrapper {
     padding: 50px;
     margin-bottom: 10px;
-}
-
-.game-board {
 }
 
 table.score-board {
@@ -107,6 +104,13 @@ table.score-board {
     /*background-color: darkcyan !important;*/
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,127,128,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.game-board .letter {
+    border: 1px solid #d4fcdb;
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
 }
 
 .hand .letter {
@@ -172,7 +176,7 @@ table.score-board {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 90;
+    top: 90px; /*Added the pixel unit of measure, was that the desired unit? - Keir*/
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -183,7 +187,7 @@ table.score-board {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 90;
+    top: 90px; /*Added the pixel unit of measure, was that the desired unit? - Keir*/
     right: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -344,4 +348,16 @@ form1 {
     display: flex;
     justify-content: center;
     text-emphasis-style: circle;
+}
+
+
+/*Challenge*/
+
+#btnChallenge {
+    float: right;
+}
+#challengeView {
+    float: right;
+    height: 25%;
+    width: 35%;
 }

@@ -20,6 +20,7 @@ var words = [];
 var scoreCounter;
 var gameArray = [];
 var image;
+var lastWord = "test";
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
@@ -1180,6 +1181,24 @@ function endTurnLogic() {
     //firstPlay = false;
     //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
 }
+
+//-----------------Challenge Logic--------------
+function ChallengeWord(challengedWord) {
+    if (!challengedWord)
+        challengedWord = lastWord;
+
+    params = {
+        'challengedWord': challengedWord
+    };
+
+    $.ajax({
+        type: "GET",
+        url: '/Home/Challenge',
+        data: params
+    }).done(function (data) {
+        alert(data)
+    });
+};
 
 
 
