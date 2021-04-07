@@ -74,6 +74,18 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 
             }
         }
+
+        public void TileToBoard(string id, string letter)
+        {
+            List<Tile> playerTiles = _user.GetPlayers().FirstOrDefault().Hand;
+            playerTiles.Remove(playerTiles.Where(l => l.Letter == letter).FirstOrDefault());
+            Clients.All.addTileToBoard(id);
+        }
+
+        public void SetCurrentTile(string tile)
+        {
+            Clients.All.selectedTile(tile);
+        }
     }
     //public class Broadcaster
     //{

@@ -762,37 +762,61 @@ function initializePlayer(num) {
 //------------------Hand to Board Tile Placement-----------------------
 var hand;
 var piece;
-// function to get the letter of the tile in the tray that is clicked
+var gameHub = $.connection.gameHub;
 function HandClicked(id) {
-
     hand = document.getElementById(id).innerHTML;
     piece = document.getElementById(id);
+    gameHub.server.setCurrentTile(hand);
 }
-// function to place letter in hand on to board
+
 function BoardClicked(id) {
-    
-    //Add to array
+
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
+
     if (gameArray[first][second].HasTile == false) {
         // Get cell of table to manipulate
-        document.getElementById(id).innerHTML = hand;
         // Array logic
-        gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
-        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
-        gameArray[first][second].PlacedThisTurn = true;
-        gameArray[first][second].HasTile = true;
-        gameArray[first][second].Row = first;
-        gameArray[first][second].Column = second;
-
         //Removes tile from your player hand array.
         piece.remove();
         var tile = parseInt(id.substring(10));
-        players[0].hand.splice(tile, 1);
+        //players[0].hand.splice(tile, 1);
+        gameHub.server.tileToBoard(id, hand);
     }
 }
+ //function to get the letter of the tile in the tray that is clicked
+//function HandClicked(id) {
+
+//    hand = document.getElementById(id).innerHTML;
+//    piece = document.getElementById(id);
+//}
+//// function to place letter in hand on to board
+//function BoardClicked(id) {
+    
+//    //Add to array
+//    var firstLetter = id.charAt(0);
+//    var first = getNumberId(firstLetter);
+//    var secondLetter = id.charAt(1);
+//    var second = getNumberId(secondLetter);
+//    if (gameArray[first][second].HasTile == false) {
+//        // Get cell of table to manipulate
+//        document.getElementById(id).innerHTML = hand;
+//        // Array logic
+//        gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+//        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+//        gameArray[first][second].PlacedThisTurn = true;
+//        gameArray[first][second].HasTile = true;
+//        gameArray[first][second].Row = first;
+//        gameArray[first][second].Column = second;
+
+//        //Removes tile from your player hand array.
+//        piece.remove();
+//        var tile = parseInt(id.substring(10));
+//        players[0].hand.splice(tile, 1);
+//    }
+//}
 
 //function GetImage(letter) {
 //    switch (letter) {
