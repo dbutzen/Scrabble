@@ -97,7 +97,11 @@ table.score-board {
     background: #ff5500;
 }
 
-.tray-container {
+#tray-container {
+    margin-top: 1%;
+    text-align:center;
+    background-image: url(../Images/Scrabble-Tray.png);
+    
 }
 
 #Scrabble-Tray {
@@ -382,6 +386,28 @@ form1 {
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
     margin-left: 41%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.home-board {
+    margin-top: 150px;
+}
+
+
+.Start-Button {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #009999, #7a0099);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 33%;
+    margin-top: 1%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
