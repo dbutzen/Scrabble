@@ -777,12 +777,8 @@ function BoardClicked(id) {
     var second = getNumberId(secondLetter);
 
     if (gameArray[first][second].HasTile == false) {
-        // Get cell of table to manipulate
-        // Array logic
         //Removes tile from your player hand array.
         piece.remove();
-        var tile = parseInt(id.substring(10));
-        //players[0].hand.splice(tile, 1);
         gameHub.server.tileToBoard(id, hand);
     }
 }

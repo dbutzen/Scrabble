@@ -21,53 +21,67 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public void GetClientId(string id)
         {
+            //Gets the clients unique connection id
             string clientId = Context.ConnectionId;
+            //Used for debugging to see if the connection id is set
             _user.GetPlayers();
             Clients.Caller.showClientId(id);
         }
 
         public void PushClientId(string id)
         {
+            //Adds the client connection id to the clientid list
             _user.PushClientId(id);
             Clients.All.addClientIds(_user.GetClientIds());
         }
         public void AddPlayer(string username)
         {
+            //Creates a new player and adds it to list of players
             Player player = new Player();
-            player.Username = username;
+            player.ConnectionId = username;
+            player.PlayerNum = _user.GetPlayers().Count + 1;
             player.Hand = new List<Tile>();
             _user.AddPlayer(player);
         }
         public Task<int> InitializePlayers()
         {
+            //Initializes the players hands for the game to start
             return _user.InitializePlayers(_user.GetPlayers());
         }
         public void GameStart(string id)
         {
             if(id == _user.GetClientIds().FirstOrDefault())
             {
+                //Creates a fresh tile bag
                 _user.NewTileBag();
+                //Initializes players
                 Task task = Task.Run(async () => { await InitializePlayers(); });
                 task.Wait();
-                ShowTiles(_user.GetPlayers().FirstOrDefault().Hand, id);
+                //Displays the fresh tiles in the players hands
+                ShowTiles(id);
             }
         }
-        public void AddTile(int playerNum)
-        {
-            Tile tile = new Tile();
-            //tile = _user.SelectTileFromBag();
-            Clients.All.addTileToPlayerHand(tile.Letter, tile.Value, playerNum);
-        }
-
-        public void ShowTiles(List<Tile> tiles, string id)
+        public async void AddTile(int playerNum)
         {
             List<Player> players = _user.GetPlayers();
+            Player currentPlayer = players[playerNum];
+            await _user.AddNewTile(currentPlayer);
+            Task task = Task.Run(async () => { await Clients.Client(currentPlayer.ConnectionId).displayTile(currentPlayer.Hand.Count, currentPlayer.Hand[currentPlayer.Hand.Count - 1].Letter, currentPlayer.ConnectionId); });
+            task.Wait();
+        }
+
+        public void ShowTiles(string id)
+        {
+            //Gets all the players
+            List<Player> players = _user.GetPlayers();
+
+            //Adds the players tiles to their own hands
             foreach(Player p in players)
             {
                 int count = 1;
                 foreach (Tile t in p.Hand)
                 {
-                    Task task = Task.Run(async () => { await Clients.Client(p.Username).displayTile(count, t.Letter, p.Username); });
+                    Task task = Task.Run(async () => { await Clients.Client(p.ConnectionId).displayTile(count, t.Letter, p.ConnectionId); });
                     task.Wait();
                     count++;
                 }
@@ -77,6 +91,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public void TileToBoard(string id, string letter)
         {
+            //For testing, tries to remove the letter from the first players hand
             List<Tile> playerTiles = _user.GetPlayers().FirstOrDefault().Hand;
             playerTiles.Remove(playerTiles.Where(l => l.Letter == letter).FirstOrDefault());
             Clients.All.addTileToBoard(id);
@@ -84,6 +99,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public void SetCurrentTile(string tile)
         {
+            //sets the hand variable to each client for board placement
             Clients.All.selectedTile(tile);
         }
     }
