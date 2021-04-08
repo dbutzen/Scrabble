@@ -713,7 +713,8 @@ function addTileToHand(tileNum, text) {
     letters.className = "hand-letter";
     letters.style.cursor = "pointer";
     letters.onclick = function () { HandClicked(this.id); };
-    letters.innerHTML = '<img class = "hand-letter" src = "../Images/' + text + '.png" />';
+    letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" />';
+    letters.title = text;
     tray.appendChild(letters);
 
 }
@@ -779,7 +780,9 @@ function BoardClicked(id) {
         // Get cell of table to manipulate
         document.getElementById(id).innerHTML = hand;
         // Array logic
-        gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+        //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+        gameArray[first][second].Tile.Letter = hand.charAt(30);
+        alert(hand.charAt(30));
         gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
         gameArray[first][second].PlacedThisTurn = true;
         gameArray[first][second].HasTile = true;
@@ -790,6 +793,7 @@ function BoardClicked(id) {
         piece.remove();
         var tile = parseInt(id.substring(10));
         players[0].hand.splice(tile, 1);
+        hand = null;
     }
 }
 
