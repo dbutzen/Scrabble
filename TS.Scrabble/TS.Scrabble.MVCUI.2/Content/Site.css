@@ -101,7 +101,7 @@ table.score-board {
     margin-top: 1%;
     text-align:center;
     background-image: url(../Images/Scrabble-Tray.png);
-    
+    width:100%;
 }
 
 #Scrabble-Tray {
@@ -410,4 +410,25 @@ form1 {
     margin-top: 1%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.Challenge-Button {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #009999, #7a0099);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 88%;
+    margin-top: 1%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+td:hover {
+    background-color: gray;
 }
