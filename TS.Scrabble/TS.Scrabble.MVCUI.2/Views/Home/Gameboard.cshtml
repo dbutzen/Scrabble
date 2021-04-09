@@ -2,6 +2,7 @@
     ViewBag.Title = "Gameboard";
 }
 
+<link rel="stylesheet" href="~/Content/Site.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 <script src="../Scripts/game.js" type="text/javascript" language="javascript"></script>
@@ -35,16 +36,17 @@
     <input type="button" value="End Turn" class="btn btn-primary btn-md ml-3" onclick="EndTurn()" />
     <input type="button" value="TestButton" class="btn btn-primary btn-md ml-3" onclick="checkLegalPlacementTest()" />
 
-    <div class="score-board">
-        <table id="score-board" class="score-board">
-            <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
-            <tr><td class="r1">Peter</td> <td class="r1">1000</td></tr>
-            <tr><td class="r1">Lois</td><td class="r1">900</td></tr>
-        </table>
-    </div>
-    <div id="tray-container">
-        @*<img id="Scrabble-Tray" src="../Images/Scrabble-Tray.png" />*@
-    </div>
-    <input type="submit" value="Challenge" class="Challenge-Button" onclick="btnChallenge_Click" />
-</body>
+<div class="score-board">
+    <table id="score-board" class="score-board">
+        <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
+        <tr><td class="r1">Peter</td> <td class="r1">1000</td></tr>
+        <tr><td class="r1">Lois</td><td class="r1">900</td></tr>
+    </table>
+</div>
+<div id="tray-container">
+    <img id="Scrabble-Tray" src="../Images/Scrabble-Tray.png" />
+    <div id="challengeView"></div> <!--Div Created to house the Definition of a word when the challenge button is pressed.-->
+</div>
 
+<input type="submit" id="btnChallenge" value="Challenge" class="Challenge-Button" onclick="ChallengeWord()" />
+</body>
