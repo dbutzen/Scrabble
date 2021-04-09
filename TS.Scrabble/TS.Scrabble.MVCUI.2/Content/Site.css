@@ -39,6 +39,10 @@ table.game-board {
     margin: 0 auto;
 }
 
+li {
+    display: inline;
+}
+
 td {
     background: #cfd034;
     border: 1px solid #d4fcdb;
@@ -48,7 +52,7 @@ td {
 }
 
 .wrapper {
-    padding: 50px;
+    padding: 10px;
     margin-bottom: 10px;
 }
 
@@ -138,10 +142,18 @@ table.score-board {
     display: inline-block;
 }
 
-#ScrabbleImage {
-    background-image: url("../Images/Scrabble.png");
+.HomePage {
+    background-image: url("../Images/Srabble-Geek.jpg");
     background-repeat: no-repeat;
-    height: 200px;
+    background-size:cover;
+    background-position:center;
+}
+
+.Game-Background {
+    background-image: url("../Images/Game-Background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 /*.letter .hand {
@@ -391,7 +403,6 @@ form1 {
 }
 
 .home-board {
-    margin-top: 150px;
 }
 
 
@@ -410,6 +421,7 @@ form1 {
     margin-top: 1%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    display:inline;
 }
 
 .Challenge-Button {
@@ -431,4 +443,20 @@ form1 {
 
 td:hover {
     background-color: gray;
+}
+
+.Account-Icon {
+    max-height:3%;
+    max-width:3%;
+    float:right;
+    margin-top:10px;
+    color:white;
+    cursor:pointer;
+    
+}
+
+.Intro {
+    color: white;
+    font: 500 2em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
 }

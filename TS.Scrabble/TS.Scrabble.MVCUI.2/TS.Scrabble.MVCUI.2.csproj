@@ -144,13 +144,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\A.png" />
+    <Content Include="Images\Account.png" />
     <Content Include="Images\B.png" />
-    <Content Include="Images\Background.jpg" />
+    <Content Include="Images\Background.png" />
     <Content Include="Images\C.png" />
     <Content Include="Images\D.png" />
     <Content Include="Images\E.png" />
     <Content Include="Images\F.png" />
     <Content Include="Images\G.png" />
+    <Content Include="Images\Game-Background.png" />
     <Content Include="Images\H.png" />
     <Content Include="Images\I.png" />
     <Content Include="Images\J.png" />
@@ -166,6 +168,7 @@
     <Content Include="Images\Scrabble-Tray.png" />
     <Content Include="Images\Scrabble.png" />
     <Content Include="Images\ScrabbleLogo.png.png" />
+    <Content Include="Images\Srabble-Geek.jpg" />
     <Content Include="Images\T.png" />
     <Content Include="Images\U.png" />
     <Content Include="Images\V.png" />
