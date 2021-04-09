@@ -795,6 +795,7 @@ function BoardClicked(id) {
         players[0].hand.splice(tile, 1);
         hand = null;
     }
+    // Secret Comment
 }
 
 //function GetImage(letter) {
