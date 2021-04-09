@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TS.Scrabble.BL;
 
 namespace TS.Scrabble.MVCUI._2.Controllers
 {
@@ -25,6 +26,15 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public JsonResult Challenge(string challengedWord = "")
+        {
+            if (!string.IsNullOrWhiteSpace(challengedWord))
+            {
+                return Json(Merriam_WebsterManager.Definition(challengedWord), JsonRequestBehavior.AllowGet);
+            }
+            return Json(null, JsonRequestBehavior.AllowGet);
         }
     }
 }

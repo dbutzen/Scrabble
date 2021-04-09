@@ -39,20 +39,21 @@ table.game-board {
     margin: 0 auto;
 }
 
+li {
+    display: inline;
+}
+
 td {
     background: #cfd034;
     border: 1px solid #d4fcdb;
-    min-width: 24px;
-    height: 27px;
+    min-width: 40px;
+    height: 40px;
     text-align: center;
 }
 
 .wrapper {
-    padding: 50px;
+    padding: 10px;
     margin-bottom: 10px;
-}
-
-.game-board {
 }
 
 table.score-board {
@@ -101,8 +102,9 @@ table.score-board {
     margin-top: 1%;
     text-align:center;
     background-image: url(../Images/Scrabble-Tray.png);
-    
+    width:100%;
 }
+
 
 #Scrabble-Tray {
     position: relative;
@@ -115,6 +117,13 @@ table.score-board {
     /*background-color: darkcyan !important;*/
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,127,128,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.game-board .letter {
+    border: 1px solid #d4fcdb;
+    min-width: 40px;
+    height: 40px;
+    text-align: center;
 }
 
 .hand .letter {
@@ -138,10 +147,18 @@ table.score-board {
     display: inline-block;
 }
 
-#ScrabbleImage {
-    background-image: url("../Images/Scrabble.png");
+.HomePage {
+    background-image: url("../Images/Srabble-Geek.jpg");
     background-repeat: no-repeat;
-    height: 200px;
+    background-size:cover;
+    background-position:center;
+}
+
+.Game-Background {
+    background-image: url("../Images/Game-Background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 /*.letter .hand {
@@ -187,7 +204,7 @@ table.score-board {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 90;
+    top: 90px; /*Added the pixel unit of measure, was that the desired unit? - Keir*/
     left: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -198,7 +215,7 @@ table.score-board {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 90;
+    top: 90px; /*Added the pixel unit of measure, was that the desired unit? - Keir*/
     right: 0;
     background-color: #111;
     overflow-x: hidden;
@@ -391,7 +408,6 @@ form1 {
 }
 
 .home-board {
-    margin-top: 150px;
 }
 
 
@@ -410,4 +426,42 @@ form1 {
     margin-top: 1%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    display:inline;
+}
+
+.Challenge-Button {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #009999, #7a0099);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 88%;
+    margin-top: 1%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+td:hover {
+    background-color: gray;
+}
+
+.Account-Icon {
+    max-height:3%;
+    max-width:3%;
+    float:right;
+    margin-top:10px;
+    color:white;
+    cursor:pointer;
+    
+}
+
+.Intro {
+    color: white;
+    font: 500 2em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
 }

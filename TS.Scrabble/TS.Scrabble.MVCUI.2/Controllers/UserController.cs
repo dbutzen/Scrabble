@@ -106,7 +106,8 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             }
             catch(Exception ex)
             {
-                return View();
+                throw ex;
+                //return View();
             }
         }
 
