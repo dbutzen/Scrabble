@@ -27,6 +27,13 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             return View();
         }
 
+        public ActionResult GameboardMulti()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
         public ActionResult Chat()
         {
             return View();

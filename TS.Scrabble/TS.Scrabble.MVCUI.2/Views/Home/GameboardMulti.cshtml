@@ -6,7 +6,13 @@
 
 
 
-<script src="~/Scripts/game.js" type="text/javascript" language="javascript"></script>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/game-single-online.js" type="text/javascript" language="javascript"></script>
+    <script src="~/Scripts/game-online.js" type="text/javascript" language="javascrpt"></script>
+}
 
 <div class="wrapper">
     <div class="game">
