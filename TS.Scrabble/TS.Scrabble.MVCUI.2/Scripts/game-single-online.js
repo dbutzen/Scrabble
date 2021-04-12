@@ -21,7 +21,6 @@ var scoreCounter;
 var gameArray = [];
 var image;
 var users = [];
-var lastWord = "test";
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
@@ -99,112 +98,139 @@ function letterClicked(elem) {
 
 function newBag() {
     var newBagTilesCount = 0;
-    for (var i = newBagTilesCount; i < 9; i++) {
+    for (var i = newBagTilesCount; i < 9; i++)
+    {
         tileBag[i] = { Letter: "A", Value: 1 };
     }
     newBagTilesCount += 9;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "B", Value: 3 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "C", Value: 3 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "D", Value: 2 };
     }
     newBagTilesCount += 4;
-    for (var i = newBagTilesCount; i < 12 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 12 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "E", Value: 1 };
     }
     newBagTilesCount += 12;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "F", Value: 4 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 3 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 3 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "G", Value: 2 }
     }
     newBagTilesCount += 3;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "H", Value: 4 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 9 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 9 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "I", Value: 1 };
     }
     newBagTilesCount += 9;
-    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "J", Value: 8 };
     }
     newBagTilesCount += 1;
-    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "K", Value: 5 };
     }
     newBagTilesCount += 1;
-    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "L", Value: 1 };
     }
     newBagTilesCount += 4
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "M", Value: 3 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "N", Value: 1 };
     }
     newBagTilesCount += 6;
-    for (var i = newBagTilesCount; i < 8 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 8 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "O", Value: 1 };
     }
     newBagTilesCount += 8;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "P", Value: 3 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "Q", Value: 10 };
     }
     newBagTilesCount += 1;
-    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "R", Value: 1 };
     }
     newBagTilesCount += 6;
-    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "S", Value: 1 };
     }
     newBagTilesCount += 4;
-    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 6 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "T", Value: 1 };
     }
     newBagTilesCount += 6;
-    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 4 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "U", Value: 1 };
     }
     newBagTilesCount += 4;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "V", Value: 4 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "W", Value: 4 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "X", Value: 8 };
     }
     newBagTilesCount += 1;
-    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 2 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "Y", Value: 4 };
     }
     newBagTilesCount += 2;
-    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++) {
+    for (var i = newBagTilesCount; i < 1 + newBagTilesCount; i++)
+    {
         tileBag[i] = { Letter: "Z", Value: 10 };
     }
     newBagTilesCount += 1;
-    for (var i = 0; i < 2; i++) {
-        tileBag[i] = { Letter: "0", Value: 0 };
+    for (var i = 0; i < 2; i++)
+    {
+        tileBag[i] = { Letter: "Blank", Value: 0 };
     }
 }
 
@@ -214,8 +240,8 @@ function initArray() {
         for (var j = 0; j < 17; j++) {
             gameArray[i][j] = { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false };
         }*/
-
-    gameArray =
+    
+        gameArray =
         [
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -254,7 +280,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -273,7 +299,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -292,7 +318,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -311,7 +337,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -330,7 +356,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -349,7 +375,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -368,7 +394,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -387,7 +413,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -406,7 +432,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -425,7 +451,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -444,7 +470,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -463,7 +489,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -482,7 +508,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -501,7 +527,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -520,7 +546,7 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
-            ],
+                ],
             [
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
@@ -540,79 +566,79 @@ function initArray() {
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false },
                 { Tile: {}, Bonus: "None", BonusUsed: false, Value: "None", PlacedThisTurn: false, HasTile: false }
             ]
-        ]
+    ]
 
 
-    // Triple word denoted TW, same as class in html
-    gameArray[1][1].Bonus = "TW";
-    gameArray[1][8].Bonus = "TW";
-    gameArray[1][15].Bonus = "TW";
-    gameArray[8][1].Bonus = "TW";
-    gameArray[8][15].Bonus = "TW";
-    gameArray[15][1].Bonus = "TW";
-    gameArray[15][8].Bonus = "TW";
-    gameArray[15][15].Bonus = "TW";
+        // Triple word denoted TW, same as class in html
+        gameArray[1][1].Bonus = "TW";
+        gameArray[1][8].Bonus = "TW";
+        gameArray[1][15].Bonus = "TW";
+        gameArray[8][1].Bonus = "TW";
+        gameArray[8][15].Bonus = "TW";
+        gameArray[15][1].Bonus = "TW";
+        gameArray[15][8].Bonus = "TW";
+        gameArray[15][15].Bonus = "TW";
 
-    //Double Word
-    gameArray[2][2].Bonus = "DW";
-    gameArray[2][14].Bonus = "DW";
-    gameArray[3][3].Bonus = "DW";
-    gameArray[3][13].Bonus = "DW";
-    gameArray[4][4].Bonus = "DW";
-    gameArray[4][12].Bonus = "DW";
-    gameArray[5][5].Bonus = "DW";
-    gameArray[5][11].Bonus = "DW";
-    gameArray[8][8].Bonus = "DW";
-    gameArray[11][5].Bonus = "DW";
-    gameArray[11][11].Bonus = "DW";
-    gameArray[12][4].Bonus = "DW";
-    gameArray[12][12].Bonus = "DW";
-    gameArray[13][3].Bonus = "DW";
-    gameArray[15][1].Bonus = "DW";
-    gameArray[15][1].Bonus = "DW";
-    gameArray[15][1].Bonus = "DW";
+        //Double Word
+        gameArray[2][2].Bonus = "DW";
+        gameArray[2][14].Bonus = "DW";
+        gameArray[3][3].Bonus = "DW";
+        gameArray[3][13].Bonus = "DW";
+        gameArray[4][4].Bonus = "DW";
+        gameArray[4][12].Bonus = "DW";
+        gameArray[5][5].Bonus = "DW";
+        gameArray[5][11].Bonus = "DW";
+        gameArray[8][8].Bonus = "DW";
+        gameArray[11][5].Bonus = "DW";
+        gameArray[11][11].Bonus = "DW";
+        gameArray[12][4].Bonus = "DW";
+        gameArray[12][12].Bonus = "DW";
+        gameArray[13][3].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
+        gameArray[15][1].Bonus = "DW";
 
-    //Double Letter
-    gameArray[1][4].Bonus = "DL";
-    gameArray[1][12].Bonus = "DL";
-    gameArray[3][6].Bonus = "DL";
-    gameArray[3][8].Bonus = "DL";
-    gameArray[4][1].Bonus = "DL";
-    gameArray[4][7].Bonus = "DL";
-    gameArray[4][15].Bonus = "DL";
-    gameArray[7][3].Bonus = "DL";
-    gameArray[7][7].Bonus = "DL";
-    gameArray[7][9].Bonus = "DL";
-    gameArray[7][13].Bonus = "DL";
-    gameArray[8][4].Bonus = "DL";
-    gameArray[8][12].Bonus = "DL";
-    gameArray[9][3].Bonus = "DL";
-    gameArray[9][7].Bonus = "DL";
-    gameArray[9][9].Bonus = "DL";
-    gameArray[9][13].Bonus = "DL";
-    gameArray[12][1].Bonus = "DL";
-    gameArray[12][8].Bonus = "DL";
-    gameArray[12][15].Bonus = "DL";
-    gameArray[13][7].Bonus = "DL";
-    gameArray[13][9].Bonus = "DL";
-    gameArray[15][4].Bonus = "DL";
-    gameArray[15][12].Bonus = "DL";
+        //Double Letter
+        gameArray[1][4].Bonus = "DL";
+        gameArray[1][12].Bonus = "DL";
+        gameArray[3][6].Bonus = "DL";
+        gameArray[3][8].Bonus = "DL";
+        gameArray[4][1].Bonus = "DL";
+        gameArray[4][7].Bonus = "DL";
+        gameArray[4][15].Bonus = "DL";
+        gameArray[7][3].Bonus = "DL";
+        gameArray[7][7].Bonus = "DL";
+        gameArray[7][9].Bonus = "DL";
+        gameArray[7][13].Bonus = "DL";
+        gameArray[8][4].Bonus = "DL";
+        gameArray[8][12].Bonus = "DL";
+        gameArray[9][3].Bonus = "DL";
+        gameArray[9][7].Bonus = "DL";
+        gameArray[9][9].Bonus = "DL";
+        gameArray[9][13].Bonus = "DL";
+        gameArray[12][1].Bonus = "DL";
+        gameArray[12][8].Bonus = "DL";
+        gameArray[12][15].Bonus = "DL";
+        gameArray[13][7].Bonus = "DL";
+        gameArray[13][9].Bonus = "DL";
+        gameArray[15][4].Bonus = "DL";
+        gameArray[15][12].Bonus = "DL";
 
-    //Triple Letter
-    gameArray[2][6].Bonus = "TL";
-    gameArray[2][10].Bonus = "TL";
-    gameArray[6][2].Bonus = "TL";
-    gameArray[6][6].Bonus = "TL";
-    gameArray[6][10].Bonus = "TL";
-    gameArray[6][14].Bonus = "TL";
-    gameArray[10][2].Bonus = "TL";
-    gameArray[10][6].Bonus = "TL";
-    gameArray[10][10].Bonus = "TL";
-    gameArray[10][14].Bonus = "TL";
-    gameArray[14][6].Bonus = "TL";
-    gameArray[14][10].Bonus = "TL";
+        //Triple Letter
+        gameArray[2][6].Bonus = "TL";
+        gameArray[2][10].Bonus = "TL";
+        gameArray[6][2].Bonus = "TL";
+        gameArray[6][6].Bonus = "TL";
+        gameArray[6][10].Bonus = "TL";
+        gameArray[6][14].Bonus = "TL";
+        gameArray[10][2].Bonus = "TL";
+        gameArray[10][6].Bonus = "TL";
+        gameArray[10][10].Bonus = "TL";
+        gameArray[10][14].Bonus = "TL";
+        gameArray[14][6].Bonus = "TL";
+        gameArray[14][10].Bonus = "TL";
 
-
+    
 }
 
 
@@ -667,8 +693,8 @@ function selectTileFromBag(playerHandLength, playerNum) {
         //Remove from bag
         tileBag.splice(selectedValue, 1);
         return letter;
-
-
+        
+       
     }
     // Only returns this if bag is empty
     return "empty";
@@ -681,21 +707,15 @@ function selectTileFromBag(playerHandLength, playerNum) {
 
 //Adds physical tile to physical player hand
 function addTileToHand(tileNum, text) {
-    var letters = document.createElement("DIV");
+    var div = document.createElement("DIV");
     tray = document.getElementById("tray-container");
 
-    letters.id = "handLetter" + (tileNum + 1);
-    letters.className = "hand-letter";
-    letters.style.cursor = "pointer";
-    letters.onclick = function () { HandClicked(this.id); };
-    letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" />';
-
-    letters.title = text;
-    tray.appendChild(letters);
-
-    // if letters.title = blank 
-
-    // create user input to place whatever letter they choose
+    div.id = "handLetter" + (tileNum + 1);
+    div.className = "letter hand";
+    div.style.cursor = "pointer";
+    div.onclick = function () { HandClicked(this.id); };
+    div.innerHTML = '<img class = "hand letter" src = "../Images/' + text + '.png" />';
+    tray.appendChild(div);
 
 }
 
@@ -742,49 +762,74 @@ function initializePlayer(num) {
 //------------------Hand to Board Tile Placement-----------------------
 var hand;
 var piece;
-//function to get the letter of the tile in the tray that is clicked
+var gameHub = $.connection.gameHub;
 function HandClicked(id) {
-
     hand = document.getElementById(id).innerHTML;
     piece = document.getElementById(id);
+    gameHub.server.setCurrentTile(hand);
 }
- //function to place letter in hand on to board
+
 function BoardClicked(id) {
 
-    //Add to array
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
+
     if (gameArray[first][second].HasTile == false) {
-         //Get cell of table to manipulate
-        document.getElementById(id).innerHTML = hand;
-        // Array logic
-        //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
-        //alert(hand.charAt(30));
-        if (hand.charAt(30) == "0") {
-            var input = prompt("Please Enter In A Letter");
-            //var boardClicked = getElementById(gameArray[first][second].Tile);
-            //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-            gameArray[first][second].Tile.Letter = input.toUpperCase();
-        } else {
-            gameArray[first][second].Tile.Letter = hand.charAt(30);
-        }
-        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
-        gameArray[first][second].PlacedThisTurn = true;
-        gameArray[first][second].HasTile = true;
-        gameArray[first][second].Row = first;
-        gameArray[first][second].Column = second;
         //Removes tile from your player hand array.
         piece.remove();
-        var tile = parseInt(id.substring(10));
-        players[0].hand.splice(tile, 1);
-        hand = null;
+        gameHub.server.tileToBoard(id, hand);
     }
-    // Secret Comment
+}
+ //function to get the letter of the tile in the tray that is clicked
+//function HandClicked(id) {
+
+//    hand = document.getElementById(id).innerHTML;
+//    piece = document.getElementById(id);
+//}
+//// function to place letter in hand on to board
+//function BoardClicked(id) {
+    
+//    //Add to array
+//    var firstLetter = id.charAt(0);
+//    var first = getNumberId(firstLetter);
+//    var secondLetter = id.charAt(1);
+//    var second = getNumberId(secondLetter);
+//    if (gameArray[first][second].HasTile == false) {
+//        // Get cell of table to manipulate
+//        document.getElementById(id).innerHTML = hand;
+//        // Array logic
+//        gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+//        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+//        gameArray[first][second].PlacedThisTurn = true;
+//        gameArray[first][second].HasTile = true;
+//        gameArray[first][second].Row = first;
+//        gameArray[first][second].Column = second;
+
+//        //Removes tile from your player hand array.
+//        piece.remove();
+//        var tile = parseInt(id.substring(10));
+//        players[0].hand.splice(tile, 1);
+//    }
+//}
+
+//function GetImage(letter) {
+//    switch (letter) {
+//        case "A":
+//            var img = document.createElement('img');
+//            img.src ="~/Images/A.png";
+//            return img;
+//    }
+//}
+
+function LoadLetterImage(letter){
+    if (letter == "A") {
+        document.documentElement.outerHTML = '<img src="~/Images/A.png" />';
+    }
 }
 
-function getValue(letter) {
+function getValue(letter){
     switch (letter) {
         case "A":
             return 1;
@@ -969,7 +1014,7 @@ function checkColumnCongruency() {
 //Gets list of words to use with dictionary, as well as
 //setting scoreCounter to the score of the combined words.
 //DOES NOT remove bonuses. Must be done after.
-function getWords() {
+function getWords() { 
     var direction = "horizontal";
     scoreCounter = 0;
 
@@ -985,7 +1030,7 @@ function getWords() {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) words.push(wordPlaceholder);
         }
-
+        
     }
     if (direction == "vertical") {
         words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
@@ -993,7 +1038,7 @@ function getWords() {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) words.push(wordPlaceholder);
         }
-
+        
     }
     return scoreCounter;
 }
@@ -1032,7 +1077,7 @@ function getHorizontalWord(originalTile, originalRow, originalColumn) {
         tempWordScore += tileScore;
         tileScore = 0;
     }
-
+    
     // Reset to original position of placed word
     tileColumn = originalColumn;
     // Get tiles to the right;
@@ -1108,7 +1153,7 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
-
+    
     if (checkLegalPlacement() == true) {
 
         //Single player for testing
@@ -1157,24 +1202,6 @@ function endTurnLogic() {
     //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
 }
 
-//-----------------Challenge Logic--------------
-function ChallengeWord(challengedWord) {
-    if (!challengedWord)
-        challengedWord = lastWord;
-
-    params = {
-        'challengedWord': challengedWord
-    };
-
-    $.ajax({
-        type: "GET",
-        url: '/Home/Challenge',
-        data: params
-    }).done(function (data) {
-        alert(data)
-    });
-};
-
 
 
 //------------------TESTS------------------
@@ -1210,7 +1237,7 @@ function checkLegalPlacementTest() {
 
     var result = checkLegalPlacement();
     alert(result);
-
+    
 }
 
 
@@ -1245,7 +1272,7 @@ function checkLegalPlacementTest() {
 
 
     getWords();
-  
+    
 
 
 }*/
