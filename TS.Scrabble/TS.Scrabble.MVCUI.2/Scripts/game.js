@@ -46,7 +46,7 @@ $(".hand").click(function () {
 });
 function MovePiece() {
     var hand = document.getElementById("handLetter1").innerHTML;
-    alert('piece taken!');
+    //alert('piece taken!');
 
 }
 function letterClicked(elem) {
@@ -905,11 +905,11 @@ function checkLegalPlacement() {
         if (equalColumn == true) columnCongruency = checkColumnCongruency();
     }
     // Checks all results and returns true or false for if placement is legal
-    alert("equalRow " + equalRow);
-    alert("equalColumn " + equalColumn);
-    alert("connected " + connected);
-    alert("rowCongruency " + rowCongruency);
-    alert("columnCongruency " + columnCongruency);
+    //alert("equalRow " + equalRow);
+    //alert("equalColumn " + equalColumn);
+    //alert("connected " + connected);
+    //alert("rowCongruency " + rowCongruency);
+    //alert("columnCongruency " + columnCongruency);
     if ((equalRow == true || equalColumn == true) && connected == true && rowCongruency == true && columnCongruency == true) return true;
     return false;
 }
