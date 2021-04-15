@@ -10,14 +10,14 @@ using TS.Scrabble.MVCUI._2.Hubs;
 
 namespace TS.Scrabble.MVCUI._2.Models
 {
-    public class User
+    public class Game
     {
-        private readonly static Lazy<User> _instance = new Lazy<User>(() => new User(GlobalHost.ConnectionManager.GetHubContext<GameHub>().Clients));
+        private readonly static Lazy<Game> _instance = new Lazy<Game>(() => new Game(GlobalHost.ConnectionManager.GetHubContext<GameHub>().Clients));
         private readonly List<string> _clientIds = new List<string>();
         private readonly List<Tile> tileBag = new List<Tile>();
         private readonly List<Player> players = new List<Player>();
 
-        public static User Instance
+        public static Game Instance
         {
             get
             {
@@ -25,7 +25,7 @@ namespace TS.Scrabble.MVCUI._2.Models
             }
         }
 
-        private User(IHubConnectionContext<dynamic> clients)
+        private Game(IHubConnectionContext<dynamic> clients)
         {
             Clients = clients;
         }
