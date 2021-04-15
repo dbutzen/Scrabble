@@ -13,6 +13,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
     public class GameHub : Hub
     {
         private readonly Game _game;
+        private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
         public GameHub() : this(Game.Instance) { }
         public GameHub(Game game)
         {
@@ -25,15 +26,27 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             string clientId = Context.ConnectionId;
             //Used for debugging to see if the connection id is set
             _game.GetPlayers();
-            Clients.Caller.showClientId(id);
+            //Clients.Caller.showClientId(id);
+        }
+
+        public override Task OnConnected()
+        {
+            string name = Context.User.Identity.Name;
+            _connections.Add(name, Context.ConnectionId);
+
+            
+            Groups.Add(Context.ConnectionId, "game");
+
+            return base.OnConnected();
         }
 
         public void PushClientId(string id)
         {
             //Adds the client connection id to the clientid list
-            _game.PushClientId(id);
+            _game.PushClientId(Context.ConnectionId);
             Clients.All.addClientIds(_game.GetClientIds());
         }
+
         public void AddPlayer(string username)
         {
             //Creates a new player and adds it to list of players
@@ -94,13 +107,78 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             //For testing, tries to remove the letter from the first players hand
             List<Tile> playerTiles = _game.GetPlayers().FirstOrDefault().Hand;
             playerTiles.Remove(playerTiles.Where(l => l.Letter == letter).FirstOrDefault());
-            Clients.All.addTileToBoard(id);
+            Clients.Group("game").addTileToBoard(id);
         }
 
         public void SetCurrentTile(string tile)
         {
             //sets the hand variable to each client for board placement
-            Clients.All.selectedTile(tile);
+            Clients.Group("game").selectedTile(tile);
+        }
+    }
+
+    public class ConnectionMapping<T>
+    {
+        private readonly Dictionary<T, HashSet<string>> _connections =
+            new Dictionary<T, HashSet<string>>();
+
+        public int Count
+        {
+            get
+            {
+                return _connections.Count;
+            }
+        }
+
+        public void Add(T key, string connectionId)
+        {
+            lock (_connections)
+            {
+                HashSet<string> connections;
+                if (!_connections.TryGetValue(key, out connections))
+                {
+                    connections = new HashSet<string>();
+                    _connections.Add(key, connections);
+                }
+
+                lock (connections)
+                {
+                    connections.Add(connectionId);
+                }
+            }
+        }
+
+        public IEnumerable<string> GetConnections(T key)
+        {
+            HashSet<string> connections;
+            if (_connections.TryGetValue(key, out connections))
+            {
+                return connections;
+            }
+
+            return Enumerable.Empty<string>();
+        }
+
+        public void Remove(T key, string connectionId)
+        {
+            lock (_connections)
+            {
+                HashSet<string> connections;
+                if (!_connections.TryGetValue(key, out connections))
+                {
+                    return;
+                }
+
+                lock (connections)
+                {
+                    connections.Remove(connectionId);
+
+                    if (connections.Count == 0)
+                    {
+                        _connections.Remove(key);
+                    }
+                }
+            }
         }
     }
     //public class Broadcaster
