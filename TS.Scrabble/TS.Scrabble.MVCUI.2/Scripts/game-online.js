@@ -31,13 +31,18 @@
         });
     }
 
-    gameHub.client.setTurnLabel = function (username) {
+    gameHub.client.setTurnLabel = function (username, id) {
         turnCounter++;
         currentPlayerTurn++;
         if (currentPlayerTurn > numPlayers) {
             currentPlayerTurn = 1;
         }
-        document.getElementById("currentturn").innerHTML = "It is " + username + "'s turn.";
+        if (id == $.connection.hub.id) {
+            document.getElementById("currentturn").innerHTML = "It is your turn.";
+        } else {
+            document.getElementById("currentturn").innerHTML = "It is " + username + "'s turn.";
+        }
+        
     }
 
     function onlineGameStart() {
