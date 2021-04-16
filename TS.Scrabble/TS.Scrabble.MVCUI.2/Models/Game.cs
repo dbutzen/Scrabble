@@ -250,6 +250,7 @@ namespace TS.Scrabble.MVCUI._2.Models
     public class Player
     {
         public int PlayerNum { get; set; }
+        public string Username { get; set; }
         public string ConnectionId { get; set; }
         public List<Tile> Hand { get; set; }
         public int Score { get; set; }

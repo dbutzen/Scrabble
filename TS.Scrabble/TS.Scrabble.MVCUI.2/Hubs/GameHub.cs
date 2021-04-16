@@ -47,11 +47,12 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Clients.All.addClientIds(_game.GetClientIds());
         }
 
-        public void AddPlayer(string username)
+        public void AddPlayer(string connectionId, string username)
         {
             //Creates a new player and adds it to list of players
             Player player = new Player();
-            player.ConnectionId = username;
+            player.ConnectionId = connectionId;
+            player.Username = username;
             player.PlayerNum = _game.GetPlayers().Count + 1;
             player.Hand = new List<Tile>();
             _game.AddPlayer(player);

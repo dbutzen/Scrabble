@@ -96,7 +96,7 @@
 
     $.connection.hub.start().done(function () {
         gameHub.server.pushClientId($.connection.hub.id);
-        gameHub.server.addPlayer($.connection.hub.id);
+        gameHub.server.addPlayer($.connection.hub.id, document.getElementById("username").value);
         $('#clientId').click(function () {
             gameHub.server.getClientId($.connection.hub.id);
         });
