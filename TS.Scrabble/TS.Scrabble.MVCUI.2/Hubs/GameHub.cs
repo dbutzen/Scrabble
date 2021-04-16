@@ -126,6 +126,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             Player player = players.FirstOrDefault();
+            SetTurn(currentPlayer);
             Clients.Client(player.ConnectionId).PlayerTurn();
         }
 
@@ -133,7 +134,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             Player player = players.FirstOrDefault();
-            Clients.Group("game").setTurnLabel(player.Username);
+            Clients.Group("game").setTurnLabel(player.PlayerNum.ToString());
         }
     }
 
