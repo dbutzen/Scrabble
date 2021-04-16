@@ -116,6 +116,12 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             //sets the hand variable to each client for board placement
             Clients.Group("game").selectedTile(tile);
         }
+
+        public void EndTurn(int currentPlayer)
+        {
+            List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
+            Player player = players.FirstOrDefault();
+        }
     }
 
     public class ConnectionMapping<T>

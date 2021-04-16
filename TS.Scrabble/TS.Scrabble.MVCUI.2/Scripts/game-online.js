@@ -8,6 +8,8 @@
         numPlayers = users.length;
         if (numPlayers == 2) {
             gameHub.server.gameStart($.connection.hub.id);
+            currentPlayerTurn = 1;
+            turnCounter = 1;
             onlineGameStart();
         }
     };
@@ -42,6 +44,15 @@
         //while (player.hand.length < 7) {
         //    gameHub.server.addTile(num);
         //}
+    }
+
+    function turnEnded() {
+        turnCounter++;
+        gameHub.server.endTurn(currentPlayerTurn);
+        currentPlayerTurn++;
+        if (currentPlayerTurn > numPlayers) {
+            currentPlayerTurn = 1;
+        }
     }
 
     function HandClicked(id) {
@@ -100,6 +111,8 @@
         $('#clientId').click(function () {
             gameHub.server.getClientId($.connection.hub.id);
         });
+        currentPlayerTurn = 0;
+        turnCounter = 0;
     });
     
 });
