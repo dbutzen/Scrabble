@@ -21,6 +21,7 @@ var scoreCounter;
 var gameArray = [];
 var image;
 var users = [];
+var currentWords = []; //Array to house the current play's words.  Intended for the Challenge use.
 var lastWord = "test";
 
 //REMINDERS
@@ -971,6 +972,7 @@ function checkColumnCongruency() {
 //DOES NOT remove bonuses. Must be done after.
 function getWords() {
     var direction = "horizontal";
+    currentWords = [];
     scoreCounter = 0;
 
     if (placements.length > 1) {
@@ -980,21 +982,29 @@ function getWords() {
     if (direction == "horizontal") {
         //Original Word
         words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         //Offshoot Words
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
-            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+            if (wordPlaceholder != 0) {
+                words.push(wordPlaceholder);
+                currentWords.push(wordPlaceholder)
+            }
         }
-
     }
     if (direction == "vertical") {
         words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
-            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+            if (wordPlaceholder != 0) {
+                words.push(wordPlaceholder);
+                currentWords.push(wordPlaceholder);
+            }
         }
 
     }
+    alert(currentWords);
     return scoreCounter;
 }
 
@@ -1159,20 +1169,25 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord) {
-    if (!challengedWord)
-        challengedWord = lastWord;
-
-    params = {
-        'challengedWord': challengedWord
-    };
-
-    $.ajax({
-        type: "GET",
-        url: '/Home/Challenge',
-        data: params
-    }).done(function (data) {
-        alert(data)
-    });
+    for (var i = 0; i < currentWords.length; i++){
+        $("#challengeView").append(currentWords[i] + "<br>").click(function () {
+            lastWord = this.innerText; //Working on getting this to work properly.
+            if (!challengedWord)
+            challengedWord = lastWord;
+    
+            params = {
+                'challengedWord': challengedWord
+            };
+            
+            $.ajax({
+                type: "GET",
+                url: '/Home/Challenge',
+                data: params
+            }).done(function (data) {
+                alert(data)
+            });
+                })
+            };
 };
 
 
