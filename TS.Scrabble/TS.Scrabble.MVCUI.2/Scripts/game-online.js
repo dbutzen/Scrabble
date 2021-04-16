@@ -32,6 +32,11 @@
     }
 
     gameHub.client.setTurnLabel = function (username) {
+        turnCounter++;
+        currentPlayerTurn++;
+        if (currentPlayerTurn > numPlayers) {
+            currentPlayerTurn = 1;
+        }
         document.getElementById("currentturn").innerHTML = "It is " + username + "'s turn.";
     }
 
@@ -58,14 +63,14 @@
     }
 
     function turnEnded() {
-        turnCounter++;
-        currentPlayerTurn++;
-        if (currentPlayerTurn > numPlayers) {
-            currentPlayerTurn = 1;
-        }
-        gameHub.server.endTurn(currentPlayerTurn);
+        //turnCounter++;
+        //currentPlayerTurn++;
+        //if (currentPlayerTurn > numPlayers) {
+        //    currentPlayerTurn = 1;
+        //}
         isTurn = false;
         $("#btnEndTurn").unbind();
+        gameHub.server.endTurn(currentPlayerTurn);
     }
 
     function HandClicked(id) {
