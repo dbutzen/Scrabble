@@ -31,6 +31,10 @@
         });
     }
 
+    gameHub.client.setTurnLabel = function (username) {
+        document.getElementById("currentturn").innerHTML = "It is " + username + "'s turn.";
+    }
+
     function onlineGameStart() {
         reset();
         initArray();
@@ -60,8 +64,8 @@
             currentPlayerTurn = 1;
         }
         gameHub.server.endTurn(currentPlayerTurn);
-        $("#btnEndTurn").click(function () { var i = 0;});
         isTurn = false;
+        $("#btnEndTurn").unbind();
     }
 
     function HandClicked(id) {

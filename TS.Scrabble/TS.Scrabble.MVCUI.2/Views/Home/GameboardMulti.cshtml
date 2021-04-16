@@ -2,10 +2,11 @@
     ViewBag.Title = "Gameboard";
 }
 
+<link rel="stylesheet" href="~/Content/Site.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
 @section scripts {
-    <link rel="stylesheet" href="~/Content/Site.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
     <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/game-single-online.js" type="text/javascript" language="javascript"></script>
@@ -16,6 +17,7 @@
 
 <body class="Game-Background">
     <div class="wrapper">
+
         <div class="game">
             <div class="game-board">
                 <table class="game-board">
@@ -41,6 +43,7 @@
     <input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click" />
     <input type="button" id="btnEndTurn" value="End Turn" class="btn btn-primary btn-md ml-3" />
     <input type="button" id="clientId" value="Client" class="btn btn-primary btn-md ml-3" />
+    <h2 id="currentturn">Turn</h2>
 
     <div class="score-board">
         <table id="score-board" class="score-board">
