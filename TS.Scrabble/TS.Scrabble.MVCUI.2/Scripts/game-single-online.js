@@ -21,6 +21,7 @@ var scoreCounter;
 var gameArray = [];
 var image;
 var users = [];
+var isTurn = false;
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
@@ -764,23 +765,28 @@ var hand;
 var piece;
 var gameHub = $.connection.gameHub;
 function HandClicked(id) {
-    hand = document.getElementById(id).innerHTML;
-    piece = document.getElementById(id);
-    gameHub.server.setCurrentTile(hand);
+    if (isTurn) {
+        hand = document.getElementById(id).innerHTML;
+        piece = document.getElementById(id);
+        gameHub.server.setCurrentTile(hand);
+    }
+    
 }
 
 function BoardClicked(id) {
+    if (isTurn) {
+        var firstLetter = id.charAt(0);
+        var first = getNumberId(firstLetter);
+        var secondLetter = id.charAt(1);
+        var second = getNumberId(secondLetter);
 
-    var firstLetter = id.charAt(0);
-    var first = getNumberId(firstLetter);
-    var secondLetter = id.charAt(1);
-    var second = getNumberId(secondLetter);
-
-    if (gameArray[first][second].HasTile == false) {
-        //Removes tile from your player hand array.
-        piece.remove();
-        gameHub.server.tileToBoard(id, hand);
+        if (gameArray[first][second].HasTile == false) {
+            //Removes tile from your player hand array.
+            piece.remove();
+            gameHub.server.tileToBoard(id, hand);
+        }
     }
+    
 }
  //function to get the letter of the tile in the tray that is clicked
 //function HandClicked(id) {

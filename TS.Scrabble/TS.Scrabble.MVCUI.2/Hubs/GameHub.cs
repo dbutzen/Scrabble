@@ -73,6 +73,9 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 task.Wait();
                 //Displays the fresh tiles in the players hands
                 ShowTiles(id);
+                List<Player> players = _game.GetPlayers();
+                Player playerOne = players.FirstOrDefault(p => p.PlayerNum == 1);
+                Clients.Client(playerOne.ConnectionId).PlayerTurn();
             }
         }
         public async void AddTile(int playerNum)
@@ -99,8 +102,9 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                     task.Wait();
                     count++;
                 }
-                
             }
+            
+            
         }
 
         public void TileToBoard(string id, string letter)
@@ -121,6 +125,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             Player player = players.FirstOrDefault();
+            Clients.Client(player.ConnectionId).PlayerTurn();
         }
     }
 

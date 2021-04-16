@@ -24,6 +24,13 @@
         players[num - 1].hand.push(tile);
     }
 
+    gameHub.client.PlayerTurn = function () {
+        isTurn = true;
+        $("#btnEndTurn").click(function () {
+            turnEnded();
+        });
+    }
+
     function onlineGameStart() {
         reset();
         initArray();
@@ -48,11 +55,13 @@
 
     function turnEnded() {
         turnCounter++;
-        gameHub.server.endTurn(currentPlayerTurn);
         currentPlayerTurn++;
         if (currentPlayerTurn > numPlayers) {
             currentPlayerTurn = 1;
         }
+        gameHub.server.endTurn(currentPlayerTurn);
+        $("#btnEndTurn").click(function () { var i = 0;});
+        isTurn = false;
     }
 
     function HandClicked(id) {
