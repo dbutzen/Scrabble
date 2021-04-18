@@ -799,8 +799,30 @@ function BoardClicked(id) {
     else {
         if (gameArray[first][second].PlacedThisTurn == true) {
             // add tile back to hand
+            var idOfTile;
+            if (checkExistence(1) == true) {
+                idOfTile = 0;
+            }
+            else if (checkExistence(2) == true) {
+                idOfTile = 1;
+            }
+            else if (checkExistence(3) == true) {
+                idOfTile = 2;
+            }
+            else if (checkExistence(4) == true) {
+                idOfTile = 3;
+            }
+            else if (checkExistence(5) == true) {
+                idOfTile = 4;
+            }
+            else if (checkExistence(6) == true) {
+                idOfTile = 5;
+            }
+            else {
+                idOfTile = 6;
+            }
             var removedLetter = document.getElementById(id).innerHTML.charAt(30);
-            addTileToHand(6, removedLetter) //arbritrary number 6
+            addTileToHand(idOfTile, removedLetter) 
             // remove tile from board
             alert(gameArray[first][second].Bonus);
             if (gameArray[first][second].Bonus == "TW") {
@@ -831,6 +853,12 @@ function BoardClicked(id) {
         }
     }
     // Secret Comment
+}
+
+function checkExistence(id) {
+    if (document.getElementById("hand-letter" + id) == null) {
+        return true;
+    }
 }
 
 function getValue(letter) {
