@@ -2,7 +2,7 @@
 
 var id_placeholder;
 var tray;
-
+var gameStarted = false;
 //var gameArray = [];
 var tileBag = [];
 var equalColumn = true;
@@ -702,12 +702,18 @@ function addTileToHand(tileNum, text) {
 
 //-------------Game Initialization---------------------
 function gameStart() {
+    
     reset();
     initArray();
     newBag();
     //player setup must happen after bag is initialized
     playerSetup(numPlayers);
     //GetImage();
+    gameStarted = true;
+    var elem = document.getElementById("btnStart");
+    elem.parentNode.removeChild(elem);
+    
+    
 }
 
 // Resets game to initial start point
@@ -741,46 +747,88 @@ function initializePlayer(num) {
 
 
 //------------------Hand to Board Tile Placement-----------------------
-var hand;
+var hand = null;
 var piece;
 //function to get the letter of the tile in the tray that is clicked
 function HandClicked(id) {
-
-    hand = document.getElementById(id).innerHTML;
-    piece = document.getElementById(id);
+    if (hand == document.getElementById(id)) {
+        // Deselect if clicking same tile twice
+        // Needed to smooth remove
+        hand == null
+    }
+    else {
+        hand = document.getElementById(id).innerHTML;
+        piece = document.getElementById(id);
+    }
 }
  //function to place letter in hand on to board
 function BoardClicked(id) {
-
-    //Add to array
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
-    if (gameArray[first][second].HasTile == false) {
-         //Get cell of table to manipulate
-        document.getElementById(id).innerHTML = hand;
-        // Array logic
-        //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
-        //alert(hand.charAt(30));
-        if (hand.charAt(30) == "0") {
-            var input = prompt("Please Enter In A Letter");
-            //var boardClicked = getElementById(gameArray[first][second].Tile);
-            //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-            gameArray[first][second].Tile.Letter = input.toUpperCase();
-        } else {
-            gameArray[first][second].Tile.Letter = hand.charAt(30);
+    if (hand != null) {
+        //Add to array
+
+        if (gameArray[first][second].HasTile == false) {
+            //Get cell of table to manipulate
+            document.getElementById(id).innerHTML = hand;
+            // Array logic
+            //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
+            //alert(hand.charAt(30));
+            if (hand.charAt(30) == "0") {
+                var input = prompt("Please Enter In A Letter");
+                //var boardClicked = getElementById(gameArray[first][second].Tile);
+                //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
+                gameArray[first][second].Tile.Letter = input.toUpperCase();
+            } else {
+                gameArray[first][second].Tile.Letter = hand.charAt(30);
+            }
+            gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+            gameArray[first][second].PlacedThisTurn = true;
+            gameArray[first][second].HasTile = true;
+            gameArray[first][second].Row = first;
+            gameArray[first][second].Column = second;
+            //Removes tile from your player hand array.
+            piece.remove();
+            var tile = parseInt(id.substring(10));
+            players[0].hand.splice(tile, 1);
+            hand = null;
         }
-        gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
-        gameArray[first][second].PlacedThisTurn = true;
-        gameArray[first][second].HasTile = true;
-        gameArray[first][second].Row = first;
-        gameArray[first][second].Column = second;
-        //Removes tile from your player hand array.
-        piece.remove();
-        var tile = parseInt(id.substring(10));
-        players[0].hand.splice(tile, 1);
-        hand = null;
+    }
+    else {
+        if (gameArray[first][second].PlacedThisTurn == true) {
+            // add tile back to hand
+            var removedLetter = document.getElementById(id).innerHTML.charAt(30);
+            addTileToHand(6, removedLetter) //arbritrary number 6
+            // remove tile from board
+            alert(gameArray[first][second].Bonus);
+            if (gameArray[first][second].Bonus == "TW") {
+                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+            }
+            else if (gameArray[first][second].Bonus == "DW") {
+                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+            }
+            else if (gameArray[first][second].Bonus == "TL") {
+                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+            }
+            else if (gameArray[first][second].Bonus == "DL") {
+                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+            }
+            else {
+                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+            }
+            // remove tile from code
+            gameArray[first][second].HasTile = false;
+            gameArray[first][second].PlacedThisTurn = false;
+            gameArray[first][second].Tile.Letter = null;
+            gameArray[first][second].Tile.Value = null;
+            gameArray[first][second].Row = null;
+            gameArray[first][second].Column = null;
+        }
+        else {
+            //do nothing if there is no tile and nothing in hand
+        }
     }
     // Secret Comment
 }
