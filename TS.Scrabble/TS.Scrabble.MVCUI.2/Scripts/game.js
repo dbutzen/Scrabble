@@ -1213,11 +1213,12 @@ function EndTurn(id) {
 
         players[0].score += addedScore;
         alert("Your current score is: " + players[0].score);
-
+        
         var tiles = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
+                alert(document.getElementById("hand-letter" + i));
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
