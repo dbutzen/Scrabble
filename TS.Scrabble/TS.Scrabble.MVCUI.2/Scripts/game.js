@@ -8,6 +8,7 @@ var tileBag = [];
 var equalColumn = true;
 var equalRow = true;
 var players = [];
+var tilesIdsPlayed = [];
 var firstPlay = true;
 var turnCounter = 1;
 var currentPlayerTurn = 1;
@@ -689,7 +690,7 @@ function addTileToHand(tileNum, text) {
     letters.className = "hand-letter";
     letters.style.cursor = "pointer";
     letters.onclick = function () { HandClicked(this.id); };
-    letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" />';
+    letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" id = "hand-letter' + (tileNum + 1) + '"/>';
 
     letters.title = text;
     tray.appendChild(letters);
@@ -789,7 +790,10 @@ function BoardClicked(id) {
             gameArray[first][second].HasTile = true;
             gameArray[first][second].Row = first;
             gameArray[first][second].Column = second;
+            tilesIdsPlayed[tilesIdsPlayed.length] = { number: hand.charAt(80), i: first, j: second };
+
             //Removes tile from your player hand array.
+
             piece.remove();
             var tile = parseInt(id.substring(10));
             players[0].hand.splice(tile, 1);
@@ -798,55 +802,8 @@ function BoardClicked(id) {
     }
     else {
         if (gameArray[first][second].PlacedThisTurn == true) {
-            // add tile back to hand
-            var idOfTile;
-            if (checkExistence(1) == true) {
-                idOfTile = 0;
-            }
-            else if (checkExistence(2) == true) {
-                idOfTile = 1;
-            }
-            else if (checkExistence(3) == true) {
-                idOfTile = 2;
-            }
-            else if (checkExistence(4) == true) {
-                idOfTile = 3;
-            }
-            else if (checkExistence(5) == true) {
-                idOfTile = 4;
-            }
-            else if (checkExistence(6) == true) {
-                idOfTile = 5;
-            }
-            else {
-                idOfTile = 6;
-            }
-            var removedLetter = document.getElementById(id).innerHTML.charAt(30);
-            addTileToHand(idOfTile, removedLetter) 
-            // remove tile from board
-            alert(gameArray[first][second].Bonus);
-            if (gameArray[first][second].Bonus == "TW") {
-                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
-            }
-            else if (gameArray[first][second].Bonus == "DW") {
-                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
-            }
-            else if (gameArray[first][second].Bonus == "TL") {
-                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
-            }
-            else if (gameArray[first][second].Bonus == "DL") {
-                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
-            }
-            else {
-                document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
-            }
-            // remove tile from code
-            gameArray[first][second].HasTile = false;
-            gameArray[first][second].PlacedThisTurn = false;
-            gameArray[first][second].Tile.Letter = null;
-            gameArray[first][second].Tile.Value = null;
-            gameArray[first][second].Row = null;
-            gameArray[first][second].Column = null;
+            removeTileAddTile(first, second, firstLetter + secondLetter);
+            
         }
         else {
             //do nothing if there is no tile and nothing in hand
@@ -855,11 +812,44 @@ function BoardClicked(id) {
     // Secret Comment
 }
 
-function checkExistence(id) {
-    if (document.getElementById("hand-letter" + id) == null) {
-        return true;
+function removeTileAddTile(first, second, id) {
+    var idOfTile;
+    var removedLetter = document.getElementById(id).innerHTML.charAt(30);
+
+    for (i = 0; i < tilesIdsPlayed.length; i++) {
+        if (tilesIdsPlayed[i].i == first && tilesIdsPlayed[i].j == second) {
+            idOfTile = tilesIdsPlayed[i].number;
+            tilesIdsPlayed.splice(i, 1);
+        }
     }
+    
+    addTileToHand(idOfTile, removedLetter)
+    // remove tile from board
+    if (gameArray[first][second].Bonus == "TW") {
+        document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+    }
+    else if (gameArray[first][second].Bonus == "DW") {
+        document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+    }
+    else if (gameArray[first][second].Bonus == "TL") {
+        document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+    }
+    else if (gameArray[first][second].Bonus == "DL") {
+        document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+    }
+    else {
+        document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+    }
+    // remove tile from code
+    gameArray[first][second].HasTile = false;
+    gameArray[first][second].PlacedThisTurn = false;
+    gameArray[first][second].Tile.Letter = null;
+    gameArray[first][second].Tile.Value = null;
+    gameArray[first][second].Row = null;
+    gameArray[first][second].Column = null;
 }
+
+
 
 function getValue(letter) {
     switch (letter) {
@@ -937,6 +927,24 @@ function getNumberId(letter) {
     if (letter == "m") return 13;
     if (letter == "n") return 14;
     if (letter == "o") return 15;
+}
+
+function getLetterId(number) {
+    if (number == 1) return "a";
+    if (number == 2) return "b";
+    if (number == 3) return "c";
+    if (number == 4) return "d";
+    if (number == 5) return "e";
+    if (number == 6) return "f";
+    if (number == 7) return "g";
+    if (number == 8) return "h";
+    if (number == 9) return "i";
+    if (number == 10) return "j";
+    if (number == 11) return "k";
+    if (number == 12) return "l";
+    if (number == 13) return "m";
+    if (number == 14) return "n";
+    if (number == 15) return "o";
 }
 
 // Gets the placement row and column of each new tile, checks if they are in the same row or column, returns true or false
@@ -1265,6 +1273,17 @@ function ChallengeWord(challengedWord) {
                 })
             };
 };
+
+function removeCurrentTiles() {
+    for (var i = 1; i < 16; i++) {
+        for (var j = 1; j < 16; j++) {
+            if (gameArray[i][j].PlacedThisTurn == true) {
+
+                removeTileAddTile(i, j, getLetterId(i) + getLetterId(j));
+            }
+        }
+    }
+}
 
 
 
