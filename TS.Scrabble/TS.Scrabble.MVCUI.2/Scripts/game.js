@@ -847,6 +847,7 @@ function removeTileAddTile(first, second, id) {
     gameArray[first][second].Tile.Value = null;
     gameArray[first][second].Row = null;
     gameArray[first][second].Column = null;
+    players[0].hand[players[0].hand.length] = "filled";
 }
 
 
@@ -1215,10 +1216,11 @@ function EndTurn(id) {
         alert("Your current score is: " + players[0].score);
         
         var tiles = [];
+        tilesIdsPlayed = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
-                alert(document.getElementById("hand-letter" + i));
+                alert(document.getElementById("handLetter" + i));
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
