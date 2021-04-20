@@ -80,6 +80,7 @@
         //}
         isTurn = false;
         $("#btnEndTurn").unbind();
+        gameHub.server.fillPlayerTiles($.connection.hub.id);
         gameHub.server.endTurn(currentPlayerTurn);
     }
 

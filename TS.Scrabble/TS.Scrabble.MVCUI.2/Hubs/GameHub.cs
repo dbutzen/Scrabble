@@ -94,7 +94,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         public void ShowTiles(string id)
         {
             Player player = _game.GetPlayer(id);
-            //Adds the players tiles to their own hands
+            //Adds the players tiles to their own hand
             int count = 1;
             foreach (Tile t in player.Hand)
             {
@@ -118,19 +118,19 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Clients.Group("game").selectedTile(tile);
         }
 
-        public async Task<int> FillPlayerTiles(Player player)
+        public async Task<int> FillPlayerTiles(string id)
         {
+            Player player = _game.GetPlayer(id);
             await _game.FillPlayerTiles(player);
+            Clients.Client(player.ConnectionId).reshowTiles();
             return 0;
         }
 
-        public async void EndTurn(int currentPlayer)
+        public void EndTurn(int currentPlayer)
         {
             List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             Player player = players.FirstOrDefault();
             SetTurn(currentPlayer);
-            await FillPlayerTiles(player);
-            Clients.Client(player.ConnectionId).reshowTiles();
             Clients.Client(player.ConnectionId).PlayerTurn();
         }
 
