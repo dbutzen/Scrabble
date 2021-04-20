@@ -45,15 +45,18 @@ namespace TS.Scrabble.MVCUI._2.Models
             players.Add(player);
         }
 
-        public async Task<int> AddNewTile(Player player)
+        public async Task<int> FillPlayerTiles(Player player)
         {
             Random rand = new Random();
             int value = rand.Next(0, tileBag.Count - 1);
-            Task t = Task.Run(async () =>
+            while(player.Hand.Count < 7)
             {
-                await SelectTileFromBag(player, value);
-            });
-            t.Wait();
+                Task t = Task.Run(async () =>
+                {
+                    await SelectTileFromBag(player, value);
+                });
+                t.Wait();
+            }
             return value;
         }
 
@@ -84,6 +87,18 @@ namespace TS.Scrabble.MVCUI._2.Models
         public List<Player> GetPlayers()
         {
             return players;
+        }
+
+        public Player GetPlayer(string id)
+        {
+            List<Player> players = GetPlayers();
+            return players.Where(p => p.ConnectionId == id).FirstOrDefault();
+        }
+
+        public Player GetPlayer(int playerNum)
+        {
+            List<Player> players = GetPlayers();
+            return players.Where(p => p.PlayerNum == playerNum).FirstOrDefault();
         }
 
         public async Task<Tile> SelectTileFromBag(Player player, int num)

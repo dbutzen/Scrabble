@@ -45,6 +45,11 @@
         
     }
 
+    gameHub.client.reshowTiles = function () {
+        $("tray-container").html('');
+        gameHub.server.showTiles($.connection.hub.id);
+    }
+
     function onlineGameStart() {
         reset();
         initArray();

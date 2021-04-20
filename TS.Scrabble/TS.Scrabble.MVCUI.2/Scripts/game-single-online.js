@@ -708,15 +708,17 @@ function selectTileFromBag(playerHandLength, playerNum) {
 
 //Adds physical tile to physical player hand
 function addTileToHand(tileNum, text) {
-    var div = document.createElement("DIV");
+    var letters = document.createElement("DIV");
     tray = document.getElementById("tray-container");
 
-    div.id = "handLetter" + (tileNum + 1);
-    div.className = "letter hand";
-    div.style.cursor = "pointer";
-    div.onclick = function () { HandClicked(this.id); };
-    div.innerHTML = '<img class = "hand letter" src = "../Images/' + text + '.png" />';
-    tray.appendChild(div);
+    letters.id = "handLetter" + (tileNum + 1);
+    letters.className = "hand-letter";
+    letters.style.cursor = "pointer";
+    letters.onclick = function () { HandClicked(this.id); };
+    letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" id = "hand-letter' + (tileNum + 1) + '"/>';
+
+    letters.title = text;
+    tray.appendChild(letters);
 
 }
 

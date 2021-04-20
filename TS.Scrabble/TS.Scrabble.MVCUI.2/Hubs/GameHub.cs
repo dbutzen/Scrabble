@@ -72,40 +72,36 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 Task task = Task.Run(async () => { await InitializePlayers(); });
                 task.Wait();
                 //Displays the fresh tiles in the players hands
-                ShowTiles(id);
                 List<Player> players = _game.GetPlayers();
+                foreach(Player p in players)
+                {
+                    ShowTiles(p.ConnectionId);
+                }
                 Player playerOne = players.FirstOrDefault(p => p.PlayerNum == 1);
                 SetTurn(1);
                 Clients.Client(playerOne.ConnectionId).PlayerTurn();
             }
         }
-        public async void AddTile(int playerNum)
-        {
-            List<Player> players = _game.GetPlayers();
-            Player currentPlayer = players[playerNum];
-            await _game.AddNewTile(currentPlayer);
-            Task task = Task.Run(async () => { await Clients.Client(currentPlayer.ConnectionId).displayTile(currentPlayer.Hand.Count, currentPlayer.Hand[currentPlayer.Hand.Count - 1].Letter, currentPlayer.ConnectionId); });
-            task.Wait();
-        }
+        //public async void AddTile(int playerNum)
+        //{
+        //    List<Player> players = _game.GetPlayers();
+        //    Player currentPlayer = players[playerNum];
+        //    await _game.AddNewTile(currentPlayer);
+        //    Task task = Task.Run(async () => { await Clients.Client(currentPlayer.ConnectionId).displayTile(currentPlayer.Hand.Count, currentPlayer.Hand[currentPlayer.Hand.Count - 1].Letter, currentPlayer.ConnectionId); });
+        //    task.Wait();
+        //}
 
         public void ShowTiles(string id)
         {
-            //Gets all the players
-            List<Player> players = _game.GetPlayers();
-
+            Player player = _game.GetPlayer(id);
             //Adds the players tiles to their own hands
-            foreach(Player p in players)
+            int count = 1;
+            foreach (Tile t in player.Hand)
             {
-                int count = 1;
-                foreach (Tile t in p.Hand)
-                {
-                    Task task = Task.Run(async () => { await Clients.Client(p.ConnectionId).displayTile(count, t.Letter, p.ConnectionId); });
-                    task.Wait();
-                    count++;
-                }
+                Task task = Task.Run(async () => { await Clients.Client(player.ConnectionId).displayTile(count, t.Letter, player.ConnectionId); });
+                task.Wait();
+                count++;
             }
-            
-            
         }
 
         public void TileToBoard(string id, string letter)
@@ -122,11 +118,19 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Clients.Group("game").selectedTile(tile);
         }
 
-        public void EndTurn(int currentPlayer)
+        public async Task<int> FillPlayerTiles(Player player)
+        {
+            await _game.FillPlayerTiles(player);
+            return 0;
+        }
+
+        public async void EndTurn(int currentPlayer)
         {
             List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             Player player = players.FirstOrDefault();
             SetTurn(currentPlayer);
+            await FillPlayerTiles(player);
+            Clients.Client(player.ConnectionId).reshowTiles();
             Clients.Client(player.ConnectionId).PlayerTurn();
         }
 
