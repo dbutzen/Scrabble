@@ -48,16 +48,16 @@ namespace TS.Scrabble.MVCUI._2.Models
         public async Task<int> FillPlayerTiles(Player player)
         {
             Random rand = new Random();
-            int value = rand.Next(0, tileBag.Count - 1);
             while(player.Hand.Count < 7)
             {
+                int value = rand.Next(0, tileBag.Count - 1);
                 Task t = Task.Run(async () =>
                 {
                     await SelectTileFromBag(player, value);
                 });
                 t.Wait();
             }
-            return value;
+            return 0;
         }
 
         public async Task<int> InitializePlayers(List<Player> playerList)
