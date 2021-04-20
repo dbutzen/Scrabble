@@ -46,7 +46,7 @@
     }
 
     gameHub.client.reshowTiles = function () {
-        $("tray-container").html('');
+        $("#tray-container").html('');
         gameHub.server.showTiles($.connection.hub.id);
     }
 
