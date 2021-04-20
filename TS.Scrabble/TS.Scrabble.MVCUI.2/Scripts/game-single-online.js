@@ -714,6 +714,7 @@ function addTileToHand(tileNum, text) {
     letters.id = "handLetter" + (tileNum + 1);
     letters.className = "hand-letter";
     letters.style.cursor = "pointer";
+    letters.title = text;
     letters.onclick = function () { HandClicked(this.id); };
     letters.innerHTML = '<img class = "hand-letter" alt=' + text + ' title = ' + text + ' src = "../Images/' + text + '.png" id = "hand-letter' + (tileNum + 1) + '"/>';
 
@@ -784,8 +785,10 @@ function BoardClicked(id) {
 
         if (gameArray[first][second].HasTile == false) {
             //Removes tile from your player hand array.
+
+            var letter = piece.getAttribute("title");
             piece.remove();
-            gameHub.server.tileToBoard(id, hand);
+            gameHub.server.tileToBoard(id, letter, $.connection.hub.id);
         }
     }
     

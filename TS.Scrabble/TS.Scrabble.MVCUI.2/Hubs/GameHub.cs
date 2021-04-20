@@ -104,11 +104,12 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             }
         }
 
-        public void TileToBoard(string id, string letter)
+        public void TileToBoard(string id, string letter, string playerId)
         {
             //For testing, tries to remove the letter from the first players hand
-            List<Tile> playerTiles = _game.GetPlayers().FirstOrDefault().Hand;
-            playerTiles.Remove(playerTiles.Where(l => l.Letter == letter).FirstOrDefault());
+            Player player = _game.GetPlayer(playerId);
+            Tile tile = player.Hand.Where(l => l.Letter == letter.ToUpper()).FirstOrDefault();
+            player.Hand.Remove(tile);
             Clients.Group("game").addTileToBoard(id);
         }
 

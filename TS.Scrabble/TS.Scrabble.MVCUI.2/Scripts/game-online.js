@@ -101,7 +101,7 @@
             piece.remove();
             var tile = parseInt(id.substring(10));
             //players[0].hand.splice(tile, 1);
-            gameHub.server.tileToBoard(id, tile);
+            gameHub.server.tileToBoard(id, hand.innerHTML, $.connection.hub.id);
         }
     }
     gameHub.client.selectedTile = function (tile) {
