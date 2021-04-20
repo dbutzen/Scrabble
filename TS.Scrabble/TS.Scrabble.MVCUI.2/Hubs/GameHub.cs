@@ -77,6 +77,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 {
                     ShowTiles(p.ConnectionId);
                 }
+                //sets up player 1 to begin the game
                 Player playerOne = players.FirstOrDefault(p => p.PlayerNum == 1);
                 SetTurn(1);
                 Clients.Client(playerOne.ConnectionId).PlayerTurn();
@@ -93,6 +94,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public void ShowTiles(string id)
         {
+            //gets a player by the passed in connection id
             Player player = _game.GetPlayer(id);
             //Adds the players tiles to their own hand
             int count = 1;
@@ -106,10 +108,12 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public void TileToBoard(string id, string letter, string playerId)
         {
-            //For testing, tries to remove the letter from the first players hand
+            //Gets player by the passed in connection id
             Player player = _game.GetPlayer(playerId);
+            //Finds the tile that was placed and removes it from the players hand
             Tile tile = player.Hand.Where(l => l.Letter == letter.ToUpper()).FirstOrDefault();
             player.Hand.Remove(tile);
+            //adds the tile to all players boards
             Clients.Group("game").addTileToBoard(id);
         }
 
@@ -121,24 +125,29 @@ namespace TS.Scrabble.MVCUI._2.Hubs
 
         public async Task<int> FillPlayerTiles(string id)
         {
+            //Gets player by their connection id
             Player player = _game.GetPlayer(id);
+            //fills that players tiles after they end their turn
             await _game.FillPlayerTiles(player);
+            //shows that player their own tiles
             Clients.Client(player.ConnectionId).reshowTiles();
             return 0;
         }
 
         public void EndTurn(int currentPlayer)
         {
-            List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
-            Player player = players.FirstOrDefault();
+            //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
+            //sets up the new player
+            Player player = _game.GetPlayer(currentPlayer);
             SetTurn(currentPlayer);
             Clients.Client(player.ConnectionId).PlayerTurn();
         }
 
         public void SetTurn(int currentPlayer)
         {
-            List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
-            Player player = players.FirstOrDefault();
+            //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
+            //sets the turn label for all players to display whose turn it is
+            Player player = _game.GetPlayer(currentPlayer);
             Clients.Group("game").setTurnLabel(player.PlayerNum.ToString(), player.ConnectionId);
         }
     }

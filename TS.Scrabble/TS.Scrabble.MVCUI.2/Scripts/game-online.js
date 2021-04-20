@@ -4,12 +4,16 @@
         alert(users);
     };
     gameHub.client.addClientIds = function (ids) {
+        //upon connection, updates the users
         users = ids;
         numPlayers = users.length;
         if (numPlayers == 2) {
+            //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
+            //updates the turn variables to start the game
             currentPlayerTurn = 1;
             turnCounter = 1;
+            //initializes client side variables
             onlineGameStart();
         }
     };
@@ -25,15 +29,19 @@
     }
 
     gameHub.client.PlayerTurn = function () {
+        //gives the ability to end a turn to the current player
         isTurn = true;
         $("#btnEndTurn").click(function () {
             turnEnded();
         });
     }
 
+    //sets the turn labels for every layer
     gameHub.client.setTurnLabel = function (username, id) {
+        //updates turns in a function that affects everyone, so every player has the updated variables
         turnCounter++;
         currentPlayerTurn++;
+        //rotates the player turn back to one if it exceeds the amount of players in the game
         if (currentPlayerTurn > numPlayers) {
             currentPlayerTurn = 1;
         }
@@ -45,6 +53,7 @@
         
     }
 
+    //empties the tiles from the players tray then refills it with all tiles in the players hand
     gameHub.client.reshowTiles = function () {
         $("#tray-container").html('');
         gameHub.server.showTiles($.connection.hub.id);
@@ -78,9 +87,12 @@
         //if (currentPlayerTurn > numPlayers) {
         //    currentPlayerTurn = 1;
         //}
+        //removes the ability to end a turn when the player ends their turn
         isTurn = false;
         $("#btnEndTurn").unbind();
+        //refills the players hand after ending the turn
         gameHub.server.fillPlayerTiles($.connection.hub.id);
+        //sets up the next player
         gameHub.server.endTurn(currentPlayerTurn);
     }
 
@@ -129,17 +141,22 @@
         //for (i = 0; i < 7; i++) {
         //    addTileToHand(i, players[0].hand[i].Letter);
         //}
+        //displays the tiles in the players hand.
         if ($.connection.hub.id == id) {
             addTileToHand(tileNum, letter)
         }
     }
 
     $.connection.hub.start().done(function () {
+        //pushes the players connection id into the game hub
         gameHub.server.pushClientId($.connection.hub.id);
+        //adds the user to the player list
         gameHub.server.addPlayer($.connection.hub.id, document.getElementById("username").value);
+        //adds functionality to the client button for potential testing
         $('#clientId').click(function () {
             gameHub.server.getClientId($.connection.hub.id);
         });
+        //initilizes turn variables
         currentPlayerTurn = 0;
         turnCounter = 0;
     });

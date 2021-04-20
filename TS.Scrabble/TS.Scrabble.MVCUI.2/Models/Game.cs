@@ -47,9 +47,11 @@ namespace TS.Scrabble.MVCUI._2.Models
 
         public async Task<int> FillPlayerTiles(Player player)
         {
+            //initializes random class
             Random rand = new Random();
             while(player.Hand.Count < 7)
             {
+                //decides a random tile from the total amount of tiles in the bag
                 int value = rand.Next(0, tileBag.Count - 1);
                 Task t = Task.Run(async () =>
                 {
@@ -63,6 +65,7 @@ namespace TS.Scrabble.MVCUI._2.Models
         public async Task<int> InitializePlayers(List<Player> playerList)
         {
             Random rand = new Random();
+            //Fills each players tile bags.
             foreach (Player p in playerList)
             {
                 while (p.Hand.Count < 7)
@@ -83,28 +86,30 @@ namespace TS.Scrabble.MVCUI._2.Models
         {
             return _clientIds;
         }
-
+        //returns all players
         public List<Player> GetPlayers()
         {
+            
             return players;
         }
-
+        //returns a player by their connection id
         public Player GetPlayer(string id)
         {
             List<Player> players = GetPlayers();
             return players.Where(p => p.ConnectionId == id).FirstOrDefault();
         }
-
+        //returns a player by their player number
         public Player GetPlayer(int playerNum)
         {
             List<Player> players = GetPlayers();
             return players.Where(p => p.PlayerNum == playerNum).FirstOrDefault();
         }
-
+        
         public async Task<Tile> SelectTileFromBag(Player player, int num)
         {
             if (tileBag.Count > 0)
             {
+                //gets the tile from the random value put in
                 Tile tile =  tileBag[num];
                 //Removes the selected tile from the bag and adds it to the current players hand
                 tileBag.Remove(tile);
@@ -115,7 +120,7 @@ namespace TS.Scrabble.MVCUI._2.Models
                 return null;
             }
         }
-
+        //initializes tile bag
         public void NewTileBag()
         {
             var newBagTilesCount = 0;
