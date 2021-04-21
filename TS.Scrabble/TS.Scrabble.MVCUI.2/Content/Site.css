@@ -100,9 +100,9 @@ table.score-board {
 
 #tray-container {
     margin-top: 1%;
-    text-align:center;
+    text-align: center;
     background-image: url(../Images/Scrabble-Tray.png);
-    width:100%;
+    width: 100%;
 }
 
 
@@ -150,8 +150,8 @@ table.score-board {
 .HomePage {
     background-image: url("../Images/Srabble-Geek.jpg");
     background-repeat: no-repeat;
-    background-size:cover;
-    background-position:center;
+    background-size: cover;
+    background-position: center;
 }
 
 .Game-Background {
@@ -426,7 +426,7 @@ form1 {
     margin-top: 1%;
     font-size: 13px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
-    display:inline;
+    display: inline;
 }
 
 .Challenge-Button {
@@ -451,13 +451,12 @@ td:hover {
 }
 
 .Account-Icon {
-    max-height:3%;
-    max-width:3%;
-    float:right;
-    margin-top:10px;
-    color:white;
-    cursor:pointer;
-    
+    /* max-height:3%;
+    max-width:3%;*/
+    float: right;
+    margin-top: 10px;
+    color: white;
+    cursor: pointer;
 }
 
 .Intro {
@@ -465,3 +464,32 @@ td:hover {
     font: 500 2em/1 "Oswald", sans-serif;
     letter-spacing: 0;
 }
+
+.Game-Icon {
+    margin-left:20px;
+    margin-top: 18px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: url("../Images/joystick.png") no-repeat;
+}
+
+    .Game-Icon:hover {
+        background: url("../Images/joystick-white.png") no-repeat;
+        width: 40px;
+        height: 40px;
+    }
+
+.Home-Icon {
+    margin-top: 18px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: url("../Images/home.png") no-repeat;
+}
+
+    .Home-Icon:hover {
+        background: url("../Images/home-white.png") no-repeat;
+        width: 40px;
+        height: 40px;
+    }

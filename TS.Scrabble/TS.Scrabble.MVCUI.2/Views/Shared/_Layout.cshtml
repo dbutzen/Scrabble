@@ -8,31 +8,40 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Scrabble!", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Home", "Home")</li>
-                        <li>@Html.ActionLink("Data", "Data", "Home")</li>
-                        <li>@Html.ActionLink("Gameboard", "Gameboard", "Home")</li>
-                        <li>@Html.ActionLink("Account", "Login", "User")</li>
-                        <li>@Html.ActionLink("Create", "Create", "User")</li>
-                        @*<li><img class="Account-Icon" src="~/Images/Account.png" /></li>*@
-                    </ul>
-                    <a href="~/User/Login">
-                        <img class="Account-Icon" src="~/Images/Account.png" />
-                    </a>
-                </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Scrabble!", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li>@Html.ActionLink("Home", "Home", "Home")</li>*@
+                    <li>
+                        <a href="~/Home/Home" class="Home-Icon"></a>
+                    </li>
+                    @*<li>@Html.ActionLink("Data", "Data", "Home")</li>*@
+                    @*<li>@Html.ActionLink("Gameboard", "Gameboard", "Home")</li>*@
+                    <li>
+                        <a href="~/Home/Gameboard" class="Game-Icon">
+                            @*<img src="~/Images/joystick.png" class="Game-Piece" width="40" />*@
+                        </a>
+                    </li>
+                    <li>@Html.ActionLink("Account", "Login", "User")</li>
+                    <li>@Html.ActionLink("Create", "Create", "User")</li>
+                    @*<li><img class="Account-Icon" src="~/Images/Account.png" /></li>*@
+                </ul>
+
+                <a href="~/User/Login">
+                    <img class="Account-Icon" src="~/Images/Account.png" width="40" />
+                </a>
             </div>
         </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
