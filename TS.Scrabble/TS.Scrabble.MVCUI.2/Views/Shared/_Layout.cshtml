@@ -20,25 +20,21 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Home", "Home")</li>*@
                     <li>
                         <a href="~/Home/Home" class="Home-Icon"></a>
                     </li>
-                    @*<li>@Html.ActionLink("Data", "Data", "Home")</li>*@
-                    @*<li>@Html.ActionLink("Gameboard", "Gameboard", "Home")</li>*@
                     <li>
-                        <a href="~/Home/Gameboard" class="Game-Icon">
-                            @*<img src="~/Images/joystick.png" class="Game-Piece" width="40" />*@
-                        </a>
+                        <a href="~/Home/Gameboard" class="Game-Icon"></a>
                     </li>
-                    <li>@Html.ActionLink("Account", "Login", "User")</li>
-                    <li>@Html.ActionLink("Create", "Create", "User")</li>
-                    @*<li><img class="Account-Icon" src="~/Images/Account.png" /></li>*@
                 </ul>
-
-                <a href="~/User/Login">
-                    <img class="Account-Icon" src="~/Images/Account.png" width="40" />
-                </a>
+                <div class="dropdown">
+                    <button class="Account-Icon" ></button>
+                    <div class="dropdown-content" id="myDropdown">
+                        @Html.ActionLink("Account", "Login", "User")
+                        @Html.ActionLink("Create", "Create", "User")
+                        <a href="~/Home/Home" class="Logout">Logout</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
