@@ -40,6 +40,13 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             return base.OnConnected();
         }
 
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            _game.RemoveClientId(Context.ConnectionId);
+            Clients.All.addClientIds(_game.GetClientIds());
+            return base.OnDisconnected(stopCalled);
+        }
+
         public void PushClientId(string id)
         {
             //Adds the client connection id to the clientid list

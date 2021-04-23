@@ -40,6 +40,12 @@ namespace TS.Scrabble.MVCUI._2.Models
             _clientIds.Add(id);
         }
 
+        public void RemoveClientId(string id)
+        {
+            string clientId = _clientIds.Where(c => c == id).FirstOrDefault();
+            _clientIds.Remove(clientId);
+        }
+
         public void AddPlayer(Player player)
         {
             players.Add(player);
