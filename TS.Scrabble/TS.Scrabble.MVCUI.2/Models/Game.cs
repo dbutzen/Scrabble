@@ -134,19 +134,27 @@ namespace TS.Scrabble.MVCUI._2.Models
             currentTurnTiles.Add(tile);
         }
         //If the undo button is pressed, the most recent tile they placed is returned to them
-        public Tile TakeTileFromCurrentTiles()
+        public async Task<int> TakeTileFromCurrentTiles(Player player)
         {
-            Tile latestTile = currentTurnTiles[currentTurnTiles.Count() - 1];
-            currentTurnTiles.Remove(latestTile);
-            return latestTile;
+            if (currentTurnTiles.Count() != 0)
+            {
+                Tile latestTile = currentTurnTiles[currentTurnTiles.Count() - 1];
+                player.Hand.Add(latestTile);
+                currentTurnTiles.Remove(latestTile);
+            }
+            return 0;
         }
         //At the end of a turn, the current tile list is emptied (can't set to a new list due to being readonly)
-        public void ResetCurrentTiles()
+        public async Task<int> ResetCurrentTiles()
         {
-            foreach(Tile t in currentTurnTiles)
+            if(currentTurnTiles.Count > 0)
             {
-                currentTurnTiles.Remove(t);
+                foreach (Tile t in currentTurnTiles)
+                {
+                    currentTurnTiles.Remove(t);
+                }
             }
+            return currentTurnTiles.Count();
         }
 
         public async Task<Tile> SelectTileFromBag(Player player, int num)

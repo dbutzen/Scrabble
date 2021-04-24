@@ -131,6 +131,15 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Clients.Group("game").selectedTile(tile);
         }
 
+        public void UndoTile(int currentPlayer)
+        {
+            Player player = _game.GetPlayer(currentPlayer);
+            Task task = Task.Run(async () => { await _game.TakeTileFromCurrentTiles(player); });
+            task.Wait();
+            Clients.Client(player.ConnectionId).reshowTiles();
+            
+        }
+
         public async Task<int> FillPlayerTiles(string id)
         {
             //Gets player by their connection id
