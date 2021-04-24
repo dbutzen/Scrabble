@@ -713,6 +713,7 @@ function gameStart() {
     gameStarted = true;
     var elem = document.getElementById("btnStart");
     elem.parentNode.removeChild(elem);
+    document.getElementById("btnPass").style['margin-left'] = '37%';
     
     
 }
