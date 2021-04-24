@@ -1217,13 +1217,22 @@ function EndTurn(id) {
     if (checkLegalPlacement() == true) {
 
         //Single player for testing
-
+        var wordsPlayedHtml;
         var addedScore = getWords();
-        //check for disctionary?
+        //check for dictionary?
         //placeholder
 
         players[0].score += addedScore;
-        alert("Your current score is: " + players[0].score);
+        document.getElementById("lblTotalScore").innerHTML = players[0].score;
+        document.getElementById("lblLastScore").innerHTML = addedScore;
+        document.getElementById("lblLastWord").innerHTML = "";
+        for(i = 0; i < words.length; i++) {
+            wordsPlayedHtml = document.getElementById("lblLastWord").innerHTML;
+            if (i == 0) { wordsPlayedHtml += words[i]; }
+            else { wordsPlayedHtml += ", " + words[i]; }
+            document.getElementById("lblLastWord").innerHTML = wordsPlayedHtml;
+        }
+        
         
         var tiles = [];
         tilesIdsPlayed = [];
@@ -1258,6 +1267,7 @@ function endTurnLogic() {
         gameArray[placements[i].Row][placements[i].Column].BonusUsed = true;
     }
     placements = [];
+    words = [];
     //currentPlayerTurn += 1;
     //firstPlay = false;
     //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
