@@ -117,8 +117,9 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             //Gets player by the passed in connection id
             Player player = _game.GetPlayer(playerId);
-            //Finds the tile that was placed and removes it from the players hand
+            //Finds the tile that was placed, places it in the current turn tiles list, and removes it from the players hand
             Tile tile = player.Hand.Where(l => l.Letter == letter.ToUpper()).FirstOrDefault();
+            _game.AddTileToCurrentTiles(tile);
             player.Hand.Remove(tile);
             //adds the tile to all players boards
             Clients.Group("game").addTileToBoard(id);
@@ -144,6 +145,8 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         public void EndTurn(int currentPlayer)
         {
             //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
+            //Resets current turn tiles
+            _game.ResetCurrentTiles();
             //sets up the new player
             Player player = _game.GetPlayer(currentPlayer);
             SetTurn(currentPlayer);
