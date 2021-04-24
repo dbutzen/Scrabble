@@ -1066,25 +1066,34 @@ function getWords() {
     }
     if (direction == "horizontal") {
         //Original Word
-        words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         //Offshoot Words
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
-                currentWords.push(wordPlaceholder)
+                currentWords.push(wordPlaceholder);
             }
         }
     }
     if (direction == "vertical") {
-        words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
                 currentWords.push(wordPlaceholder);
+                
             }
         }
 
@@ -1220,7 +1229,6 @@ function EndTurn(id) {
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
-                alert(document.getElementById("handLetter" + i));
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
