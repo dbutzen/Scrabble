@@ -75,6 +75,15 @@ table.score-board {
     text-align:center;
 }
 
+th {
+    background: #cfd034;
+    border: 1px solid #d4fcdb;
+    min-width: 100px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+}
+
 .score-board {
     text-align: center;
     border-radius: 25px;
