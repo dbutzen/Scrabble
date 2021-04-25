@@ -40,6 +40,13 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             return base.OnConnected();
         }
 
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            _game.RemoveClientId(Context.ConnectionId);
+            Clients.All.addClientIds(_game.GetClientIds());
+            return base.OnDisconnected(stopCalled);
+        }
+
         public void PushClientId(string id)
         {
             //Adds the client connection id to the clientid list
@@ -110,8 +117,9 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             //Gets player by the passed in connection id
             Player player = _game.GetPlayer(playerId);
-            //Finds the tile that was placed and removes it from the players hand
+            //Finds the tile that was placed, places it in the current turn tiles list, and removes it from the players hand
             Tile tile = player.Hand.Where(l => l.Letter == letter.ToUpper()).FirstOrDefault();
+            _game.AddTileToCurrentTiles(tile);
             player.Hand.Remove(tile);
             //adds the tile to all players boards
             Clients.Group("game").addTileToBoard(id);
@@ -121,6 +129,15 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             //sets the hand variable to each client for board placement
             Clients.Group("game").selectedTile(tile);
+        }
+
+        public void UndoTile(int currentPlayer)
+        {
+            Player player = _game.GetPlayer(currentPlayer);
+            Task task = Task.Run(async () => { await _game.TakeTileFromCurrentTiles(player); });
+            task.Wait();
+            Clients.Client(player.ConnectionId).reshowTiles();
+            
         }
 
         public async Task<int> FillPlayerTiles(string id)
@@ -137,6 +154,8 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         public void EndTurn(int currentPlayer)
         {
             //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
+            //Resets current turn tiles
+            _game.ResetCurrentTiles();
             //sets up the new player
             Player player = _game.GetPlayer(currentPlayer);
             SetTurn(currentPlayer);

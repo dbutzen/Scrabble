@@ -713,8 +713,9 @@ function gameStart() {
     gameStarted = true;
     var elem = document.getElementById("btnStart");
     elem.parentNode.removeChild(elem);
-
-
+    document.getElementById("btnPass").style['margin-left'] = '37%';
+    
+    
 }
 
 // Resets game to initial start point
@@ -1077,25 +1078,34 @@ function getWords() {
     }
     if (direction == "horizontal") {
         //Original Word
-        words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         //Offshoot Words
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
-                currentWords.push(wordPlaceholder)
+                currentWords.push(wordPlaceholder);
             }
         }
     }
     if (direction == "vertical") {
-        words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
                 currentWords.push(wordPlaceholder);
+                
             }
         }
 
@@ -1218,20 +1228,28 @@ function EndTurn(id) {
     if (checkLegalPlacement() == true) {
 
         //Single player for testing
-
+        var wordsPlayedHtml;
         var addedScore = getWords();
-        //check for disctionary?
+        //check for dictionary?
         //placeholder
 
         players[0].score += addedScore;
-        alert("Your current score is: " + players[0].score);
-
+        document.getElementById("lblTotalScore").innerHTML = players[0].score;
+        document.getElementById("lblLastScore").innerHTML = addedScore;
+        document.getElementById("lblLastWord").innerHTML = "";
+        for(i = 0; i < words.length; i++) {
+            wordsPlayedHtml = document.getElementById("lblLastWord").innerHTML;
+            if (i == 0) { wordsPlayedHtml += words[i]; }
+            else { wordsPlayedHtml += ", " + words[i]; }
+            document.getElementById("lblLastWord").innerHTML = wordsPlayedHtml;
+        }
+        
+        
         var tiles = [];
         tilesIdsPlayed = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
-                alert(document.getElementById("handLetter" + i));
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
@@ -1260,6 +1278,7 @@ function endTurnLogic() {
         gameArray[placements[i].Row][placements[i].Column].BonusUsed = true;
     }
     placements = [];
+    words = [];
     //currentPlayerTurn += 1;
     //firstPlay = false;
     //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;

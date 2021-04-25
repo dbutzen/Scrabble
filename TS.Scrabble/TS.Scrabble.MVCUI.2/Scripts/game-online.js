@@ -11,8 +11,8 @@
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
-            currentPlayerTurn = 1;
-            turnCounter = 1;
+            currentPlayerTurn = 0;
+            turnCounter = 0;
             //initializes client side variables
             onlineGameStart();
         }
@@ -33,6 +33,9 @@
         isTurn = true;
         $("#btnEndTurn").click(function () {
             turnEnded();
+        });
+        $('#btnUndo').click(function () {
+            undo();
         });
     }
 
@@ -90,10 +93,15 @@
         //removes the ability to end a turn when the player ends their turn
         isTurn = false;
         $("#btnEndTurn").unbind();
+        $("#btnUndo").unbind();
         //refills the players hand after ending the turn
         gameHub.server.fillPlayerTiles($.connection.hub.id);
         //sets up the next player
         gameHub.server.endTurn(currentPlayerTurn);
+    }
+
+    function undo() {
+        gameHub.server.undoTile(currentPlayerTurn);
     }
 
     function HandClicked(id) {

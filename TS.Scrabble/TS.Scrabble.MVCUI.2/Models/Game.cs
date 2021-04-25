@@ -16,6 +16,7 @@ namespace TS.Scrabble.MVCUI._2.Models
         private readonly List<string> _clientIds = new List<string>();
         private readonly List<Tile> tileBag = new List<Tile>();
         private readonly List<Player> players = new List<Player>();
+        private readonly List<Tile> currentTurnTiles = new List<Tile>();
 
         public static Game Instance
         {
@@ -38,6 +39,28 @@ namespace TS.Scrabble.MVCUI._2.Models
         public void PushClientId(string id)
         {
             _clientIds.Add(id);
+        }
+
+        public void RemoveClientId(string id)
+        {
+            //When a player disconnects, remove their id from the connection id list
+            string clientId = _clientIds.Where(c => c == id).FirstOrDefault();
+            _clientIds.Remove(clientId);
+            //Until connection mapping and multiple games can be played at once, player with the id is also removed
+            Player player = players.Where(p => p.ConnectionId == id).FirstOrDefault();
+            players.Remove(player);
+            //Reassigns player numbers so there isn't multiple players of the same player number
+            ReassignPlayerNums();
+        }
+
+        public void ReassignPlayerNums()
+        {
+            int count = 1;
+            foreach(Player p in players)
+            {
+                p.PlayerNum = count;
+                count++;
+            }
         }
 
         public void AddPlayer(Player player)
@@ -105,6 +128,35 @@ namespace TS.Scrabble.MVCUI._2.Models
             return players.Where(p => p.PlayerNum == playerNum).FirstOrDefault();
         }
         
+        //When a player puts a tile down, it is added to a list of the tiles played that turn
+        public void AddTileToCurrentTiles(Tile tile)
+        {
+            currentTurnTiles.Add(tile);
+        }
+        //If the undo button is pressed, the most recent tile they placed is returned to them
+        public async Task<int> TakeTileFromCurrentTiles(Player player)
+        {
+            if (currentTurnTiles.Count() != 0)
+            {
+                Tile latestTile = currentTurnTiles[currentTurnTiles.Count() - 1];
+                player.Hand.Add(latestTile);
+                currentTurnTiles.Remove(latestTile);
+            }
+            return 0;
+        }
+        //At the end of a turn, the current tile list is emptied (can't set to a new list due to being readonly)
+        public async Task<int> ResetCurrentTiles()
+        {
+            if(currentTurnTiles.Count > 0)
+            {
+                foreach (Tile t in currentTurnTiles)
+                {
+                    currentTurnTiles.Remove(t);
+                }
+            }
+            return currentTurnTiles.Count();
+        }
+
         public async Task<Tile> SelectTileFromBag(Player player, int num)
         {
             if (tileBag.Count > 0)
