@@ -769,6 +769,7 @@ function BoardClicked(id) {
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
+    var inputFailed = false;
     if (hand != null) {
         //Add to array
 
@@ -776,13 +777,29 @@ function BoardClicked(id) {
             //Get cell of table to manipulate
             document.getElementById(id).innerHTML = hand;
             // Array logic
+            alert(hand);
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
                 var input = prompt("Please Enter In A Letter");
+                var alphaExp = /^[a-zA-Z]+$/;
+                while (!input.match(alphaExp)) {
+                    alert("Blanks must be a letter!");
+                    input = prompt("Please Enter In A Letter");
+                }
+                upperInput = input.toUpperCase()
                 //var boardClicked = getElementById(gameArray[first][second].Tile);
                 //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-                gameArray[first][second].Tile.Letter = input.toUpperCase();
+                gameArray[first][second].Tile.Letter = '0';
+                document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                document.getElementById(id).style.color = "blue";
+                document.getElementById(id).style.fontSize = "20px";
+                //documnet.getElementById(id).style.backgroundImage = "url('../Images/0.png')";
+                //document.getElementById(id).classList.add('blankText');
+                //document.getElementById(id).appendChild(document.createTextNode(upperInput));
+
+                
+                
             } else {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
             }
@@ -815,8 +832,13 @@ function BoardClicked(id) {
 
 function removeTileAddTile(first, second, id) {
     var idOfTile;
-    var removedLetter = document.getElementById(id).innerHTML.charAt(30);
-
+    var removedLetter;
+    if (document.getElementById(id).innerHTML.charAt(0) == '*') {
+        removedLetter = '0';
+    }
+    else {
+        removedLetter = document.getElementById(id).innerHTML.charAt(30);
+    }
     for (i = 0; i < tilesIdsPlayed.length; i++) {
         if (tilesIdsPlayed[i].i == first && tilesIdsPlayed[i].j == second) {
             idOfTile = tilesIdsPlayed[i].number;
@@ -849,6 +871,9 @@ function removeTileAddTile(first, second, id) {
     gameArray[first][second].Row = null;
     gameArray[first][second].Column = null;
     players[0].hand[players[0].hand.length] = "filled";
+
+    document.getElementById(id).style.color = "black";
+    document.getElementById(id).style.fontSize = "14px";
 }
 
 

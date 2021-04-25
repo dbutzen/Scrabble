@@ -39,6 +39,8 @@ table.game-board {
     margin: 0 auto;
 }
 
+
+
 li {
     display: inline;
 }
@@ -130,9 +132,20 @@ table.score-board {
 
 .game-board .hand-letter {
     border: 1px solid #d4fcdb;
+    position: relative;
     width: 40px;
     height: 40px;
     text-align: center;
+}
+
+.blankText {
+    position: absolute;
+    text-align: center;
+    color: blue;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
 }
 
 .hand .letter {
