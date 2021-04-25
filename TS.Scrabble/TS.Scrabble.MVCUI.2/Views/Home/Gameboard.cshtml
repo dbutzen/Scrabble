@@ -31,22 +31,32 @@
             </div>
         </div>
     </div>
-    <input type="button" id="btnStart" value="Start" class="Start-Button" onclick="gameStart()" />
-    <input type="submit" value="Pass" class="btn btn-primary btn-md ml-3" onclick="btnPass_Click" />
-    <input type="button" value="End Turn" class="btn btn-primary btn-md ml-3" onclick="EndTurn()" />
-    <input type="button" value="TestButton" class="btn btn-primary btn-md ml-3" onclick="removeCurrentTiles()" />
-
-<div class="score-board">
     <div id="challengeView"></div>
-    <table id="score-board" class="score-board">
-        <tr><th class="r1">Player</th><th class="r1">Score</th></tr>
-        <tr><td class="r1">Peter</td> <td class="r1">1000</td></tr>
-        <tr><td class="r1">Lois</td><td class="r1">900</td></tr>
-    </table>
-</div>
-<div id="tray-container">
-    @*<img id="Scrabble-Tray" src="../Images/Scrabble-Tray.png" />*@
-     <!--Div Created to house the Definition of a word when the challenge button is pressed.-->
-</div>
-    <input type="submit" id="btnChallenge" value="Challenge" class="Challenge-Button" onclick="ChallengeWord()" />
+    <div class="game-buttons">
+        <input type="button" id="btnStart" value="Start" class="Start-Button" onclick="gameStart()" />
+        <input type="submit" value="Pass" class="Start-Button" onclick="btnPass_Click" />
+        <input type="button" value="End Turn" class="Start-Button" onclick="EndTurn()" />
+        <input type="button" value="TestButton" class="Start-Button" onclick="removeCurrentTiles()" />
+    </div>
+        <div id="score-board" class="score-board">
+            <div class="player">
+                <h4>Player 1</h4>
+                <div class="score-box">
+                    15
+                </div>
+            </div>
+            <div class="player">
+                <h4>Player 2</h4>
+                <div class="score-box">
+                    200
+                </div>
+            </div>
+        </div>
+    <div id="tray-container">
+        @*<img id="Scrabble-Tray" src="../Images/Scrabble-Tray.png" />*@
+        <!--Div Created to house the Definition of a word when the challenge button is pressed.-->
+    </div>
+    <div class="game-buttons">
+        <input type="submit" id="btnChallenge" value="Challenge" class="Challenge-Button" onclick="ChallengeWord()" />
+    </div>
 </body>

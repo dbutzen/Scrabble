@@ -703,7 +703,7 @@ function addTileToHand(tileNum, text) {
 
 //-------------Game Initialization---------------------
 function gameStart() {
-    
+
     reset();
     initArray();
     newBag();
@@ -713,8 +713,8 @@ function gameStart() {
     gameStarted = true;
     var elem = document.getElementById("btnStart");
     elem.parentNode.removeChild(elem);
-    
-    
+
+
 }
 
 // Resets game to initial start point
@@ -762,13 +762,13 @@ function HandClicked(id) {
         piece = document.getElementById(id);
     }
 }
- //function to place letter in hand on to board
+//function to place letter in hand on to board
 function BoardClicked(id) {
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
-    if (hand != null) {
+    if (hand != null) { 
         //Add to array
 
         if (gameArray[first][second].HasTile == false) {
@@ -778,11 +778,22 @@ function BoardClicked(id) {
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
+
+                // this is hand at this point
+                // <img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter3">
+
                 var input = prompt("Please Enter In A Letter");
+                alert(hand);
+                hand = input.toLocaleUpperCase();
+                alert(hand);
                 //var boardClicked = getElementById(gameArray[first][second].Tile);
-                //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-                gameArray[first][second].Tile.Letter = input.toUpperCase();
-            } else {
+                // document.getElementById(id).innerHTML("src", "../Images/" + input + ".png");
+                //document.getElementById(id).createElement('<img class = "hand-letter" alt="' +input+'" title="'+input+'" src = "../Images/"' + input + '.png" id="hand-letter2" >');
+                // Use append child by creating a var for the user input append to td ??
+                //gameArray[first][second].Tile.Letter = input.charAt(0);
+                gameArray[first][second].Tile.Letter = hand;
+            }
+            else {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
             }
             gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
@@ -803,7 +814,7 @@ function BoardClicked(id) {
     else {
         if (gameArray[first][second].PlacedThisTurn == true) {
             removeTileAddTile(first, second, firstLetter + secondLetter);
-            
+
         }
         else {
             //do nothing if there is no tile and nothing in hand
@@ -822,7 +833,7 @@ function removeTileAddTile(first, second, id) {
             tilesIdsPlayed.splice(i, 1);
         }
     }
-    
+
     addTileToHand(idOfTile, removedLetter)
     // remove tile from board
     if (gameArray[first][second].Bonus == "TW") {
@@ -1214,7 +1225,7 @@ function EndTurn(id) {
 
         players[0].score += addedScore;
         alert("Your current score is: " + players[0].score);
-        
+
         var tiles = [];
         tilesIdsPlayed = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
@@ -1256,16 +1267,16 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord) {
-    for (var i = 0; i < currentWords.length; i++){
+    for (var i = 0; i < currentWords.length; i++) {
         $("#challengeView").append(currentWords[i] + "<br>").click(function () {
             lastWord = this.innerText; //Working on getting this to work properly.
             if (!challengedWord)
-            challengedWord = lastWord;
-    
+                challengedWord = lastWord;
+
             params = {
                 'challengedWord': challengedWord
             };
-            
+
             $.ajax({
                 type: "GET",
                 url: '/Home/Challenge',
@@ -1273,8 +1284,8 @@ function ChallengeWord(challengedWord) {
             }).done(function (data) {
                 alert(data)
             });
-                })
-            };
+        })
+    };
 };
 
 function removeCurrentTiles() {
@@ -1358,7 +1369,7 @@ function checkLegalPlacementTest() {
 
 
     getWords();
-  
+ 
 
 
 }*/
