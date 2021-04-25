@@ -703,7 +703,7 @@ function addTileToHand(tileNum, text) {
 
 //-------------Game Initialization---------------------
 function gameStart() {
-    
+
     reset();
     initArray();
     newBag();
@@ -763,7 +763,7 @@ function HandClicked(id) {
         piece = document.getElementById(id);
     }
 }
- //function to place letter in hand on to board
+//function to place letter in hand on to board
 function BoardClicked(id) {
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
@@ -781,6 +781,10 @@ function BoardClicked(id) {
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
+
+                // this is hand at this point
+                // <img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter3">
+
                 var input = prompt("Please Enter In A Letter");
                 var alphaExp = /^[a-zA-Z]+$/;
                 while (!input.match(alphaExp)) {
@@ -821,7 +825,7 @@ function BoardClicked(id) {
     else {
         if (gameArray[first][second].PlacedThisTurn == true) {
             removeTileAddTile(first, second, firstLetter + secondLetter);
-            
+
         }
         else {
             //do nothing if there is no tile and nothing in hand
@@ -845,7 +849,7 @@ function removeTileAddTile(first, second, id) {
             tilesIdsPlayed.splice(i, 1);
         }
     }
-    
+
     addTileToHand(idOfTile, removedLetter)
     // remove tile from board
     if (gameArray[first][second].Bonus == "TW") {
@@ -1300,16 +1304,16 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord) {
-    for (var i = 0; i < currentWords.length; i++){
+    for (var i = 0; i < currentWords.length; i++) {
         $("#challengeView").append(currentWords[i] + "<br>").click(function () {
             lastWord = this.innerText; //Working on getting this to work properly.
             if (!challengedWord)
-            challengedWord = lastWord;
-    
+                challengedWord = lastWord;
+
             params = {
                 'challengedWord': challengedWord
             };
-            
+
             $.ajax({
                 type: "GET",
                 url: '/Home/Challenge',
@@ -1317,8 +1321,8 @@ function ChallengeWord(challengedWord) {
             }).done(function (data) {
                 alert(data)
             });
-                })
-            };
+        })
+    };
 };
 
 function removeCurrentTiles() {
@@ -1402,7 +1406,7 @@ function checkLegalPlacementTest() {
 
 
     getWords();
-  
+ 
 
 
 }*/
