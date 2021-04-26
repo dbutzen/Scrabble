@@ -86,6 +86,12 @@ th {
     font-size: 20px;
 }
 
+.blank-text {
+    /*background-image: url(../Images/0.png);*/
+    position: absolute;
+    transform: translate(80%, -115%);
+}
+
 .score-board {
     text-align: center;
     border-radius: 25px;

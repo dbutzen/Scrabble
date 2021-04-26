@@ -770,6 +770,7 @@ function BoardClicked(id) {
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
     var inputFailed = false;
+    var blankTile = '<img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter4">';
     if (hand != null) {
         //Add to array
 
@@ -797,8 +798,11 @@ function BoardClicked(id) {
                 gameArray[first][second].Tile.Letter = upperInput;
                 gameArray[first][second].Tile.Value = 0;
                 //document.getElementById(id).innerHTML = '*' + upperInput + '*';  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
-                //document.getElementById(id).innerHTML = '<img class="hand-letter" alt="' + upperInput + '" title="' + upperInput + '" src="../Images/' + upperInput + '.png" id=hand-letter4">'; 
-                document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                //document.getElementById(id).innerHTML = '<img class="hand-letter" alt="' + upperInput + '" title="' + upperInput + '" src="../Images/' + upperInput + '.png" id=hand-letter4">';
+                //document.getElementById(id).style.backgroundImage = "url('../Images/"+upperInput+".png')";
+                //document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                
+                document.getElementById(id).innerHTML = blankTile + '<p class="blank-text">' + upperInput + '</p>';
                 document.getElementById(id).style.color = "blue";
                 document.getElementById(id).style.fontSize = "20px";
                 //documnet.getElementById(id).style.backgroundImage = "url('../Images/0.png')";
@@ -807,10 +811,10 @@ function BoardClicked(id) {
 
                 
                 
-            } else {
+            } else if (hand.charAt(30) != "0") {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
+                gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
             }
-            gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
             gameArray[first][second].PlacedThisTurn = true;
             gameArray[first][second].HasTile = true;
             gameArray[first][second].Row = first;
