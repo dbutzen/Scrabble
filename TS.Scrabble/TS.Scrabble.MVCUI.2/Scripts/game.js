@@ -778,7 +778,6 @@ function BoardClicked(id) {
             //Get cell of table to manipulate
             document.getElementById(id).innerHTML = hand;
             // Array logic
-            alert(hand);
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
