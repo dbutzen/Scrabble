@@ -777,7 +777,6 @@ function BoardClicked(id) {
             //Get cell of table to manipulate
             document.getElementById(id).innerHTML = hand;
             // Array logic
-            alert(hand);
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
@@ -794,7 +793,8 @@ function BoardClicked(id) {
                 upperInput = input.toUpperCase()
                 //var boardClicked = getElementById(gameArray[first][second].Tile);
                 //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-                gameArray[first][second].Tile.Letter = '0';
+                gameArray[first][second].Tile.Letter = upperInput;
+                gameArray[first][second].Tile.Value = 0;
                 document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
                 document.getElementById(id).style.color = "blue";
                 document.getElementById(id).style.fontSize = "20px";
@@ -804,10 +804,11 @@ function BoardClicked(id) {
 
                 
                 
-            } else {
+            } else if (hand.charAt(30) != "0") {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
+                gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
             }
-            gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
+            
             gameArray[first][second].PlacedThisTurn = true;
             gameArray[first][second].HasTile = true;
             gameArray[first][second].Row = first;
