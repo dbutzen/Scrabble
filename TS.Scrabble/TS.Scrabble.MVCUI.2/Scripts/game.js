@@ -794,7 +794,10 @@ function BoardClicked(id) {
                 upperInput = input.toUpperCase()
                 //var boardClicked = getElementById(gameArray[first][second].Tile);
                 //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-                gameArray[first][second].Tile.Letter = '0';
+                gameArray[first][second].Tile.Letter = upperInput;
+                gameArray[first][second].Tile.Value = 0;
+                //document.getElementById(id).innerHTML = '*' + upperInput + '*';  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                //document.getElementById(id).innerHTML = '<img class="hand-letter" alt="' + upperInput + '" title="' + upperInput + '" src="../Images/' + upperInput + '.png" id=hand-letter4">'; 
                 document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
                 document.getElementById(id).style.color = "blue";
                 document.getElementById(id).style.fontSize = "20px";
