@@ -86,7 +86,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 }
                 //sets up player 1 to begin the game
                 Player playerOne = players.FirstOrDefault(p => p.PlayerNum == 1);
-                SetTurn(1);
+                SetTurn(playerOne.PlayerNum);
                 Clients.Client(playerOne.ConnectionId).PlayerTurn();
             }
         }
@@ -161,11 +161,18 @@ namespace TS.Scrabble.MVCUI._2.Hubs
         {
             //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             //Resets current turn tiles
-            _game.ResetCurrentTiles();
+            Task task = Task.Run(async () => { await _game.ResetCurrentTiles(); });
+            task.Wait();
             //sets up the new player
             Player player = _game.GetPlayer(currentPlayer);
             SetTurn(currentPlayer);
             Clients.Client(player.ConnectionId).PlayerTurn();
+        }
+
+        public void UpdateCurrentPlayerTurn()
+        {
+            Task task = Task.Run(async () => { await Clients.Group("game").updatePlayerTurn(); });
+            task.Wait();
         }
 
         public void SetTurn(int currentPlayer)

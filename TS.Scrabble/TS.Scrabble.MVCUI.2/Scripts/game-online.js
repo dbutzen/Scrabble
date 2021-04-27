@@ -11,8 +11,8 @@
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
-            currentPlayerTurn = 0;
-            turnCounter = 0;
+            currentPlayerTurn = 1;
+            turnCounter = 1;
             //initializes client side variables
             onlineGameStart();
         }
@@ -41,9 +41,6 @@
 
     //sets the turn labels for every layer
     gameHub.client.setTurnLabel = function (username, id) {
-        //updates turns in a function that affects everyone, so every player has the updated variables
-        turnCounter++;
-        currentPlayerTurn++;
         //rotates the player turn back to one if it exceeds the amount of players in the game
         if (currentPlayerTurn > numPlayers) {
             currentPlayerTurn = 1;
@@ -54,6 +51,14 @@
             document.getElementById("currentturn").innerHTML = "It is " + username + "'s turn.";
         }
         
+    }
+
+    gameHub.client.updatePlayerTurn = function () {
+        currentPlayerTurn++;
+        if (currentPlayerTurn > numPlayers) {
+            currentPlayerTurn = 1;
+        }
+        turnCounter++;
     }
 
     //empties the tiles from the players tray then refills it with all tiles in the players hand
@@ -123,10 +128,13 @@
         isTurn = false;
         $("#btnEndTurn").unbind();
         $("#btnUndo").unbind();
+        gameHub.server.updateCurrentPlayerTurn();
         //refills the players hand after ending the turn
         gameHub.server.fillPlayerTiles($.connection.hub.id);
         //sets up the next player
-        gameHub.server.endTurn(currentPlayerTurn);
+        var nextTurn = currentPlayerTurn + 1;
+        if (nextTurn > numPlayers) {nextTurn = 1}
+        gameHub.server.endTurn(nextTurn);
     }
 
     function undo() {

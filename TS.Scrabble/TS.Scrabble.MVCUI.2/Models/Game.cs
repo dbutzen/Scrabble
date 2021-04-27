@@ -165,9 +165,20 @@ namespace TS.Scrabble.MVCUI._2.Models
         {
             if(currentTurnTiles.Count > 0)
             {
-                foreach (Tile t in currentTurnTiles)
+                int tileCount = currentTurnTiles.Count;
+                for(int i = tileCount - 1; i < 0; i--)
                 {
-                    currentTurnTiles.Remove(t);
+                    Tile tile = currentTurnTiles[i];
+                    currentTurnTiles.Remove(tile);
+                }
+            }
+            if(currentTurnTileLocations.Count > 0)
+            {
+                int locCount = currentTurnTileLocations.Count;
+                for (int i = locCount - 1; i < 0; i--)
+                {
+                    string loc = currentTurnTileLocations[i];
+                    currentTurnTileLocations.Remove(loc);
                 }
             }
             return currentTurnTiles.Count();
