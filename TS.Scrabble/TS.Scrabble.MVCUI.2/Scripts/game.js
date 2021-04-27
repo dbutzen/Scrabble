@@ -771,6 +771,7 @@ function BoardClicked(id) {
     var second = getNumberId(secondLetter);
     var inputFailed = false;
     var blankTile = '<img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter4">';
+    var lastPlayedWord;
     if (hand != null) {
         //Add to array
 
@@ -820,12 +821,16 @@ function BoardClicked(id) {
             gameArray[first][second].Column = second;
             tilesIdsPlayed[tilesIdsPlayed.length] = { number: hand.charAt(80), i: first, j: second };
 
+            // Change outline of tiles on board clicked this turn to Blue instead of green
+            document.getElementById(id).style.border = "3px solid #000dff";
+
             //Removes tile from your player hand array.
 
             piece.remove();
             var tile = parseInt(id.substring(10));
             players[0].hand.splice(tile, 1);
             hand = null;
+
         }
     }
     else {
@@ -860,18 +865,23 @@ function removeTileAddTile(first, second, id) {
     // remove tile from board
     if (gameArray[first][second].Bonus == "TW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "DW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "TL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "DL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     // remove tile from code
     gameArray[first][second].HasTile = false;
@@ -884,6 +894,7 @@ function removeTileAddTile(first, second, id) {
 
     document.getElementById(id).style.color = "black";
     document.getElementById(id).style.fontSize = "14px";
+    document.getElementById(id).style.border = "1px solid #d4fcdb";
 }
 
 
@@ -1248,6 +1259,7 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
+    
 
     if (checkLegalPlacement() == true) {
 

@@ -44,6 +44,7 @@ li {
 }
 
 td {
+    /*background: #000dff;*/ 
     background: #cfd034;
     border: 1px solid #d4fcdb;
     min-width: 40px;
@@ -89,7 +90,9 @@ th {
 .blank-text {
     /*background-image: url(../Images/0.png);*/
     position: absolute;
-    transform: translate(80%, -115%);
+    transform: translate(65%, -100%);
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .score-board {
