@@ -17,6 +17,7 @@ namespace TS.Scrabble.MVCUI._2.Models
         private readonly List<Tile> tileBag = new List<Tile>();
         private readonly List<Player> players = new List<Player>();
         private readonly List<Tile> currentTurnTiles = new List<Tile>();
+        private readonly List<string> currentTurnTileLocations = new List<String>();
 
         public static Game Instance
         {
@@ -129,9 +130,10 @@ namespace TS.Scrabble.MVCUI._2.Models
         }
         
         //When a player puts a tile down, it is added to a list of the tiles played that turn
-        public void AddTileToCurrentTiles(Tile tile)
+        public void AddTileToCurrentTiles(Tile tile, string location)
         {
             currentTurnTiles.Add(tile);
+            currentTurnTileLocations.Add(location);
         }
         //If the undo button is pressed, the most recent tile they placed is returned to them
         public async Task<int> TakeTileFromCurrentTiles(Player player)
@@ -143,6 +145,20 @@ namespace TS.Scrabble.MVCUI._2.Models
                 currentTurnTiles.Remove(latestTile);
             }
             return 0;
+        }
+
+        public async Task<string> GetLastTileLocation()
+        {
+            if(currentTurnTileLocations.Count != 0)
+            {
+                string lastLocation = currentTurnTileLocations[currentTurnTileLocations.Count() - 1];
+                currentTurnTileLocations.Remove(lastLocation);
+                return lastLocation;
+            } else
+            {
+                return null;
+            }
+            
         }
         //At the end of a turn, the current tile list is emptied (can't set to a new list due to being readonly)
         public async Task<int> ResetCurrentTiles()

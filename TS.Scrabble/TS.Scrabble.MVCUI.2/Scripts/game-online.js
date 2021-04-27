@@ -62,6 +62,35 @@
         gameHub.server.showTiles($.connection.hub.id);
     }
 
+    gameHub.client.undoTileFromBoard = function (id) {
+        var firstLetter = id.charAt(0);
+        var first = getNumberId(firstLetter);
+        var secondLetter = id.charAt(1);
+        var second = getNumberId(secondLetter);
+        if (gameArray[first][second].Bonus == "TW") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+        }
+        else if (gameArray[first][second].Bonus == "DW") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+        }
+        else if (gameArray[first][second].Bonus == "TL") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+        }
+        else if (gameArray[first][second].Bonus == "DL") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+        }
+        else {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+        }
+        // remove tile from code
+        gameArray[first][second].HasTile = false;
+        gameArray[first][second].PlacedThisTurn = false;
+        gameArray[first][second].Tile.Letter = null;
+        gameArray[first][second].Tile.Value = null;
+        gameArray[first][second].Row = null;
+        gameArray[first][second].Column = null;
+    }
+
     function onlineGameStart() {
         reset();
         initArray();
@@ -142,6 +171,8 @@
         gameArray[first][second].HasTile = true;
         gameArray[first][second].Row = first;
         gameArray[first][second].Column = second;
+
+        hand = null;
     }
 
     gameHub.client.displayTile = function (tileNum, letter, id) {

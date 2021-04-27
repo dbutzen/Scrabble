@@ -113,16 +113,16 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             }
         }
 
-        public void TileToBoard(string id, string letter, string playerId)
+        public void TileToBoard(string location, string letter, string playerId)
         {
             //Gets player by the passed in connection id
             Player player = _game.GetPlayer(playerId);
             //Finds the tile that was placed, places it in the current turn tiles list, and removes it from the players hand
             Tile tile = player.Hand.Where(l => l.Letter == letter.ToUpper()).FirstOrDefault();
-            _game.AddTileToCurrentTiles(tile);
+            _game.AddTileToCurrentTiles(tile, location);
             player.Hand.Remove(tile);
             //adds the tile to all players boards
-            Clients.Group("game").addTileToBoard(id);
+            Clients.Group("game").addTileToBoard(location);
         }
 
         public void SetCurrentTile(string tile)
@@ -136,7 +136,13 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Player player = _game.GetPlayer(currentPlayer);
             Task task = Task.Run(async () => { await _game.TakeTileFromCurrentTiles(player); });
             task.Wait();
+            Task getLocation = Task.Run(async () => 
+            { 
+                var data = await _game.GetLastTileLocation();
+                Clients.All.undoTileFromBoard(data);
+            });
             Clients.Client(player.ConnectionId).reshowTiles();
+            
             
         }
 
