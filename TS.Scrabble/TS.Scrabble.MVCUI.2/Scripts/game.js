@@ -703,7 +703,7 @@ function addTileToHand(tileNum, text) {
 
 //-------------Game Initialization---------------------
 function gameStart() {
-    
+
     reset();
     initArray();
     newBag();
@@ -713,6 +713,7 @@ function gameStart() {
     gameStarted = true;
     var elem = document.getElementById("btnStart");
     elem.parentNode.removeChild(elem);
+    document.getElementById("btnPass").style['margin-left'] = '37%';
     
     
 }
@@ -762,12 +763,15 @@ function HandClicked(id) {
         piece = document.getElementById(id);
     }
 }
- //function to place letter in hand on to board
+//function to place letter in hand on to board
 function BoardClicked(id) {
     var firstLetter = id.charAt(0);
     var first = getNumberId(firstLetter);
     var secondLetter = id.charAt(1);
     var second = getNumberId(secondLetter);
+    var inputFailed = false;
+    var blankTile = '<img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter4">';
+    var lastPlayedWord;
     if (hand != null) {
         //Add to array
 
@@ -778,19 +782,47 @@ function BoardClicked(id) {
             //gameArray[first][second].Tile.Letter = document.getElementById(id).textContent;
             //alert(hand.charAt(30));
             if (hand.charAt(30) == "0") {
+
+                // this is hand at this point
+                // <img class="hand-letter" alt="0" title="0" src="../Images/0.png" id="hand-letter3">
+
                 var input = prompt("Please Enter In A Letter");
+                var alphaExp = /^[a-zA-Z]+$/;
+                while (!input.match(alphaExp)) {
+                    alert("Blanks must be a letter!");
+                    input = prompt("Please Enter In A Letter");
+                }
+                upperInput = input.toUpperCase()
                 //var boardClicked = getElementById(gameArray[first][second].Tile);
                 //$(boardClicked).innerHTML("src", "../Images/" + input + ".png");
-                gameArray[first][second].Tile.Letter = input.toUpperCase();
-            } else {
+                gameArray[first][second].Tile.Letter = upperInput;
+                gameArray[first][second].Tile.Value = 0;
+                //document.getElementById(id).innerHTML = '*' + upperInput + '*';  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                //document.getElementById(id).innerHTML = '<img class="hand-letter" alt="' + upperInput + '" title="' + upperInput + '" src="../Images/' + upperInput + '.png" id=hand-letter4">';
+                //document.getElementById(id).style.backgroundImage = "url('../Images/"+upperInput+".png')";
+                //document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
+                
+                document.getElementById(id).innerHTML = blankTile + '<p class="blank-text">' + upperInput + '</p>';
+                document.getElementById(id).style.color = "blue";
+                document.getElementById(id).style.fontSize = "20px";
+                //documnet.getElementById(id).style.backgroundImage = "url('../Images/0.png')";
+                //document.getElementById(id).classList.add('blankText');
+                //document.getElementById(id).appendChild(document.createTextNode(upperInput));
+
+                
+                
+            } else if (hand.charAt(30) != "0") {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
+                gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
             }
-            gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
             gameArray[first][second].PlacedThisTurn = true;
             gameArray[first][second].HasTile = true;
             gameArray[first][second].Row = first;
             gameArray[first][second].Column = second;
             tilesIdsPlayed[tilesIdsPlayed.length] = { number: hand.charAt(80), i: first, j: second };
+
+            // Change outline of tiles on board clicked this turn to Blue instead of green
+            document.getElementById(id).style.border = "3px solid #000dff";
 
             //Removes tile from your player hand array.
 
@@ -798,12 +830,13 @@ function BoardClicked(id) {
             var tile = parseInt(id.substring(10));
             players[0].hand.splice(tile, 1);
             hand = null;
+
         }
     }
     else {
         if (gameArray[first][second].PlacedThisTurn == true) {
             removeTileAddTile(first, second, firstLetter + secondLetter);
-            
+
         }
         else {
             //do nothing if there is no tile and nothing in hand
@@ -814,31 +847,41 @@ function BoardClicked(id) {
 
 function removeTileAddTile(first, second, id) {
     var idOfTile;
-    var removedLetter = document.getElementById(id).innerHTML.charAt(30);
-
+    var removedLetter;
+    if (document.getElementById(id).innerHTML.charAt(0) == '*') {
+        removedLetter = '0';
+    }
+    else {
+        removedLetter = document.getElementById(id).innerHTML.charAt(30);
+    }
     for (i = 0; i < tilesIdsPlayed.length; i++) {
         if (tilesIdsPlayed[i].i == first && tilesIdsPlayed[i].j == second) {
             idOfTile = tilesIdsPlayed[i].number;
             tilesIdsPlayed.splice(i, 1);
         }
     }
-    
+
     addTileToHand(idOfTile, removedLetter)
     // remove tile from board
     if (gameArray[first][second].Bonus == "TW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "DW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "TL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else if (gameArray[first][second].Bonus == "DL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     else {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
     }
     // remove tile from code
     gameArray[first][second].HasTile = false;
@@ -848,6 +891,10 @@ function removeTileAddTile(first, second, id) {
     gameArray[first][second].Row = null;
     gameArray[first][second].Column = null;
     players[0].hand[players[0].hand.length] = "filled";
+
+    document.getElementById(id).style.color = "black";
+    document.getElementById(id).style.fontSize = "14px";
+    document.getElementById(id).style.border = "1px solid #d4fcdb";
 }
 
 
@@ -1066,25 +1113,34 @@ function getWords() {
     }
     if (direction == "horizontal") {
         //Original Word
-        words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         //Offshoot Words
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
-                currentWords.push(wordPlaceholder)
+                currentWords.push(wordPlaceholder);
             }
         }
     }
     if (direction == "vertical") {
-        words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
-        currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
                 currentWords.push(wordPlaceholder);
+                
             }
         }
 
@@ -1203,24 +1259,33 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
+    
 
     if (checkLegalPlacement() == true) {
 
         //Single player for testing
-
+        var wordsPlayedHtml;
         var addedScore = getWords();
-        //check for disctionary?
+        //check for dictionary?
         //placeholder
 
         players[0].score += addedScore;
-        alert("Your current score is: " + players[0].score);
+        document.getElementById("lblTotalScore").innerHTML = players[0].score;
+        document.getElementById("lblLastScore").innerHTML = addedScore;
+        document.getElementById("lblLastWord").innerHTML = "";
+        for(i = 0; i < words.length; i++) {
+            wordsPlayedHtml = document.getElementById("lblLastWord").innerHTML;
+            if (i == 0) { wordsPlayedHtml += words[i]; }
+            else { wordsPlayedHtml += ", " + words[i]; }
+            document.getElementById("lblLastWord").innerHTML = wordsPlayedHtml;
+        }
+        
         
         var tiles = [];
         tilesIdsPlayed = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
-                alert(document.getElementById("handLetter" + i));
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
@@ -1249,6 +1314,7 @@ function endTurnLogic() {
         gameArray[placements[i].Row][placements[i].Column].BonusUsed = true;
     }
     placements = [];
+    words = [];
     //currentPlayerTurn += 1;
     //firstPlay = false;
     //if (playerNum < currentPlayerTurn) currentPlayerTurn = 1;
@@ -1256,16 +1322,16 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord) {
-    for (var i = 0; i < currentWords.length; i++){
+    for (var i = 0; i < currentWords.length; i++) {
         $("#challengeView").append(currentWords[i] + "<br>").click(function () {
             lastWord = this.innerText; //Working on getting this to work properly.
             if (!challengedWord)
-            challengedWord = lastWord;
-    
+                challengedWord = lastWord;
+
             params = {
                 'challengedWord': challengedWord
             };
-            
+
             $.ajax({
                 type: "GET",
                 url: '/Home/Challenge',
@@ -1273,8 +1339,8 @@ function ChallengeWord(challengedWord) {
             }).done(function (data) {
                 alert(data)
             });
-                })
-            };
+        })
+    };
 };
 
 function removeCurrentTiles() {
@@ -1358,7 +1424,7 @@ function checkLegalPlacementTest() {
 
 
     getWords();
-  
+ 
 
 
 }*/
