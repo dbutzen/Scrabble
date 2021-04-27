@@ -163,23 +163,15 @@ namespace TS.Scrabble.MVCUI._2.Models
         //At the end of a turn, the current tile list is emptied (can't set to a new list due to being readonly)
         public async Task<int> ResetCurrentTiles()
         {
-            if(currentTurnTiles.Count > 0)
+            while (currentTurnTiles.Count > 0)
             {
-                int tileCount = currentTurnTiles.Count;
-                for(int i = tileCount - 1; i < 0; i--)
-                {
-                    Tile tile = currentTurnTiles[i];
-                    currentTurnTiles.Remove(tile);
-                }
+                Tile latestTile = currentTurnTiles[currentTurnTiles.Count() - 1];
+                currentTurnTiles.Remove(latestTile);
             }
-            if(currentTurnTileLocations.Count > 0)
+            while (currentTurnTileLocations.Count > 0)
             {
-                int locCount = currentTurnTileLocations.Count;
-                for (int i = locCount - 1; i < 0; i--)
-                {
-                    string loc = currentTurnTileLocations[i];
-                    currentTurnTileLocations.Remove(loc);
-                }
+                string latestLoc = currentTurnTileLocations[currentTurnTileLocations.Count() - 1];
+                currentTurnTileLocations.Remove(latestLoc);
             }
             return currentTurnTiles.Count();
         }
