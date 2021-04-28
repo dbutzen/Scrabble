@@ -51,9 +51,13 @@ namespace TS.Scrabble.BL
                             else
                             {
                                 var definitionJson = root[0];
+                                string definition = definitionJson.GetProperty("shortdef").ToString();
                                 try
                                 {
-                                    return definitionJson.GetProperty("shortdef").ToString();
+                                    if (string.IsNullOrEmpty(definition))
+                                        return "Word not found";
+                                    else
+                                        return definition;
                                 }
                                 catch
                                 {
@@ -66,8 +70,8 @@ namespace TS.Scrabble.BL
             }
             catch (Exception ex)
             {
-                Console.WriteLine("MerriamWebster API Error: " + ex.Message.ToString());
-                return null;
+                return "MerriamWebster API Error: " + ex.Message.ToString();
+                
             }
         }
     }

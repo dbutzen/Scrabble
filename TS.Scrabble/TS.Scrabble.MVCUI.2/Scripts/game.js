@@ -23,7 +23,7 @@ var gameArray = [];
 var image;
 var users = [];
 var currentWords = []; //Array to house the current play's words.  Intended for the Challenge use.
-var lastWord = "test";
+//var lastWord = "test";
 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
@@ -714,8 +714,8 @@ function gameStart() {
     var elem = document.getElementById("btnStart");
     elem.parentNode.removeChild(elem);
     document.getElementById("btnPass").style['margin-left'] = '37%';
-    
-    
+
+
 }
 
 // Resets game to initial start point
@@ -801,7 +801,7 @@ function BoardClicked(id) {
                 //document.getElementById(id).innerHTML = '<img class="hand-letter" alt="' + upperInput + '" title="' + upperInput + '" src="../Images/' + upperInput + '.png" id=hand-letter4">';
                 //document.getElementById(id).style.backgroundImage = "url('../Images/"+upperInput+".png')";
                 //document.getElementById(id).innerHTML = '*' + upperInput + '*'  //'<img class="hand-letter" alt="0" title="0" src="../ Images / V.png" id="hand - letter4">';
-                
+
                 document.getElementById(id).innerHTML = blankTile + '<p class="blank-text">' + upperInput + '</p>';
                 document.getElementById(id).style.color = "blue";
                 document.getElementById(id).style.fontSize = "20px";
@@ -809,8 +809,8 @@ function BoardClicked(id) {
                 //document.getElementById(id).classList.add('blankText');
                 //document.getElementById(id).appendChild(document.createTextNode(upperInput));
 
-                
-                
+
+
             } else if (hand.charAt(30) != "0") {
                 gameArray[first][second].Tile.Letter = hand.charAt(30);
                 gameArray[first][second].Tile.Value = getValue(gameArray[first][second].Tile.Letter);
@@ -1140,12 +1140,11 @@ function getWords() {
             if (wordPlaceholder != 0) {
                 words.push(wordPlaceholder);
                 currentWords.push(wordPlaceholder);
-                
+
             }
         }
 
     }
-    alert(currentWords);
     return scoreCounter;
 }
 
@@ -1259,7 +1258,7 @@ function getVerticalWord(originalTile, originalRow, originalColumn) {
 
 //-------------------------Turn Logic--------------------------------
 function EndTurn(id) {
-    
+
 
     if (checkLegalPlacement() == true) {
 
@@ -1273,14 +1272,14 @@ function EndTurn(id) {
         document.getElementById("lblTotalScore").innerHTML = players[0].score;
         document.getElementById("lblLastScore").innerHTML = addedScore;
         document.getElementById("lblLastWord").innerHTML = "";
-        for(i = 0; i < words.length; i++) {
+        for (i = 0; i < words.length; i++) {
             wordsPlayedHtml = document.getElementById("lblLastWord").innerHTML;
             if (i == 0) { wordsPlayedHtml += words[i]; }
             else { wordsPlayedHtml += ", " + words[i]; }
             document.getElementById("lblLastWord").innerHTML = wordsPlayedHtml;
         }
-        
-        
+
+
         var tiles = [];
         tilesIdsPlayed = [];
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
@@ -1322,25 +1321,28 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord) {
+    $("#challengeView").empty();
     for (var i = 0; i < currentWords.length; i++) {
-        $("#challengeView").append(currentWords[i] + "<br>").click(function () {
-            lastWord = this.innerText; //Working on getting this to work properly.
-            if (!challengedWord)
-                challengedWord = lastWord;
+        $("#challengeView").append("<b><p style = cursor:pointer id = challengeWord" + i + ">" + currentWords[i] + "</b></p>");
+    }
+    $("#challengeView").on('click', 'p', (function () {
+        var challengeID = this.id;
+        var lastWord = this.innerText; //Working on getting this to work properly.
+        //if (!challengedWord) {
+        //    challengedWord = lastWord;
+        //}
+        params = {
+            'challengedWord': lastWord
+        };
 
-            params = {
-                'challengedWord': challengedWord
-            };
-
-            $.ajax({
-                type: "GET",
-                url: '/Home/Challenge',
-                data: params
-            }).done(function (data) {
-                alert(data)
-            });
-        })
-    };
+        $.ajax({
+            type: "GET",
+            url: '/Home/Challenge',
+            data: params
+        }).done(function (data) {
+            $("#" + challengeID).append("<strong>:</strong>  <i>" + data + "</i>");
+        });
+    }));
 };
 
 function removeCurrentTiles() {
@@ -1424,7 +1426,7 @@ function checkLegalPlacementTest() {
 
 
     getWords();
- 
+
 
 
 }*/
