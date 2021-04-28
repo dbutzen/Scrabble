@@ -1299,6 +1299,10 @@ function EndTurn(id) {
 
         //Backend logic reset
         endTurnLogic();
+        $("#challengeView").empty();
+        for (var i = 0; i < currentWords.length; i++) {
+            $("#challengeView").append("<b><p onClick=\"ChallengeWord\('" + currentWords[i] + "','challengeWord" + i + "'\)\" style = cursor:pointer id = challengeWord" + i + ">" + currentWords[i] + "</b></p>");
+        }
     }
 }
 
@@ -1320,19 +1324,11 @@ function endTurnLogic() {
 }
 
 //-----------------Challenge Logic--------------
-function ChallengeWord(challengedWord) {
-    $("#challengeView").empty();
-    for (var i = 0; i < currentWords.length; i++) {
-        $("#challengeView").append("<b><p style = cursor:pointer id = challengeWord" + i + ">" + currentWords[i] + "</b></p>");
-    }
-    $("#challengeView").on('click', 'p', (function () {
-        var challengeID = this.id;
-        var lastWord = this.innerText; //Working on getting this to work properly.
-        //if (!challengedWord) {
-        //    challengedWord = lastWord;
-        //}
-        params = {
-            'challengedWord': lastWord
+function ChallengeWord(challengedWord, id) {
+    //alert(challengedWord);
+    //alert(id);
+    params = {
+        'challengedWord': challengedWord
         };
 
         $.ajax({
@@ -1340,9 +1336,19 @@ function ChallengeWord(challengedWord) {
             url: '/Home/Challenge',
             data: params
         }).done(function (data) {
-            $("#" + challengeID).append("<strong>:</strong>  <i>" + data + "</i>");
+            $("#" + id).append("<b>:</b>  <i>" + data + "</i>");
         });
-    }));
+
+
+    //$("#challengeView").on('click', 'p', (function (event) {
+    //    var challengeID = this.id;
+    //    var lastWord = this.innerText; //Working on getting this to work properly.
+    //    //if (!challengedWord) {
+    //    //    challengedWord = lastWord;
+    //    //}
+    //    
+    //    return false;
+    //}));
 };
 
 function removeCurrentTiles() {
