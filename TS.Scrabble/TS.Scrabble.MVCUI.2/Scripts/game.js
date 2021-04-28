@@ -1325,31 +1325,26 @@ function endTurnLogic() {
 
 //-----------------Challenge Logic--------------
 function ChallengeWord(challengedWord, id) {
-    //alert(challengedWord);
-    //alert(id);
     params = {
         'challengedWord': challengedWord
-        };
-
-        $.ajax({
-            type: "GET",
-            url: '/Home/Challenge',
-            data: params
-        }).done(function (data) {
-            $("#" + id).append("<b>:</b>  <i>" + data + "</i>");
-        });
-
-
-    //$("#challengeView").on('click', 'p', (function (event) {
-    //    var challengeID = this.id;
-    //    var lastWord = this.innerText; //Working on getting this to work properly.
-    //    //if (!challengedWord) {
-    //    //    challengedWord = lastWord;
-    //    //}
-    //    
-    //    return false;
-    //}));
+    };
+    $.ajax({
+        type: "GET",
+        url: '/Home/Challenge',
+        data: params
+    }).done(function (data) {
+        $("#" + id).append("<b>:</b>  <i>" + data + "</i>");
+    });
 };
+//$("#challengeView").on('click', 'p', (function (event) {
+//    var challengeID = this.id;
+//    var lastWord = this.innerText; //Working on getting this to work properly.
+//    //if (!challengedWord) {
+//    //    challengedWord = lastWord;
+//    //}
+//    
+//    return false;
+//}));
 
 function removeCurrentTiles() {
     for (var i = 1; i < 16; i++) {
