@@ -101,8 +101,10 @@ th {
     background-image: linear-gradient(to right, #009999, #7a0099);
     display: inline-block;
     position:absolute;
-    right:300px;
-    top: 100px;
+    /*right:300px;
+    top: 100px;*/
+    right: 15%;
+    top: 10%;
 }
 
 .player {
