@@ -180,7 +180,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             //List<Player> players = _game.GetPlayers().Where(p => p.PlayerNum == currentPlayer).ToList();
             //sets the turn label for all players to display whose turn it is
             Player player = _game.GetPlayer(currentPlayer);
-            Clients.Group("game").setTurnLabel(player.PlayerNum.ToString(), player.ConnectionId);
+            Clients.Group("game").setTurnLabel(player.Username, player.ConnectionId);
         }
     }
 
