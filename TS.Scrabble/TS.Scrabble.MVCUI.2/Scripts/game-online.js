@@ -11,8 +11,8 @@
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
-            currentPlayerTurn = 0;
-            turnCounter = 0;
+            currentPlayerTurn = 1;
+            turnCounter = 1;
             //initializes client side variables
             onlineGameStart();
         }
@@ -41,9 +41,6 @@
 
     //sets the turn labels for every layer
     gameHub.client.setTurnLabel = function (username, id) {
-        //updates turns in a function that affects everyone, so every player has the updated variables
-        turnCounter++;
-        currentPlayerTurn++;
         //rotates the player turn back to one if it exceeds the amount of players in the game
         if (currentPlayerTurn > numPlayers) {
             currentPlayerTurn = 1;
@@ -56,10 +53,47 @@
         
     }
 
+    gameHub.client.updatePlayerTurn = function () {
+        currentPlayerTurn++;
+        if (currentPlayerTurn > numPlayers) {
+            currentPlayerTurn = 1;
+        }
+        turnCounter++;
+    }
+
     //empties the tiles from the players tray then refills it with all tiles in the players hand
     gameHub.client.reshowTiles = function () {
         $("#tray-container").html('');
         gameHub.server.showTiles($.connection.hub.id);
+    }
+
+    gameHub.client.undoTileFromBoard = function (id) {
+        var firstLetter = id.charAt(0);
+        var first = getNumberId(firstLetter);
+        var secondLetter = id.charAt(1);
+        var second = getNumberId(secondLetter);
+        if (gameArray[first][second].Bonus == "TW") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
+        }
+        else if (gameArray[first][second].Bonus == "DW") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
+        }
+        else if (gameArray[first][second].Bonus == "TL") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
+        }
+        else if (gameArray[first][second].Bonus == "DL") {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
+        }
+        else {
+            document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
+        }
+        // remove tile from code
+        gameArray[first][second].HasTile = false;
+        gameArray[first][second].PlacedThisTurn = false;
+        gameArray[first][second].Tile.Letter = null;
+        gameArray[first][second].Tile.Value = null;
+        gameArray[first][second].Row = null;
+        gameArray[first][second].Column = null;
     }
 
     function onlineGameStart() {
@@ -94,10 +128,13 @@
         isTurn = false;
         $("#btnEndTurn").unbind();
         $("#btnUndo").unbind();
+        gameHub.server.updateCurrentPlayerTurn();
         //refills the players hand after ending the turn
         gameHub.server.fillPlayerTiles($.connection.hub.id);
         //sets up the next player
-        gameHub.server.endTurn(currentPlayerTurn);
+        var nextTurn = currentPlayerTurn + 1;
+        if (nextTurn > numPlayers) {nextTurn = 1}
+        gameHub.server.endTurn(nextTurn);
     }
 
     function undo() {
@@ -142,6 +179,8 @@
         gameArray[first][second].HasTile = true;
         gameArray[first][second].Row = first;
         gameArray[first][second].Column = second;
+
+        hand = null;
     }
 
     gameHub.client.displayTile = function (tileNum, letter, id) {

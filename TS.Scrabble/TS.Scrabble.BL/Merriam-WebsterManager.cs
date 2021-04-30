@@ -16,10 +16,13 @@ namespace TS.Scrabble.BL
     public class Merriam_WebsterManager
     {
 
+        //Collegiate Dictionary
+        //private const string APIKey = "96117da3-8cb7-4b5b-b29c-a89712b2ce8f";
+        //private const string resourceURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/";// + word + "?" + APIKey;
 
-        private const string APIKey = "96117da3-8cb7-4b5b-b29c-a89712b2ce8f";
-        private const string resourceURL = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/";// + word + "?" + APIKey;
-
+        //Highschool Dictionary
+        private const string APIKey = "c325761f-da2b-4f9d-a959-c328ebb26d00";
+        private const string resourceURL = "https://www.dictionaryapi.com/api/v3/references/sd4/json/";// + word + "?" + APIKey;
 
         public static string Definition(string word)
         {
@@ -51,9 +54,13 @@ namespace TS.Scrabble.BL
                             else
                             {
                                 var definitionJson = root[0];
+                                string definition = definitionJson.GetProperty("shortdef").ToString();
                                 try
                                 {
-                                    return definitionJson.GetProperty("shortdef").ToString();
+                                    if (string.IsNullOrEmpty(definition))
+                                        return "Word not found";
+                                    else
+                                        return definition;
                                 }
                                 catch
                                 {
@@ -66,8 +73,8 @@ namespace TS.Scrabble.BL
             }
             catch (Exception ex)
             {
-                Console.WriteLine("MerriamWebster API Error: " + ex.Message.ToString());
-                return null;
+                return "MerriamWebster API Error: " + ex.Message.ToString();
+                
             }
         }
     }
