@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TS.Scrabble.BL;
+using TS.Scrabble.MVCUI._2.Models;
 
 namespace TS.Scrabble.MVCUI._2.Controllers
 {
@@ -23,16 +24,24 @@ namespace TS.Scrabble.MVCUI._2.Controllers
 
         public ActionResult Gameboard()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (Authenticate.IsAuthenticated())
+            {
+                ViewBag.Message = "Your contact page.";
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
         }
 
         public ActionResult GameboardMulti()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (Authenticate.IsAuthenticated())
+            {
+                ViewBag.Message = "Your contact page.";
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
         }
 
         public ActionResult Chat()

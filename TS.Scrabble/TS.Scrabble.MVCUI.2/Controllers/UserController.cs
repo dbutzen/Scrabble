@@ -16,8 +16,9 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnurl)
         {
+            ViewBag.ReturnUrl = returnurl;
             return View();
         }
 
