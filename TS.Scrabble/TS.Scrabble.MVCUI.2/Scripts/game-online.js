@@ -135,6 +135,7 @@
         var nextTurn = currentPlayerTurn + 1;
         if (nextTurn > numPlayers) {nextTurn = 1}
         gameHub.server.endTurn(nextTurn);
+
     }
 
     function undo() {
