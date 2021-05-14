@@ -22,6 +22,7 @@ var scoreCounter;
 var gameArray = [];
 var image;
 var users = [];
+var TileSelected = false;
 var currentWords = []; //Array to house the current play's words.  Intended for the Challenge use.
 //var lastWord = "test";
 
@@ -747,6 +748,14 @@ function initializePlayer(num) {
     }
 }
 
+function GetTileSelected(TileSelected) {
+    if (TileSelected == true) {
+        document.getElementById(id).style.border = "3px solid #000dff";
+    }
+    if (TileSelected == false) {
+        document.getElementById(id).style.border = "1px solid #d4fcdb";
+    }
+}
 
 //------------------Hand to Board Tile Placement-----------------------
 var hand = null;
@@ -821,9 +830,11 @@ function BoardClicked(id) {
             gameArray[first][second].Column = second;
             tilesIdsPlayed[tilesIdsPlayed.length] = { number: hand.charAt(80), i: first, j: second };
 
+            var x = document.getElementById(id);
             // Change outline of tiles on board clicked this turn to Blue instead of green
+            TileSelected = true;
             document.getElementById(id).style.border = "3px solid #000dff";
-
+            
             //Removes tile from your player hand array.
 
             piece.remove();
@@ -866,22 +877,27 @@ function removeTileAddTile(first, second, id) {
     if (gameArray[first][second].Bonus == "TW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tw" onclick="BoardClicked(id)" style="cursor:pointer">TW</td>';
         document.getElementById(id).style.border = "1px solid #d4fcdb";
+        TileSelected = false;
     }
     else if (gameArray[first][second].Bonus == "DW") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dw" onclick="BoardClicked(id)" style="cursor:pointer">DW</td>';
         document.getElementById(id).style.border = "1px solid #d4fcdb";
+        TileSelected = false;
     }
     else if (gameArray[first][second].Bonus == "TL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused tl" onclick="BoardClicked(id)" style="cursor:pointer">TL</td>';
         document.getElementById(id).style.border = "1px solid #d4fcdb";
+        TileSelected = false;
     }
     else if (gameArray[first][second].Bonus == "DL") {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused dl" onclick="BoardClicked(id)" style="cursor:pointer">DL</td>';
         document.getElementById(id).style.border = "1px solid #d4fcdb";
+        TileSelected = false;
     }
     else {
         document.getElementById(id).innerHTML = '<td id="' + id + '" class="board-tile unused" onclick="BoardClicked(id)" style="cursor:pointer"></td>';
         document.getElementById(id).style.border = "1px solid #d4fcdb";
+        TileSelected = false;
     }
     // remove tile from code
     gameArray[first][second].HasTile = false;
@@ -1268,6 +1284,8 @@ function EndTurn(id) {
         //check for dictionary?
         //placeholder
 
+        //document.getElementsByClassName("hand-letter").style.border = "1px solid #d4fcdb";
+
         players[0].score += addedScore;
         document.getElementById("lblTotalScore").innerHTML = players[0].score;
         document.getElementById("lblLastScore").innerHTML = addedScore;
@@ -1285,6 +1303,7 @@ function EndTurn(id) {
         //At the end of your turn, pushes existing tiles over to make room for the new ones coming.
         for (i = 1; i <= 7; i++) {
             if (document.getElementById("handLetter" + i) != null) {
+                /*document.getElementById("handLetter" + i).style.border = "1px solid #d4fcdb";*/
                 tiles.push(document.getElementById("handLetter" + i));
             }
         }
@@ -1303,6 +1322,13 @@ function EndTurn(id) {
         for (var i = 0; i < currentWords.length; i++) {
             $("#challengeView").append("<b><p onClick=\"ChallengeWord\('" + currentWords[i] + "','challengeWord" + i + "'\)\" style = cursor:pointer id = challengeWord" + i + ">" + currentWords[i] + "</b></p>");
         }
+
+        // Set all tile outlines back to green
+        TileSelected = false;
+        //$('#game-board').children().each(function () {
+        //    document.getElementById(id).style.border = "1px solid #d4fcdb";
+        //});
+
     }
 }
 

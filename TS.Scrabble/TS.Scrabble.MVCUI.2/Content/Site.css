@@ -505,6 +505,15 @@ td:hover {
     background-color: gray;
 }
 
+.Account-Name {
+    top: 10px;
+    width: 40px;
+    margin-right: 20px;
+    height: 40px;
+    display: inline-block;
+    border: none;
+}
+
 .Account-Icon {
     top: 10px;
     left: 2200%;
