@@ -7,7 +7,7 @@
         //upon connection, updates the users
         users = ids;
         numPlayers = users.length;
-        if (numPlayers == 4) {
+        if (numPlayers == 3) {
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
@@ -142,8 +142,8 @@
             isTurn = false;
             $("#btnEndTurn").unbind();
             $("#btnUndo").unbind();
-            var score = getWords();
-            gameHub.server.addScore(currentPlayerTurn, score);
+            //var score = getWords();
+            //gameHub.server.addScore(currentPlayerTurn, score);
             gameHub.server.updateCurrentPlayerTurn();
             //refills the players hand after ending the turn
             gameHub.server.fillPlayerTiles($.connection.hub.id);
