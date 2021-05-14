@@ -83,6 +83,7 @@ namespace TS.Scrabble.MVCUI._2.Hubs
                 foreach(Player p in players)
                 {
                     ShowTiles(p.ConnectionId);
+                    Clients.Group("game").createScoreboard(p.Username);
                 }
                 //sets up player 1 to begin the game
                 Player playerOne = players.FirstOrDefault(p => p.PlayerNum == 1);
@@ -167,6 +168,14 @@ namespace TS.Scrabble.MVCUI._2.Hubs
             Player player = _game.GetPlayer(currentPlayer);
             SetTurn(currentPlayer);
             Clients.Client(player.ConnectionId).PlayerTurn();
+        }
+
+        public void AddScore(int currentTurn, int score)
+        {
+            Player player = _game.GetPlayer(currentTurn);
+            player.Score += score;
+
+            Clients.Group("game").updateScoreboard(player.Username, player.Score.ToString());
         }
 
         public void UpdateCurrentPlayerTurn()
