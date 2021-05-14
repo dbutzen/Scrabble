@@ -3,7 +3,7 @@
 var id_placeholder;
 var tray;
 
-//var gameArray = [];
+var gameArray = [];
 var tileBag = [];
 var equalColumn = true;
 var equalRow = true;
@@ -962,11 +962,11 @@ function checkLegalPlacement() {
         if (equalColumn == true) columnCongruency = checkColumnCongruency();
     }
     // Checks all results and returns true or false for if placement is legal
-    alert("equalRow " + equalRow);
-    alert("equalColumn " + equalColumn);
-    alert("connected " + connected);
-    alert("rowCongruency " + rowCongruency);
-    alert("columnCongruency " + columnCongruency);
+    //alert("equalRow " + equalRow);
+    //alert("equalColumn " + equalColumn);
+    //alert("connected " + connected);
+    //alert("rowCongruency " + rowCongruency);
+    //alert("columnCongruency " + columnCongruency);
     if ((equalRow == true || equalColumn == true) && connected == true && rowCongruency == true && columnCongruency == true) return true;
     return false;
 }
@@ -1025,8 +1025,9 @@ function checkColumnCongruency() {
 //Gets list of words to use with dictionary, as well as
 //setting scoreCounter to the score of the combined words.
 //DOES NOT remove bonuses. Must be done after.
-function getWords() { 
+function getWords() {
     var direction = "horizontal";
+    currentWords = [];
     scoreCounter = 0;
 
     if (placements.length > 1) {
@@ -1035,21 +1036,37 @@ function getWords() {
     }
     if (direction == "horizontal") {
         //Original Word
-        words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getHorizontalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         //Offshoot Words
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getVerticalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
-            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+            if (wordPlaceholder != 0) {
+                words.push(wordPlaceholder);
+                currentWords.push(wordPlaceholder);
+            }
         }
-        
     }
     if (direction == "vertical") {
-        words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+
+        var placeholderWord = getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column);
+        words.push(placeholderWord);
+        currentWords.push(placeholderWord);
+        //words.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
+        //currentWords.push(getVerticalWord(gameArray[placements[0].Row][placements[0].Column], placements[0].Row, placements[0].Column));
         for (var i = 0; i < placements.length; i++) {
             var wordPlaceholder = getHorizontalWord(gameArray[placements[i].Row][placements[i].Column], placements[i].Row, placements[i].Column);
-            if (wordPlaceholder != 0) words.push(wordPlaceholder);
+            if (wordPlaceholder != 0) {
+                words.push(wordPlaceholder);
+                currentWords.push(wordPlaceholder);
+
+            }
         }
-        
+
     }
     return scoreCounter;
 }
@@ -1088,7 +1105,7 @@ function getHorizontalWord(originalTile, originalRow, originalColumn) {
         tempWordScore += tileScore;
         tileScore = 0;
     }
-    
+
     // Reset to original position of placed word
     tileColumn = originalColumn;
     // Get tiles to the right;

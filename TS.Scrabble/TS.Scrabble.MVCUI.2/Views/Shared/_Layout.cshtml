@@ -26,12 +26,13 @@
                     <li>
                         <a href="~/Home/Gameboard" class="Game-Icon"></a>
                     </li>
+                    <li>
+                        <a href="~/Home/GameboardMulti" class="">Multiplayer</a>
+                    </li>
                 </ul>
-
-                @*Show The Username to the left of the Account Icon*@
-                <div id="Account-Name" class="Account-Name" runat="server"></div>
-
-                <div class="dropdown">    
+                <div class="dropdown">
+                    
+                    <p class="Account-Name">@Session["username"]</p>
                     <button class="Account-Icon" ></button>
                     <div class="dropdown-content" id="myDropdown">
                         @Html.ActionLink("Account", "Login", "User")

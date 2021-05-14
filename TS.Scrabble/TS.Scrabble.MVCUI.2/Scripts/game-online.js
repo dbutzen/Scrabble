@@ -7,7 +7,7 @@
         //upon connection, updates the users
         users = ids;
         numPlayers = users.length;
-        if (numPlayers == 2) {
+        if (numPlayers == 3) {
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
@@ -96,6 +96,23 @@
         gameArray[first][second].Column = null;
     }
 
+    gameHub.client.createScoreboard = function (userName) {
+        var tables = document.getElementById('score-board');
+        var rows = tables.insertRow(1);
+        var cellOne = rows.insertCell(0);
+        var cellTwo = rows.insertCell(1);
+
+        cellOne.innerHTML = userName;
+        cellTwo.innerHTML = "0";
+        cellTwo.id = userName;
+    }
+
+    gameHub.client.updateScoreboard = function (userName, score) {
+        var cell = document.getElementById(userName)
+
+        cell.innerHTML = score;
+    }
+
     function onlineGameStart() {
         reset();
         initArray();
@@ -119,22 +136,22 @@
     }
 
     function turnEnded() {
-        //turnCounter++;
-        //currentPlayerTurn++;
-        //if (currentPlayerTurn > numPlayers) {
-        //    currentPlayerTurn = 1;
+        
+        //if (checkLegalPlacement() == true) {
+            //removes the ability to end a turn when the player ends their turn
+            isTurn = false;
+            $("#btnEndTurn").unbind();
+            $("#btnUndo").unbind();
+            //var score = getWords();
+            //gameHub.server.addScore(currentPlayerTurn, score);
+            gameHub.server.updateCurrentPlayerTurn();
+            //refills the players hand after ending the turn
+            gameHub.server.fillPlayerTiles($.connection.hub.id);
+            //sets up the next player
+            var nextTurn = currentPlayerTurn + 1;
+            if (nextTurn > numPlayers) { nextTurn = 1 }
+            gameHub.server.endTurn(nextTurn);
         //}
-        //removes the ability to end a turn when the player ends their turn
-        isTurn = false;
-        $("#btnEndTurn").unbind();
-        $("#btnUndo").unbind();
-        gameHub.server.updateCurrentPlayerTurn();
-        //refills the players hand after ending the turn
-        gameHub.server.fillPlayerTiles($.connection.hub.id);
-        //sets up the next player
-        var nextTurn = currentPlayerTurn + 1;
-        if (nextTurn > numPlayers) {nextTurn = 1}
-        gameHub.server.endTurn(nextTurn);
 
     }
 
@@ -162,6 +179,9 @@
             gameHub.server.tileToBoard(id, hand.innerHTML, $.connection.hub.id);
         }
     }
+
+
+
     gameHub.client.selectedTile = function (tile) {
         hand = tile;
     }
