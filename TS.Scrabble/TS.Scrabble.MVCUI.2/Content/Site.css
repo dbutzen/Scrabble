@@ -103,7 +103,9 @@ th {
     position:absolute;
     /*right:300px;
     top: 100px;*/
-    right: 15%;
+    /*right: 15%;*/
+    float: right;
+    margin: auto;
     top: 10%;
 }
 
