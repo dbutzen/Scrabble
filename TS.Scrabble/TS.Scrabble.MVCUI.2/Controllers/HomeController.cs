@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using TS.Scrabble.BL;
 using TS.Scrabble.MVCUI._2.Models;
 
@@ -27,6 +28,12 @@ namespace TS.Scrabble.MVCUI._2.Controllers
             if (Authenticate.IsAuthenticated())
             {
                 ViewBag.Message = "Your contact page.";
+                //MembershipUser membershipUser = Membership.GetUser();
+                //if (membershipUser != null)
+                //{
+                //    string loggedinuser = Membership.GetUser().ToString();
+                //    ViewBag.Name = loggedinuser;
+                //}
                 return View();
             }
             else

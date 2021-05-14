@@ -27,8 +27,11 @@
                         <a href="~/Home/Gameboard" class="Game-Icon"></a>
                     </li>
                 </ul>
-                <div class="dropdown">
-                    <p class="Account-Name">Account Name</p>
+
+                @*Show The Username to the left of the Account Icon*@
+                <div id="Account-Name" class="Account-Name" runat="server"></div>
+
+                <div class="dropdown">    
                     <button class="Account-Icon" ></button>
                     <div class="dropdown-content" id="myDropdown">
                         @Html.ActionLink("Account", "Login", "User")
