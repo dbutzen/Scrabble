@@ -206,6 +206,7 @@
     <Content Include="Images\Z.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\TeamScrabble - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\game-single-online.js" />
     <Content Include="Scripts\game-online.js" />
