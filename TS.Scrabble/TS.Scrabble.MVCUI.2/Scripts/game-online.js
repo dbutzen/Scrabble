@@ -7,7 +7,7 @@
         //upon connection, updates the users
         users = ids;
         numPlayers = users.length;
-        if (numPlayers == 3) {
+        if (numPlayers == 4) {
             //when the number of connections is equal to the number above, the game begins.
             gameHub.server.gameStart($.connection.hub.id);
             //updates the turn variables to start the game
