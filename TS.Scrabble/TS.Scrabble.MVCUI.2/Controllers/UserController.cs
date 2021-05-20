@@ -34,7 +34,6 @@ namespace TS.Scrabble.MVCUI._2.Controllers
                     Session["userid"] = user.Id;
                     Session["username"] = user.Username;
                     Session["email"] = user.Email;
-                    
                     return RedirectToAction("Home", "Home");
                 }
                 else

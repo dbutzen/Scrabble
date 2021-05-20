@@ -44,7 +44,7 @@ li {
 }
 
 td {
-    /*background: #000dff;*/ 
+    /*background: #000dff;*/
     background: #cfd034;
     border: 1px solid #d4fcdb;
     min-width: 44px;
@@ -75,7 +75,7 @@ table.score-board {
 }
 
 .game-buttons {
-    text-align:center;
+    text-align: center;
 }
 
 th {
@@ -100,7 +100,7 @@ th {
     border-radius: 25px;
     background-image: linear-gradient(to right, #009999, #7a0099);
     display: inline-block;
-    position:absolute;
+    position: absolute;
     /*right:300px;
     top: 100px;*/
     /*right: 15%;*/
@@ -116,7 +116,7 @@ th {
 
     .player h4 {
         font-weight: bold;
-        color:white
+        color: white
     }
 
 .score-box {
@@ -520,7 +520,7 @@ td:hover {
     top: 10px;
     left: 2200%;
     width: 40px;
-    height: 40px;
+    height: 50px;
     display: inline-block;
     background: url("../Images/Account.png") no-repeat;
     border: none;
@@ -529,7 +529,7 @@ td:hover {
     .Account-Icon:hover {
         background: url("../Images/Account-White.png") no-repeat;
         width: 40px;
-        height: 40px;
+        height: 50px;
     }
 
 .dropdown-content a:hover {
@@ -549,7 +549,7 @@ td:hover {
 }
 
 .dropdown-content {
-    display:none;
+    display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
@@ -587,9 +587,24 @@ td:hover {
         height: 40px;
     }
 
+.Multi-Icon {
+    margin-left: 20px;
+    margin-top: 18px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: url("../Images/multiplayer-black.png") no-repeat;
+}
+
+    .Multi-Icon:hover {
+        background: url("../Images/multiplayer-white.png") no-repeat;
+        width: 40px;
+        height: 40px;
+    }
+
 .Home-Icon {
     margin-top: 14px;
-    left:20px;
+    left: 20px;
     width: 40px;
     height: 40px;
     display: inline-block;
