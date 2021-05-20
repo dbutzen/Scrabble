@@ -19,6 +19,7 @@ textarea {
 .navbar {
     background: linear-gradient(to right, #009999, #7a0099);
     color: white;
+    height: 65px;
 }
 
 /* Responsive: Portrait tablets and up */
