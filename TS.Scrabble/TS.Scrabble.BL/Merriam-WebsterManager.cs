@@ -71,7 +71,7 @@ namespace TS.Scrabble.BL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "Word not found.";
                 
