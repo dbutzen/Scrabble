@@ -71,9 +71,9 @@ namespace TS.Scrabble.BL
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return "MerriamWebster API Error: " + ex.Message.ToString();
+                return "Word not found.";
                 
             }
         }
