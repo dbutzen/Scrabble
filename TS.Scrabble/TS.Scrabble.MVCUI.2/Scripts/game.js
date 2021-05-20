@@ -29,6 +29,11 @@ var currentWords = []; //Array to house the current play's words.  Intended for 
 //REMINDERS
 //---Make sure when a multiplier is used to remove it from the board---
 
+//----------------Load-Page------------------
+function LoadPage() {
+
+}
+
 
 //----------------Tile Movement------------------
 function SelectedTile(value, location) {

@@ -137,13 +137,13 @@
 
     function turnEnded() {
         
-        if (checkLegalPlacement() == true) {
+        //if (checkLegalPlacement() == true) {
             //removes the ability to end a turn when the player ends their turn
             isTurn = false;
             $("#btnEndTurn").unbind();
             $("#btnUndo").unbind();
-            var score = getWords();
-            gameHub.server.addScore(currentPlayerTurn, score);
+            //var score = getWords();
+            //gameHub.server.addScore(currentPlayerTurn, score);
             gameHub.server.updateCurrentPlayerTurn();
             //refills the players hand after ending the turn
             gameHub.server.fillPlayerTiles($.connection.hub.id);
@@ -151,7 +151,7 @@
             var nextTurn = currentPlayerTurn + 1;
             if (nextTurn > numPlayers) { nextTurn = 1 }
             gameHub.server.endTurn(nextTurn);
-        }
+        //}
 
     }
 
